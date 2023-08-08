@@ -1,6 +1,9 @@
 version: "3"
 services:
   devcontainer:
+    privileged: true
+    ports:
+      - "5000:5000"
     container_name: frigate-devcontainer
     # add groups from host for render, plugdev, video
     group_add:
@@ -14,13 +17,13 @@ services:
       dockerfile: docker/main/Dockerfile
       # Use target devcontainer-trt for TensorRT dev
       target: devcontainer
-    deploy:
-          resources:
-              reservations:
-                  devices:
-                      - driver: nvidia
-                        count: 1
-                        capabilities: [gpu]
+    # deploy:
+    #       resources:
+    #           reservations:
+    #               devices:
+    #                   - driver: nvidia
+    #                     count: 1
+    #                     capabilities: [gpu]
     environment:
       YOLO_MODELS: yolov7-320
     devices:
