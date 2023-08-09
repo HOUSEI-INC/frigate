@@ -47,7 +47,7 @@ export default function Sidebar() {
       <Destination href="/exports" text="Exports" />
       <Separator />
       <Destination href="/storage" text="Storage" />
-      <Destination href="/system" text="System" />
+      <Destination href="/system" text="系统" />
       <Destination href="/config" text="Config" />
       <Destination href="/logs" text="Logs" />
       <Separator />
@@ -72,7 +72,7 @@ function CameraSection({ sortedCameras }) {
       <div className="overflow-auto pr-2">
         {sortedCameras.map(([camera]) => (
           <Destination key={camera} href={`/cameras/${camera}`} text={camera.replaceAll('_', ' ')} />
-        ))}   
+        ))}
       </div>
       <Separator />
     </Fragment>

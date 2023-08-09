@@ -2,8 +2,6 @@ version: "3"
 services:
   devcontainer:
     privileged: true
-    ports:
-      - "5000:5000"
     container_name: frigate-devcontainer
     # add groups from host for render, plugdev, video
     group_add:
@@ -26,8 +24,8 @@ services:
     #                     capabilities: [gpu]
     environment:
       YOLO_MODELS: yolov7-320
-    devices:
-      - /dev/bus/usb:/dev/bus/usb
+    # devices:
+      # - /dev/bus/usb:/dev/bus/usb
       # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
     volumes:
       - .:/workspace/frigate:cached
@@ -35,7 +33,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./config:/config
       - ./debug:/media/frigate
-      - /dev/bus/usb:/dev/bus/usb
+      # - /dev/bus/usb:/dev/bus/usb
   mqtt:
     container_name: mqtt
     image: eclipse-mosquitto:1.6
