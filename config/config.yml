@@ -1,6 +1,6 @@
 mqtt:
   host: emqx
-  port: 1883  
+  port: 1883
 birdseye:
   enabled: False
   mode: motion
@@ -12,8 +12,8 @@ objects:
 #    - car
 #    - motorcyle
 #    - cat
-#    - dog   
-        # Optional: list of objects to track from labelmap.txt (default: shown below)
+#    - dog
+# Optional: list of objects to track from labelmap.txt (default: shown below)
 ffmpeg:
   output_args:
     record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
@@ -28,21 +28,25 @@ cameras:
       height: 500
     ffmpeg:
       inputs:
-        - path: rtsp://172.29.243.65:554
+        - path: rtsp://172.29.243.64:554
           roles:
-          - detect
-          - rtmp
-          - record
-     
+            - detect
+            - rtmp
+            - record
+    detect:
+      height: 1080
+      width: 1920
+      fps: 60
 detect:
   height: 720
   width: 1280
   fps: 60
 record:
-  enabled: True
-      # Optional: timeout for highest scoring image before allowing it
-      # to be replaced by a newer image. (default: shown below)
+  enabled:
+    True
+    # Optional: timeout for highest scoring image before allowing it
+    # to be replaced by a newer image. (default: shown below)
   retain:
-    days: 30  
+    days: 30
 snapshots:
   enabled: True

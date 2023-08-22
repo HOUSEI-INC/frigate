@@ -49,7 +49,7 @@ export default function Sidebar() {
       <Destination href="/storage" text="Storage" />
       <Destination href="/system" text="系统" />
       <Destination href="/config" text="Config" />
-      <Destination href="/logs" text="Logs" />
+      {/* <Destination href="/logs" text="Logs" /> */}
       <Separator />
       <div className="flex flex-grow" />
       {ENV !== 'production' ? (
@@ -58,8 +58,8 @@ export default function Sidebar() {
           <Separator />
         </Fragment>
       ) : null}
-      <Destination className="self-end" href="https://docs.frigate.video" text="Documentation" />
-      <Destination className="self-end" href="https://github.com/blakeblackshear/frigate" text="GitHub" />
+      {/* <Destination className="self-end" href="https://docs.frigate.video" text="Documentation" />
+      <Destination className="self-end" href="https://github.com/blakeblackshear/frigate" text="GitHub" /> */}
     </NavigationDrawer>
   );
 }

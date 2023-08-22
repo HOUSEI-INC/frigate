@@ -9,6 +9,10 @@ import SnapshotIcon from '../icons/Snapshot';
 import { useAudioState, useDetectState, useRecordingsState, useSnapshotsState } from '../api/ws';
 import { useMemo } from 'preact/hooks';
 import useSWR from 'swr';
+import FormDialog from '../components/FormDialog';
+
+
+
 
 export default function Cameras() {
   const { data: config } = useSWR('config');
@@ -21,6 +25,9 @@ export default function Cameras() {
     </div>
   );
 }
+
+
+
 
 function SortedCameras({ config, unsortedCameras }) {
   const sortedCameras = useMemo(
@@ -100,12 +107,15 @@ function Camera({ name, config }) {
   );
 
   return (
-    <Card
-      buttons={buttons}
-      href={href}
-      header={cleanName}
-      icons={icons}
-      media={<CameraImage camera={name} stretch />}
-    />
+    <div>
+      <FormDialog/>
+      <Card
+        buttons={buttons}
+        href={href}
+        header={cleanName}
+        icons={icons}
+        media={<CameraImage camera={name} stretch />}
+      />
+    </div>
   );
 }
