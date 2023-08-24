@@ -1000,7 +1000,7 @@ def config_save():
     save_option = request.args.get("save_option")
 
     new_config = request.get_data().decode()
-
+    print(new_config) 
     if not new_config:
         return "Config with body param is required", 400
 

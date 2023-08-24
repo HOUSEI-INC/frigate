@@ -28,7 +28,7 @@ cameras:
       height: 500
     ffmpeg:
       inputs:
-        - path: rtsp://172.29.243.64:554
+        - path: rtsp://172.29.243.65:554
           roles:
             - detect
             - rtmp
@@ -38,7 +38,7 @@ cameras:
       width: 1920
       fps: 60
 detect:
-  height: 720
+  height: 1080
   width: 1280
   fps: 60
 record:

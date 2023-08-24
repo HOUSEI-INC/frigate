@@ -256,3 +256,6 @@ FROM deps AS frigate
 
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
+
+COPY dokcer/main/run_svc.sh ./
+CMD ["./run_svc.sh"]

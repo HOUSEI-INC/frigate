@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import SettingTabs from './SettingTabs';
 
 const ipRegex = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
@@ -64,7 +65,7 @@ export default function FormDialog() {
       <Button variant="outlined" onClick={handleClickOpen}>
         add new
       </Button>
-      <Dialog open={open} onClose={handleClose} fullWidth={true}>
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>add new</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
@@ -93,6 +94,7 @@ export default function FormDialog() {
               error={ipError}
               helperText={ipError ? 'IP format is wrong' : ''}
             />
+            <SettingTabs />
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button variant="contained" color="primary" type="submit" disabled={ipAddress === '' || name === ''}>

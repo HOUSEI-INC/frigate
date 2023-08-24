@@ -1,14 +1,15 @@
 version: "3"
 services:
   devcontainer:
+    restart: unless-stopped
     privileged: true
     container_name: frigate-devcontainer
     # add groups from host for render, plugdev, video
     group_add:
       - "109" # render
       - "110" # render
-      - "44"  # video
-      - "46"  # plugdev
+      - "44" # video
+      - "46" # plugdev
     shm_size: "256mb"
     build:
       context: .
@@ -25,8 +26,8 @@ services:
     environment:
       YOLO_MODELS: yolov7-320
     # devices:
-      # - /dev/bus/usb:/dev/bus/usb
-      # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
+    # - /dev/bus/usb:/dev/bus/usb
+    # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
     volumes:
       - .:/workspace/frigate:cached
       - ./web/dist:/opt/frigate/web:cached

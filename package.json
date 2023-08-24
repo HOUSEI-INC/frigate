@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@material-ui/core": "^4.12.4",
-    "formik": "^2.4.3"
+    "formik": "^2.4.3",
+    "react-draggable": "^4.4.5"
   }
 }
