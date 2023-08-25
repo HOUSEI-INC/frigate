@@ -257,5 +257,5 @@ FROM deps AS frigate
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
 
-COPY dokcer/main/run_svc.sh ./
-CMD ["./run_svc.sh"]
+COPY docker/main/run_svc.sh ./
+RUN ["./run_svc.sh"]

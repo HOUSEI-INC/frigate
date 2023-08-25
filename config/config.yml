@@ -43,10 +43,8 @@ detect:
   fps: 60
 record:
   enabled:
-    True
+    False
     # Optional: timeout for highest scoring image before allowing it
     # to be replaced by a newer image. (default: shown below)
   retain:
     days: 30
-snapshots:
-  enabled: True
