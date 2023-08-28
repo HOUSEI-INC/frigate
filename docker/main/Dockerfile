@@ -217,9 +217,10 @@ RUN apt-get update \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g npm@9
-
+WORKDIR /workspace
+COPY ./docker/main/run_svc.sh ./
 WORKDIR /workspace/frigate
-
+COPY ./docker/main/run_svc.sh ./
 RUN apt-get update \
     && apt-get install make -y \
     && rm -rf /var/lib/apt/lists/*
@@ -227,35 +228,37 @@ RUN apt-get update \
 RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
     pip3 install -r requirements-dev.txt
 
-CMD ["sleep", "infinity"]
+WORKDIR /workspace/frigate
+CMD ["sh", "-c", "python3 -m frigate"]
 
 
-# Frigate web build
-# This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
-FROM --platform=$BUILDPLATFORM node:16 AS web-build
+# # Frigate web build
+# # This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
+# FROM --platform=$BUILDPLATFORM node:16 AS web-build
 
-WORKDIR /work
-COPY web/package.json web/package-lock.json ./
-RUN npm install
+# WORKDIR /work
+# COPY web/package.json web/package-lock.json ./
+# RUN npm install
 
-COPY web/ ./
-RUN npm run build \
-    && mv dist/BASE_PATH/monacoeditorwork/* dist/assets/ \
-    && rm -rf dist/BASE_PATH
+# COPY web/ ./
+# RUN npm run build \
+#     && mv dist/BASE_PATH/monacoeditorwork/* dist/assets/ \
+#     && rm -rf dist/BASE_PATH
 
-# Collect final files in a single layer
-FROM scratch AS rootfs
+# # Collect final files in a single layer
+# FROM scratch AS rootfs
 
-WORKDIR /opt/frigate/
-COPY frigate frigate/
-COPY migrations migrations/
-COPY --from=web-build /work/dist/ web/
+# WORKDIR /opt/frigate/
+# COPY frigate frigate/
+# COPY migrations migrations/
+# COPY --from=web-build /work/dist/ web/
 
-# Frigate final container
-FROM deps AS frigate
+# # Frigate final container
+# FROM deps AS frigate
 
-WORKDIR /opt/frigate/
-COPY --from=rootfs / /
+# WORKDIR /opt/frigate/
+# COPY --from=rootfs / /
 
-COPY docker/main/run_svc.sh ./
-RUN ["./run_svc.sh"]
+# WORKDIR /workspace/frigate
+# CMD ["sh", "-c", "cd web && npm run dev"]
+
