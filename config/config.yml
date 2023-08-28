@@ -41,10 +41,13 @@ detect:
   height: 1080
   width: 1280
   fps: 60
+snapshots:
+  enabled: false
+  timestamp: true
 record:
   enabled:
-    False
+    True
     # Optional: timeout for highest scoring image before allowing it
     # to be replaced by a newer image. (default: shown below)
   retain:
-    days: 30
+    days: 1
