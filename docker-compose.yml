@@ -39,9 +39,6 @@ services:
       - 5000:5000
       - 5001:5001
       - 5173:5173
-      - 1935:1935
-      - 8554:8554
-      - 8555:8555
   mqtt:
     container_name: mqtt
     image: eclipse-mosquitto:1.6

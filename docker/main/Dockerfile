@@ -228,36 +228,39 @@ RUN apt-get update \
 RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
     pip3 install -r requirements-dev.txt
 
-WORKDIR /workspace/frigate
-CMD ["sh", "-c", "python3 -m frigate"]
+CMD ["sleep", "infinity"]
 
 
-# # Frigate web build
-# # This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
-# FROM --platform=$BUILDPLATFORM node:16 AS web-build
+# WORKDIR /workspace/frigate
+# CMD ["sh", "-c", "python3 -m frigate"]
 
-# WORKDIR /work
-# COPY web/package.json web/package-lock.json ./
-# RUN npm install
 
-# COPY web/ ./
-# RUN npm run build \
-#     && mv dist/BASE_PATH/monacoeditorwork/* dist/assets/ \
-#     && rm -rf dist/BASE_PATH
+# Frigate web build
+# This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
+FROM --platform=$BUILDPLATFORM node:16 AS web-build
 
-# # Collect final files in a single layer
-# FROM scratch AS rootfs
+WORKDIR /work
+COPY web/package.json web/package-lock.json ./
+RUN npm install
 
-# WORKDIR /opt/frigate/
-# COPY frigate frigate/
-# COPY migrations migrations/
-# COPY --from=web-build /work/dist/ web/
+COPY web/ ./
+RUN npm run build \
+    && mv dist/BASE_PATH/monacoeditorwork/* dist/assets/ \
+    && rm -rf dist/BASE_PATH
 
-# # Frigate final container
-# FROM deps AS frigate
+# Collect final files in a single layer
+FROM scratch AS rootfs
 
-# WORKDIR /opt/frigate/
-# COPY --from=rootfs / /
+WORKDIR /opt/frigate/
+COPY frigate frigate/
+COPY migrations migrations/
+COPY --from=web-build /work/dist/ web/
+
+# Frigate final container
+FROM deps AS frigate
+
+WORKDIR /opt/frigate/
+COPY --from=rootfs / /
 
 # WORKDIR /workspace/frigate
 # CMD ["sh", "-c", "cd web && npm run dev"]
