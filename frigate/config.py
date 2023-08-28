@@ -1242,3 +1242,9 @@ class FrigateConfig(FrigateBaseModel):
     def parse_raw(cls, raw_config):
         config = load_config_with_no_duplicates(raw_config)
         return cls.parse_obj(config)
+
+    def from_json(self, data_dict):
+        for key, value in data_dict.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+

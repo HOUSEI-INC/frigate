@@ -5,6 +5,7 @@
   "workspaceFolder": "/workspace/frigate",
   "initializeCommand": ".devcontainer/initialize.sh",
   "postCreateCommand": ".devcontainer/post_create.sh",
+  "remoteUser": "vscode",
   "overrideCommand": false,
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2.1.1": {}

@@ -35,8 +35,12 @@ class ModelTypeEnum(str, Enum):
 
 
 class ModelConfig(BaseModel):
-    path: Optional[str] = Field(title="Custom Object detection model path.")
-    labelmap_path: Optional[str] = Field(title="Label map for custom object detector.")
+    path: Optional[str] = Field(
+        default="/edgetpu_model.tflite", title="Custom Object detection model path."
+    )
+    labelmap_path: Optional[str] = Field(
+        default="/labelmap.txt", title="Label map for custom object detector."
+    )
     width: int = Field(default=320, title="Object detection model input width.")
     height: int = Field(default=320, title="Object detection model input height.")
     labelmap: Dict[int, str] = Field(
