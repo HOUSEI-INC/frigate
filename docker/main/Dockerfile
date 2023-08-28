@@ -217,9 +217,10 @@ RUN apt-get update \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g npm@9
-
+WORKDIR /workspace
+COPY ./docker/main/run_svc.sh ./
 WORKDIR /workspace/frigate
-
+COPY ./docker/main/run_svc.sh ./
 RUN apt-get update \
     && apt-get install make -y \
     && rm -rf /var/lib/apt/lists/*
@@ -228,6 +229,10 @@ RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspac
     pip3 install -r requirements-dev.txt
 
 CMD ["sleep", "infinity"]
+
+
+# WORKDIR /workspace/frigate
+# CMD ["sh", "-c", "python3 -m frigate"]
 
 
 # Frigate web build
@@ -257,5 +262,6 @@ FROM deps AS frigate
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
 
-COPY docker/main/run_svc.sh ./
-RUN ["./run_svc.sh"]
+# WORKDIR /workspace/frigate
+# CMD ["sh", "-c", "cd web && npm run dev"]
+

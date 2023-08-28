@@ -49,12 +49,15 @@ const Tab1Component = forwardRef((props, ref) => {
     <div>
       <FormControlLabel
         control={<Switch checked={switchState} onChange={handleSwitchChange} color="primary" />}
-        label="显示文本框 Tab 1"
+        label="enable"
       />
       {switchState && (
         <>
+          width:
           <TextField label="输入文本 1" variant="outlined" value={text1} onChange={handleTextChange1} />
+          height:
           <TextField label="输入文本 2" variant="outlined" value={text2} onChange={handleTextChange2} />
+          fps:
           <TextField label="输入文本 3" variant="outlined" value={text3} onChange={handleTextChange3} />
         </>
       )}

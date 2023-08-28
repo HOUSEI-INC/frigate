@@ -108,9 +108,9 @@ export default function SettingTabs() {
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="Item One" value="1" />
-                  <Tab label="Item Two" value="2" />
-                  <Tab label="Item Three" value="3" />
+                  <Tab label="Detect" value="1" />
+                  <Tab label="Recording" value="2" />
+                  <Tab label="Snapshot" value="3" />
                 </TabList>
               </Box>
               <TabPanel value="1">
