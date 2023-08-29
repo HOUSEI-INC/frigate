@@ -18,24 +18,40 @@ birdseye:
   restream: false
   width: 1280
 cameras:
-  cam:
-    audio:
-      enabled: false
-      enabled_in_config: null
-      filters: null
-      listen:
-      - bark
-      - speech
-      - yell
-      - scream
-      max_not_heard: 30
-      min_volume: 500
-    best_image_timeout: 60
-    birdseye:
-      enabled: true
-      mode: !!python/object/apply:frigate.config.BirdseyeModeEnum
-      - objects
-      order: 0
+  test:
+    mqtt:
+      enabled: True
+      timestamp: False
+      bounding_box: False
+      crop: True
+      quality: 100
+      height: 500
+    ffmpeg:
+      inputs:
+        - path: rtsp://172.29.243.65:554
+          roles:
+            - detect
+            - rtmp
+            - record
+    detect:
+      height: 1080
+      width: 1920
+      fps: 60
+  test2:
+    mqtt:
+      enabled: True
+      timestamp: False
+      bounding_box: False
+      crop: True
+      quality: 100
+      height: 500
+    ffmpeg:
+      inputs:
+        - path: rtsp://172.29.243.65:554
+          roles:
+            - detect
+            - rtmp
+            - record
     detect:
       annotation_offset: 0
       enabled: true
