@@ -3,11 +3,12 @@ import { Switch, TextField, FormControlLabel } from '@mui/material';
 
 const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleMainSwitchChange = (event) => {
-    const newState = { ...data, mainSwitchState: event.target.checked };
+    const newState = { ...data, enabled: event.target.checked };
     if (!event.target.checked) {
-      newState.switch1 = true;
-      newState.switch2 = false;
-      newState.textField = '';
+      newState.clean_copy = true;
+      newState.timestamp = false;
+      newState.retain_days = '';
+      newState.height = 175;
     }
     setData(newState);
   };
@@ -15,10 +16,11 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
   useImperativeHandle(ref, () => ({
     resetSnapshotSwitch: () => {
       setData({
-        mainSwitchState: false,
-        switch1: true,
-        switch2: false,
-        textField: '',
+        enabled: false,
+        clean_copy: true,
+        timestamp: false,
+        retain_days: '',
+        height: 175,
       });
     },
   }));
@@ -34,24 +36,32 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
   return (
     <div>
       <FormControlLabel
-        control={<Switch checked={data.mainSwitchState} onChange={handleMainSwitchChange} color="primary" />}
-        label="Main Switch"
+        control={<Switch checked={data.enabled} onChange={handleMainSwitchChange} color="primary" />}
+        label="enabled"
       />
-      {data.mainSwitchState && (
+      {data.enabled && (
         <>
           <FormControlLabel
-            control={<Switch checked={data.switch1} onChange={handleSwitchChange('switch1')} color="primary" />}
-            label="Switch 1"
+            control={<Switch checked={data.clean_copy} onChange={handleSwitchChange('clean_copy')} color="primary" />}
+            label="clean_copy"
           />
           <FormControlLabel
-            control={<Switch checked={data.switch2} onChange={handleSwitchChange('switch2')} color="primary" />}
-            label="Switch 2"
+            control={<Switch checked={data.timestamp} onChange={handleSwitchChange('timestamp')} color="primary" />}
+            label="timestamp"
           />
           <TextField
             label="Input Field"
             variant="outlined"
-            value={data.textField}
-            onChange={handleInputChange('textField')}
+            value={data.retain_days}
+            type="number"
+            onChange={handleInputChange('retain_days')}
+          />
+          <TextField
+            label="Input Field"
+            variant="outlined"
+            value={data.height}
+            type="number"
+            onChange={handleInputChange('height')}
           />
         </>
       )}

@@ -9,7 +9,6 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import DetectSettingsTab from './DetectSettingsTab';
 import RecordingSettingsTab from './RecordingSettingsTab';
 import SnapshotSettingTab from './SnapshotSettingTab';
@@ -18,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function SettingTabs() {
+export default function SettingTabs({ onReceiveData }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('1');
 
@@ -27,27 +26,54 @@ export default function SettingTabs() {
   const snapshotSettingsRef = React.useRef();
 
   const [detectData, setDetectData] = React.useState({
-    switchState: false,
-    text1: '',
-    text2: '',
-    text3: '',
+    enabled: false,
+    width: '',
+    height: '',
+    fps: '',
   });
 
   const [recordingData, setRecordingData] = React.useState({
-    switchState: false,
-    text: '',
-    radioValue: '',
-    text1: '',
-    text2: '',
-    text3: '',
+    enabled: false,
+    record_retain_days: '',
+    record_retain_model: '',
+    event_pre_capture: '',
+    event_post_capture: '',
+    event_retain_days: '',
+    event_retain_model: '',
   });
 
   const [snapshotData, setSnapshotData] = React.useState({
-    mainSwitchState: false,
-    switch1: true,
-    switch2: false,
-    textField: '',
+    enabled: false,
+    clean_copy: true,
+    timestamp: false,
+    retain_days: '',
+    height: 175,
   });
+
+  const initialDetectData = {
+    enabled: false,
+    width: '',
+    height: '',
+    fps: '',
+  };
+
+  const initialRecordingData = {
+    enabled: false,
+    record_retain_days: '',
+    record_retain_model: '',
+    event_pre_capture: '',
+    event_post_capture: '',
+    event_retain_days: '',
+    event_retain_model: '',
+  };
+
+  const initialSnapshotData = {
+    enabled: false,
+    clean_copy: true,
+    timestamp: false,
+    retain_days: '',
+    height: 175,
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,24 +97,23 @@ export default function SettingTabs() {
     if (snapshotSettingsRef.current) {
       snapshotSettingsRef.current.resetSnapshotSwitch();
     }
+
+    setDetectData(initialDetectData);
+    setRecordingData(initialRecordingData);
+    setSnapshotData(initialSnapshotData);
     setValue('1');
     setOpen(false);
   };
 
   const handleSubmit = () => {
-    if (detectSettingRef.current) {
-      detectSettingRef.current.resetDetectSwitch();
-    }
-    if (recordingSettingsRef.current) {
-      recordingSettingsRef.current.resetSwitch();
-    }
-    if (snapshotSettingsRef.current) {
-      snapshotSettingsRef.current.resetSnapshotSwitch();
-    }
-    console.log('detect Data:', detectData);
-    console.log('Recording Data:', recordingData);
-    console.log('snapshot Data:', snapshotData);
-    setOpen(false);
+    const allData = {
+      detectData,
+      recordingData,
+      snapshotData,
+    };
+
+    onReceiveData(allData);
+    handleClose();
   };
 
   return (
@@ -114,15 +139,13 @@ export default function SettingTabs() {
                   <Tab label="Snapshot" value="3" />
                 </TabList>
               </Box>
-              <TabPanel value="1">
-                <DetectSettingsTab ref={detectSettingRef} data={detectData} setData={setDetectData} />
-              </TabPanel>
-              <TabPanel value="2">
+              {value === '1' && <DetectSettingsTab ref={detectSettingRef} data={detectData} setData={setDetectData} />}
+              {value === '2' && (
                 <RecordingSettingsTab ref={recordingSettingsRef} data={recordingData} setData={setRecordingData} />
-              </TabPanel>
-              <TabPanel value="3">
+              )}
+              {value === '3' && (
                 <SnapshotSettingTab ref={snapshotSettingsRef} data={snapshotData} setData={setSnapshotData} />
-              </TabPanel>
+              )}
             </TabContext>
           </Box>
         </DialogContent>

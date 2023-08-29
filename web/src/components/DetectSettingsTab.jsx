@@ -3,11 +3,11 @@ import { Switch, TextField, FormControlLabel } from '@mui/material';
 
 const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleSwitchChange = (event) => {
-    const newState = { ...data, switchState: event.target.checked };
+    const newState = { ...data, enabled: event.target.checked };
     if (!event.target.checked) {
-      newState.text1 = '';
-      newState.text2 = '';
-      newState.text3 = '';
+      newState.width = '';
+      newState.height = '';
+      newState.fps = '';
     }
     setData(newState);
   };
@@ -15,10 +15,10 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
   useImperativeHandle(ref, () => ({
     resetDetectSwitch: () => {
       setData({
-        switchState: false,
-        text1: '',
-        text2: '',
-        text3: '',
+        enabled: false,
+        width: '',
+        height: '',
+        fps: '',
       });
     },
   }));
@@ -30,14 +30,32 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
   return (
     <div>
       <FormControlLabel
-        control={<Switch checked={data.switchState} onChange={handleSwitchChange} color="primary" />}
+        control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
         label="Enable"
       />
-      {data.switchState && (
+      {data.enabled && (
         <>
-          <TextField label="输入文本 1" variant="outlined" value={data.text1} onChange={handleInputChange('text1')} />
-          <TextField label="输入文本 2" variant="outlined" value={data.text2} onChange={handleInputChange('text2')} />
-          <TextField label="输入文本 3" variant="outlined" value={data.text3} onChange={handleInputChange('text3')} />
+          <TextField
+            label="输入文本 1"
+            variant="outlined"
+            value={data.width}
+            onChange={handleInputChange('width')}
+            type="number"
+          />
+          <TextField
+            label="输入文本 2"
+            variant="outlined"
+            value={data.height}
+            onChange={handleInputChange('height')}
+            type="number"
+          />
+          <TextField
+            label="输入文本 3"
+            variant="outlined"
+            value={data.fps}
+            onChange={handleInputChange('fps')}
+            type="number"
+          />
         </>
       )}
     </div>

@@ -5,27 +5,29 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleSwitchChange = (event) => {
     if (!event.target.checked) {
       setData({
-        switchState: false,
-        text: '',
-        radioValue: '',
-        text1: '',
-        text2: '',
-        text3: '',
+        enabled: false,
+        record_retain_days: '',
+        record_retain_model: '',
+        event_pre_capture: '',
+        event_post_capture: '',
+        event_retain_days: '',
+        event_retain_model: '',
       });
     } else {
-      setData((prev) => ({ ...prev, switchState: true }));
+      setData((prev) => ({ ...prev, enabled: true }));
     }
   };
 
   useImperativeHandle(ref, () => ({
     resetSwitch: () => {
       setData({
-        switchState: false,
-        text: '',
-        radioValue: '',
-        text1: '',
-        text2: '',
-        text3: '',
+        enabled: false,
+        record_retain_days: '',
+        record_retain_model: '',
+        event_pre_capture: '',
+        event_post_capture: '',
+        event_retain_days: '',
+        event_retain_model: '',
       });
     },
   }));
@@ -37,23 +39,55 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
   return (
     <div>
       <FormControlLabel
-        control={<Switch checked={data.switchState} onChange={handleSwitchChange} color="primary" />}
+        control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
         label="Enable"
       />
-      {data.switchState && (
+      {data.enabled && (
         <>
-          <TextField label="输入文本" variant="outlined" value={data.text} onChange={handleInputChange('text')} />
+          <TextField
+            label="输入文本"
+            variant="outlined"
+            value={data.record_retain_days}
+            type="number"
+            onChange={handleInputChange('record_retain_days')}
+          />
           <FormControl component="fieldset">
             <FormLabel component="legend">选择项</FormLabel>
-            <RadioGroup row value={data.radioValue} onChange={handleInputChange('radioValue')}>
-              <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
-              <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
-              <FormControlLabel value="option3" control={<Radio />} label="Option 3" />
+            <RadioGroup row value={data.record_retain_model} onChange={handleInputChange('record_retain_model')}>
+              <FormControlLabel value="all" control={<Radio />} label="all" />
+              <FormControlLabel value="motion" control={<Radio />} label="motion" />
+              <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
             </RadioGroup>
           </FormControl>
-          <TextField label="输入文本 1" variant="outlined" value={data.text1} onChange={handleInputChange('text1')} />
-          <TextField label="输入文本 2" variant="outlined" value={data.text2} onChange={handleInputChange('text2')} />
-          <TextField label="输入文本 3" variant="outlined" value={data.text3} onChange={handleInputChange('text3')} />
+          <TextField
+            label="输入文本 1"
+            variant="outlined"
+            value={data.event_pre_capture}
+            type="number"
+            onChange={handleInputChange('event_pre_capture')}
+          />
+          <TextField
+            label="输入文本 2"
+            variant="outlined"
+            value={data.event_post_capture}
+            type="number"
+            onChange={handleInputChange('event_post_capture')}
+          />
+          <TextField
+            label="输入文本 3"
+            variant="outlined"
+            value={data.event_retain_days}
+            type="number"
+            onChange={handleInputChange('event_retain_days')}
+          />
+          <FormControl component="fieldset">
+            <FormLabel component="legend">选择项2</FormLabel>
+            <RadioGroup row value={data.event_retain_model} onChange={handleInputChange('event_retain_model')}>
+              <FormControlLabel value="all" control={<Radio />} label="all" />
+              <FormControlLabel value="motion" control={<Radio />} label="motion" />
+              <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
+            </RadioGroup>
+          </FormControl>
         </>
       )}
     </div>
