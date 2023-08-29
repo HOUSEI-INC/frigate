@@ -1761,6 +1761,12 @@ def config_partial_save():
         return "Config with body param is required", 400
 
     user_config.from_json(json_data)
+    # del model struct
+    del user_config.model
+    # set cam name
+    for key, cam in user_config.cameras.items():
+        cam.name = key
+
     yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
 
     # Validate the config schema

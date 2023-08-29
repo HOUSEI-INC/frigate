@@ -23,7 +23,6 @@ def restart_frigate():
     proc = psutil.Process(1)
     # if this is running via s6, sigterm pid 1
     if proc.name() == "s6-svscan":
-        print("aaaaaaaaaaaaaa")
         proc.terminate()
     # otherwise, just try and exit frigate
     else:
