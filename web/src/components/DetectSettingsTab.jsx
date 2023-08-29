@@ -1,68 +1,47 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useImperativeHandle, forwardRef } from 'react';
 import { Switch, TextField, FormControlLabel } from '@mui/material';
 
-const Tab1Component = forwardRef((props, ref) => {
-  const { onTabDataChange } = props;
-
-  const [switchState, setSwitchState] = useState(false);
-  const [text1, setText1] = useState('');
-  const [text2, setText2] = useState('');
-  const [text3, setText3] = useState('');
+const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
+  const handleSwitchChange = (event) => {
+    const newState = { ...data, switchState: event.target.checked };
+    if (!event.target.checked) {
+      newState.text1 = '';
+      newState.text2 = '';
+      newState.text3 = '';
+    }
+    setData(newState);
+  };
 
   useImperativeHandle(ref, () => ({
-    resetSwitch: () => {
-      setSwitchState(false);
+    resetDetectSwitch: () => {
+      setData({
+        switchState: false,
+        text1: '',
+        text2: '',
+        text3: '',
+      });
     },
   }));
 
-  const handleSwitchChange = (event) => {
-    setSwitchState(event.target.checked);
-    if (!event.target.checked) {
-      setText1('');
-      setText2('');
-      setText3('');
-    }
-    onTabDataChange({
-      switchState: event.target.checked,
-      text1: event.target.checked ? text1 : '',
-      text2: event.target.checked ? text2 : '',
-      text3: event.target.checked ? text3 : '',
-    });
-  };
-
-  const handleTextChange1 = (event) => {
-    setText1(event.target.value);
-    onTabDataChange({ switchState, text1: event.target.value, text2, text3 });
-  };
-
-  const handleTextChange2 = (event) => {
-    setText2(event.target.value);
-    onTabDataChange({ switchState, text1, text2: event.target.value, text3 });
-  };
-
-  const handleTextChange3 = (event) => {
-    setText3(event.target.value);
-    onTabDataChange({ switchState, text1, text2, text3: event.target.value });
+  const handleInputChange = (field) => (event) => {
+    setData((prev) => ({ ...prev, [field]: event.target.value }));
   };
 
   return (
     <div>
       <FormControlLabel
-        control={<Switch checked={switchState} onChange={handleSwitchChange} color="primary" />}
-        label="enable"
+        control={<Switch checked={data.switchState} onChange={handleSwitchChange} color="primary" />}
+        label="Enable"
       />
-      {switchState && (
+      {data.switchState && (
         <>
-          width:
-          <TextField label="输入文本 1" variant="outlined" value={text1} onChange={handleTextChange1} />
-          height:
-          <TextField label="输入文本 2" variant="outlined" value={text2} onChange={handleTextChange2} />
-          fps:
-          <TextField label="输入文本 3" variant="outlined" value={text3} onChange={handleTextChange3} />
+          <TextField label="输入文本 1" variant="outlined" value={data.text1} onChange={handleInputChange('text1')} />
+          <TextField label="输入文本 2" variant="outlined" value={data.text2} onChange={handleInputChange('text2')} />
+          <TextField label="输入文本 3" variant="outlined" value={data.text3} onChange={handleInputChange('text3')} />
         </>
       )}
     </div>
   );
 });
 
-export default Tab1Component;
+export default DetectSettingsTab;
