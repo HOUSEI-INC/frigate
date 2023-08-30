@@ -95,7 +95,7 @@ cameras:
       quality: 100
       required_zones: []
       timestamp: false
-    name: null
+    name: cam
     objects:
       filters: null
       mask: ''
@@ -211,18 +211,6 @@ logger:
   default: !!python/object/apply:frigate.config.LogLevelEnum
   - info
   logs: {}
-model:
-  height: 320
-  input_pixel_format: !!python/object/apply:frigate.detectors.detector_config.PixelFormatEnum
-  - rgb
-  input_tensor: !!python/object/apply:frigate.detectors.detector_config.InputTensorEnum
-  - nhwc
-  labelmap: {}
-  labelmap_path: /labelmap.txt
-  model_type: !!python/object/apply:frigate.detectors.detector_config.ModelTypeEnum
-  - ssd
-  path: /edgetpu_model.tflite
-  width: 320
 motion: null
 mqtt:
   client_id: frigate

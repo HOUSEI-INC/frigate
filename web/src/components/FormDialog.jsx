@@ -65,82 +65,95 @@ export default function FormDialog() {
       console.log('Camera Name:', name);
       //发送给后端API等。
       console.log(settingsData);
-
       const camPath = 'rtsp://' + ipAddress + ':554';
-      const data = {
-        [name]: {
-          ffmpeg: {
-            inputs: [
-              {
-                path: camPath,
+
+      let data = {};
+      if (Object.keys(settingsData).length !== 0) {
+        data = {
+          cameras: {
+            [name]: {
+              ffmpeg: {
+                inputs: [
+                  {
+                    path: camPath,
+                  },
+                ],
               },
-            ],
-          },
-          detect: {
-            enabled: settingsData.detectData.enabled,
-            width: settingsData.detectData.width,
-            height: settingsData.detectData.height,
-            fps: settingsData.detectData.fps,
-          },
-          record: {
-            enabled: settingsData.recordingData.enabled,
-            retain: {
-              days: settingsData.recordingData.record_retain_days,
-              mode: settingsData.recordingData.record_retain_model,
-            },
-            events: {
-              post_capture: settingsData.recordingData.event_post_capture,
-              pre_capture: settingsData.recordingData.event_pre_capture,
-              retain: {
-                default: settingsData.recordingData.event_retain_days,
-                mode: settingsData.recordingData.event_retain_model,
+              detect: {
+                enabled: settingsData.detectData.enabled,
+                width: settingsData.detectData.width,
+                height: settingsData.detectData.height,
+                fps: settingsData.detectData.fps,
+              },
+              record: {
+                enabled: settingsData.recordingData.enabled,
+                retain: {
+                  days: settingsData.recordingData.record_retain_days,
+                  mode: settingsData.recordingData.record_retain_model,
+                },
+                events: {
+                  post_capture: settingsData.recordingData.event_post_capture,
+                  pre_capture: settingsData.recordingData.event_pre_capture,
+                  retain: {
+                    default: settingsData.recordingData.event_retain_days,
+                    mode: settingsData.recordingData.event_retain_model,
+                  },
+                },
+              },
+              snapshots: {
+                clean_copy: settingsData.snapshotData.clean_copy,
+                enabled: settingsData.snapshotData.enabled,
+                height: settingsData.snapshotData.height,
+                retain: {
+                  default: settingsData.snapshotData.retain_days,
+                },
+                timestamp: settingsData.snapshotData.timestamp,
               },
             },
           },
-          snapshots: {
-            clean_copy: settingsData.snapshotData.clean_copy,
-            enabled: settingsData.snapshotData.enabled,
-            height: settingsData.snapshotData.height,
-            retain: {
-              default: settingsData.snapshotData.retain_days,
+        };
+      } else {
+        data = {
+          cameras: {
+            [name]: {
+              ffmpeg: {
+                inputs: [
+                  {
+                    path: camPath,
+                  },
+                ],
+              },
             },
-            timestamp: settingsData.snapshotData.timestamp,
           },
-        },
-      };
+        };
+      }
       console.log(data);
+      addNewCam(data);
       setCongifData(data);
+      console.log(configData);
       handleClose();
     }
   };
 
   const [success, setSuccess] = useState();
+
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState();
 
-  const onHandleAddNewCam = async (e, partial_config) => {
-    if (e) {
-      e.stopPropagation();
+  const addNewCam = async (partial_config) => {
+    try {
+      const response = await axios.post(`config/partial/save?save_option=restart`, partial_config);
+      if (response.status === 200) {
+        setSuccess(response.data);
+        console.log(success);
+      }
+    } catch (error) {
+      setError(error.response ? error.response.data.message : error.message);
     }
-
-    axios
-      .post(`config/partial/save?save_option=restart`, partial_config)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(success);
-          setSuccess(response.data);
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          setError(error.response.data.message);
-        } else {
-          setError(error.message);
-        }
-      });
   };
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <Button variant="outlined" onClick={handleClickOpen}>
         add new
       </Button>
@@ -176,17 +189,10 @@ export default function FormDialog() {
             <SettingTabs onReceiveData={handleSettingsData} />
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={ipAddress === '' || name === ''}
-                onClick={(e) => onHandleAddNewCam(e, configData)}
-              >
+              <Button variant="contained" color="primary" type="submit" disabled={ipAddress === '' || name === ''}>
                 REGISTER
               </Button>
             </DialogActions>
-            {error && <div className="p-4 overflow-scroll text-red-500 whitespace-pre-wrap">{error}</div>}
           </DialogContent>
         </form>
       </Dialog>

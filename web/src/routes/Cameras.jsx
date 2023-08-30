@@ -11,9 +11,6 @@ import { useMemo } from 'preact/hooks';
 import useSWR from 'swr';
 import FormDialog from '../components/FormDialog';
 
-
-
-
 export default function Cameras() {
   const { data: config } = useSWR('config');
 
@@ -21,13 +18,13 @@ export default function Cameras() {
     <ActivityIndicator />
   ) : (
     <div className="grid grid-cols-1 3xl:grid-cols-3 md:grid-cols-2 gap-4 p-2 px-4">
+      <div className="col-span-full 3xl:col-span-3 md:col-span-2">
+        <FormDialog />
+      </div>
       <SortedCameras config={config} unsortedCameras={config.cameras} />
     </div>
   );
 }
-
-
-
 
 function SortedCameras({ config, unsortedCameras }) {
   const sortedCameras = useMemo(
@@ -35,7 +32,7 @@ function SortedCameras({ config, unsortedCameras }) {
       Object.entries(unsortedCameras)
         .filter(([_, conf]) => conf.ui.dashboard)
         .sort(([_, aConf], [__, bConf]) => aConf.ui.order - bConf.ui.order),
-    [unsortedCameras]
+    [unsortedCameras],
   );
 
   return (
@@ -63,52 +60,52 @@ function Camera({ name, config }) {
     return `${name.replaceAll('_', ' ')}`;
   }, [name]);
   const icons = useMemo(
-    () => [
-      {
-        name: `Toggle detect ${detectValue === 'ON' ? 'off' : 'on'}`,
-        icon: MotionIcon,
-        color: detectValue === 'ON' ? 'blue' : 'gray',
-        onClick: () => {
-          sendDetect(detectValue === 'ON' ? 'OFF' : 'ON', true);
-        },
-      },
-      {
-        name: config.record.enabled_in_config
-          ? `Toggle recordings ${recordValue === 'ON' ? 'off' : 'on'}`
-          : 'Recordings must be enabled in the config to be turned on in the UI.',
-        icon: ClipIcon,
-        color: config.record.enabled_in_config ? (recordValue === 'ON' ? 'blue' : 'gray') : 'red',
-        onClick: () => {
-          if (config.record.enabled_in_config) {
-            sendRecordings(recordValue === 'ON' ? 'OFF' : 'ON', true);
-          }
-        },
-      },
-      {
-        name: `Toggle snapshots ${snapshotValue === 'ON' ? 'off' : 'on'}`,
-        icon: SnapshotIcon,
-        color: snapshotValue === 'ON' ? 'blue' : 'gray',
-        onClick: () => {
-          sendSnapshots(snapshotValue === 'ON' ? 'OFF' : 'ON', true);
-        },
-      },
-      config.audio.enabled_in_config
-        ? {
-          name: `Toggle audio detection ${audioValue === 'ON' ? 'off' : 'on'}`,
-          icon: AudioIcon,
-          color: audioValue === 'ON' ? 'blue' : 'gray',
+    () =>
+      [
+        {
+          name: `Toggle detect ${detectValue === 'ON' ? 'off' : 'on'}`,
+          icon: MotionIcon,
+          color: detectValue === 'ON' ? 'blue' : 'gray',
           onClick: () => {
-            sendAudio(audioValue === 'ON' ? 'OFF' : 'ON', true);
+            sendDetect(detectValue === 'ON' ? 'OFF' : 'ON', true);
           },
-        }
-        : null,
-    ].filter((button) => button != null),
-    [config, audioValue, sendAudio, detectValue, sendDetect, recordValue, sendRecordings, snapshotValue, sendSnapshots]
+        },
+        {
+          name: config.record.enabled_in_config
+            ? `Toggle recordings ${recordValue === 'ON' ? 'off' : 'on'}`
+            : 'Recordings must be enabled in the config to be turned on in the UI.',
+          icon: ClipIcon,
+          color: config.record.enabled_in_config ? (recordValue === 'ON' ? 'blue' : 'gray') : 'red',
+          onClick: () => {
+            if (config.record.enabled_in_config) {
+              sendRecordings(recordValue === 'ON' ? 'OFF' : 'ON', true);
+            }
+          },
+        },
+        {
+          name: `Toggle snapshots ${snapshotValue === 'ON' ? 'off' : 'on'}`,
+          icon: SnapshotIcon,
+          color: snapshotValue === 'ON' ? 'blue' : 'gray',
+          onClick: () => {
+            sendSnapshots(snapshotValue === 'ON' ? 'OFF' : 'ON', true);
+          },
+        },
+        config.audio.enabled_in_config
+          ? {
+              name: `Toggle audio detection ${audioValue === 'ON' ? 'off' : 'on'}`,
+              icon: AudioIcon,
+              color: audioValue === 'ON' ? 'blue' : 'gray',
+              onClick: () => {
+                sendAudio(audioValue === 'ON' ? 'OFF' : 'ON', true);
+              },
+            }
+          : null,
+      ].filter((button) => button != null),
+    [config, audioValue, sendAudio, detectValue, sendDetect, recordValue, sendRecordings, snapshotValue, sendSnapshots],
   );
 
   return (
     <div>
-      <FormDialog/>
       <Card
         buttons={buttons}
         href={href}
