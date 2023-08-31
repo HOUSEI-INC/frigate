@@ -838,6 +838,24 @@ class CameraConfig(FrigateBaseModel):
 
         return [part for part in cmd if part != ""]
 
+    def from_json(self, data_dict):
+        self._update_obj(self, data_dict)
+        return self
+
+    def _update_obj(self, obj, data_dict):
+        if isinstance(data_dict, dict):
+            for key, value in data_dict.items():
+                if hasattr(obj, key):
+                    if isinstance(value, str) or isinstance(value, (int, float)):
+                        setattr(obj, key, value)
+                    else:
+                        self._update_obj(getattr(obj, key), value)
+                elif key in obj:
+                    self._update_obj(obj[key], value)
+        elif isinstance(obj, list) and isinstance(data_dict, list):
+            for i in range(min(len(obj), len(data_dict))):
+                self._update_obj(obj[i], data_dict[i])
+
 
 class DatabaseConfig(FrigateBaseModel):
     path: str = Field(default=DEFAULT_DB_PATH, title="Database path.")
@@ -1244,7 +1262,18 @@ class FrigateConfig(FrigateBaseModel):
         return cls.parse_obj(config)
 
     def from_json(self, data_dict):
-        for key, value in data_dict.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
+        self._update_obj(self, data_dict)
 
+    def _update_obj(self, obj, data_dict):
+        if isinstance(data_dict, dict):
+            for key, value in data_dict.items():
+                if hasattr(obj, key):
+                    if isinstance(value, str) or isinstance(value, (int, float)):
+                        setattr(obj, key, value)
+                    else:
+                        self._update_obj(getattr(obj, key), value)
+                elif key in obj:
+                    self._update_obj(obj[key], value)
+        elif isinstance(obj, list) and isinstance(data_dict, list):
+            for i in range(min(len(obj), len(data_dict))):
+                self._update_obj(obj[i], data_dict[i])

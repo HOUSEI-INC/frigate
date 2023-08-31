@@ -1757,15 +1757,110 @@ def config_partial_save():
     # get json data
     json_data = request.get_json()
 
-    if json_data is None:
+    if not json_data:
         return "Config with body param is required", 400
 
     user_config.from_json(json_data)
+
     # del model struct
     del user_config.model
     # set cam name
     for key, cam in user_config.cameras.items():
         cam.name = key
+
+    yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
+
+    # Validate the config schema
+    try:
+        FrigateConfig.parse_raw(yaml_str)
+    except Exception:
+        return make_response(
+            jsonify(
+                {
+                    "success": False,
+                    "message": f"\nConfig Error:\n\n{str(traceback.format_exc())}",
+                }
+            ),
+            400,
+        )
+
+    # Save the config to file
+    try:
+        config_file = os.environ.get("CONFIG_FILE", "/config/config.yml")
+
+        # Check if we can use .yaml instead of .yml
+        config_file_yaml = config_file.replace(".yml", ".yaml")
+
+        if os.path.isfile(config_file_yaml):
+            config_file = config_file_yaml
+
+        with open(config_file, "w") as f:
+            yaml.dump(user_config.dict(), f)
+            f.close()
+    except Exception:
+        return make_response(
+            jsonify(
+                {
+                    "success": False,
+                    "message": "Could not write config file, be sure that Frigate has write permission on the config file.",
+                }
+            ),
+            400,
+        )
+
+    if save_option == "restart":
+        try:
+            restart_frigate()
+        except Exception as e:
+            logging.error(f"Error restarting Frigate: {e}")
+            return "Config successfully saved, unable to restart Frigate", 200
+
+        return (
+            "Config successfully saved, restarting (this can take up to one minute)...",
+            200,
+        )
+    else:
+        return "Config successfully saved.", 200
+
+
+@bp.route("/config/cameras/add", methods=["POST"])
+def config_cameras_add():
+    save_option = request.args.get("save_option")
+
+    # yaml file
+    config_file = os.environ.get("CONFIG_FILE", "/config/config.yml")
+    # Check if we can use .yaml instead of .yml
+    config_file_yaml = config_file.replace(".yml", ".yaml")
+    if os.path.isfile(config_file_yaml):
+        config_file = config_file_yaml
+
+    # load yaml setting
+    user_config = FrigateConfig.parse_file(config_file)
+
+    # get json data
+    json_data = request.get_json()
+
+    if json_data is None:
+        return "Config with body param is required", 400
+
+    if json_data and "cameras" in json_data and isinstance(json_data["cameras"], dict):
+        cam_list = json_data["cameras"]
+
+        for key in cam_list:
+            if key in user_config.cameras:
+                return "The camera name already exists", 400
+            else:
+                user_config.cameras["init"].enabled = True
+                new_camera = user_config.cameras["init"].from_json(cam_list[key])
+                user_config.cameras[key] = new_camera.copy()
+
+    # del model struct
+    del user_config.model
+    # set cam name
+    for key in user_config.cameras:
+        user_config.cameras[key].name = key
+    # init cam disable
+    user_config.cameras["init"].enabled = False
 
     yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
 
@@ -1835,7 +1930,6 @@ def config_cameras_delete():
 
     # load yaml setting
     user_config = FrigateConfig.parse_file(config_file)
-    print(len(user_config.cameras))
 
     # get json data
     json_data = request.get_json()
@@ -1847,10 +1941,11 @@ def config_cameras_delete():
         cam_list = json_data["cameras"]
 
         for value in cam_list:
-            print(value)
-
             if value in user_config.cameras:
                 del user_config.cameras[value]
+
+    # del model struct
+    del user_config.model
 
     yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
 
