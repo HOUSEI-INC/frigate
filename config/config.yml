@@ -39,8 +39,8 @@ cameras:
     detect:
       annotation_offset: 0
       enabled: true
-      fps: 60
-      height: 1080
+      fps: '5'
+      height: '760'
       max_disappeared: null
       stationary:
         interval: null
@@ -48,7 +48,7 @@ cameras:
           default: null
           objects: {}
         threshold: null
-      width: 1920
+      width: '1280'
     enabled: true
     ffmpeg:
       global_args:
@@ -122,15 +122,13 @@ cameras:
         pre_capture: 5
         required_zones: []
         retain:
-          default: 10.0
-          mode: !!python/object/apply:frigate.config.RetainModeEnum
-          - motion
+          default: 10
+          mode: motion
           objects: {}
       expire_interval: 60
       retain:
-        days: 0.0
-        mode: !!python/object/apply:frigate.config.RetainModeEnum
-        - all
+        days: 0
+        mode: all
       sync_on_startup: false
     rtmp:
       enabled: false
@@ -139,11 +137,11 @@ cameras:
       clean_copy: true
       crop: false
       enabled: false
-      height: null
+      height: 0
       quality: 70
       required_zones: []
       retain:
-        default: 10.0
+        default: 10
         mode: !!python/object/apply:frigate.config.RetainModeEnum
         - motion
         objects: {}
