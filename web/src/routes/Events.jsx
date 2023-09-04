@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { h, Fragment } from 'preact';
 import { route } from 'preact-router';
 import ActivityIndicator from '../components/ActivityIndicator';
@@ -101,7 +102,7 @@ export default function Events({ path, ...props }) {
 
       return ['events', searchParams];
     },
-    [searchParams]
+    [searchParams],
   );
 
   const { data: eventPages, mutate, size, setSize, isValidating } = useSWRInfinite(getKey, eventsFetcher);
@@ -126,7 +127,7 @@ export default function Events({ path, ...props }) {
       labels: Object.values(allLabels || {}),
       sub_labels: (allSubLabels || []).length > 0 ? [...Object.values(allSubLabels), 'None'] : [],
     }),
-    [config, allLabels, allSubLabels]
+    [config, allLabels, allSubLabels],
   );
 
   const onSave = async (e, eventId, save) => {
@@ -231,7 +232,7 @@ export default function Events({ path, ...props }) {
       setSearchParams({ ...searchParams, before: dates.before, after: dates.after });
       setState({ ...state, showDatePicker: false });
     },
-    [searchParams, setSearchParams, state, setState]
+    [searchParams, setSearchParams, state, setState],
   );
 
   const onFilter = useCallback(
@@ -249,7 +250,7 @@ export default function Events({ path, ...props }) {
         .join('&');
       route(`${path}?${queryString}`);
     },
-    [path, searchParams, setSearchParams]
+    [path, searchParams, setSearchParams],
   );
 
   const isDone = (eventPages?.[eventPages.length - 1]?.length ?? 0) < API_LIMIT;
@@ -267,7 +268,7 @@ export default function Events({ path, ...props }) {
       });
       if (node) observer.current.observe(node);
     },
-    [size, setSize, isValidating, isDone]
+    [size, setSize, isValidating, isDone],
   );
 
   const onSendToPlus = async (id, false_positive, validBox) => {
@@ -290,9 +291,9 @@ export default function Events({ path, ...props }) {
                 return { ...event, plus_id: response.data.plus_id };
               }
               return event;
-            })
+            }),
           ),
-        false
+        false,
       );
     }
 
@@ -320,13 +321,13 @@ export default function Events({ path, ...props }) {
         <MultiSelect
           className="basis-1/5 cursor-pointer rounded dark:bg-slate-800"
           title="Cameras"
-          options={filterValues.cameras}
+          options={filterValues.cameras.filter((name) => name !== 'init')}
           selection={searchParams.cameras}
           onToggle={(item) => onToggleNamedFilter('cameras', item)}
           onShowAll={() => onFilter('cameras', ['all'])}
           onSelectSingle={(item) => onFilter('cameras', item)}
         />
-        <MultiSelect
+        {/* <MultiSelect
           className="basis-1/5 cursor-pointer rounded dark:bg-slate-800"
           title="Labels"
           options={filterValues.labels}
@@ -334,8 +335,8 @@ export default function Events({ path, ...props }) {
           onToggle={(item) => onToggleNamedFilter('labels', item)}
           onShowAll={() => onFilter('labels', ['all'])}
           onSelectSingle={(item) => onFilter('labels', item)}
-        />
-        <MultiSelect
+        /> */}
+        {/* <MultiSelect
           className="basis-1/5 cursor-pointer rounded dark:bg-slate-800"
           title="Zones"
           options={filterValues.zones}
@@ -343,7 +344,7 @@ export default function Events({ path, ...props }) {
           onToggle={(item) => onToggleNamedFilter('zones', item)}
           onShowAll={() => onFilter('zones', ['all'])}
           onSelectSingle={(item) => onFilter('zones', item)}
-        />
+        /> */}
         {filterValues.sub_labels.length > 0 && (
           <MultiSelect
             className="basis-1/5 cursor-pointer rounded dark:bg-slate-800"
@@ -389,14 +390,17 @@ export default function Events({ path, ...props }) {
               download
             />
           )}
-          {(event?.data?.type || "object") == "object" && downloadEvent.end_time && downloadEvent.has_snapshot && !downloadEvent.plus_id && (
-            <MenuItem
-              icon={UploadPlus}
-              label={uploading.includes(downloadEvent.id) ? 'Uploading...' : 'Send to Frigate+'}
-              value="plus"
-              onSelect={() => showSubmitToPlus(downloadEvent.id, downloadEvent.label, downloadEvent.box)}
-            />
-          )}
+          {(event?.data?.type || 'object') == 'object' &&
+            downloadEvent.end_time &&
+            downloadEvent.has_snapshot &&
+            !downloadEvent.plus_id && (
+              <MenuItem
+                icon={UploadPlus}
+                label={uploading.includes(downloadEvent.id) ? 'Uploading...' : 'Send to Frigate+'}
+                value="plus"
+                onSelect={() => showSubmitToPlus(downloadEvent.id, downloadEvent.label, downloadEvent.box)}
+              />
+            )}
           {downloadEvent.plus_id && (
             <MenuItem
               icon={UploadPlus}
@@ -622,10 +626,12 @@ export default function Events({ path, ...props }) {
                           <Camera className="h-5 w-5 mr-2 inline" />
                           {event.camera.replaceAll('_', ' ')}
                         </div>
-                        {event.zones.length ? <div className="capitalize  text-sm flex align-center">
-                          <Zone className="w-5 h-5 mr-2 inline" />
-                          {event.zones.join(', ').replaceAll('_', ' ')}
-                        </div> : null}
+                        {event.zones.length ? (
+                          <div className="capitalize  text-sm flex align-center">
+                            <Zone className="w-5 h-5 mr-2 inline" />
+                            {event.zones.join(', ').replaceAll('_', ' ')}
+                          </div>
+                        ) : null}
                         <div className="capitalize  text-sm flex align-center">
                           <Score className="w-5 h-5 mr-2 inline" />
                           {(event?.data?.top_score || event.top_score || 0) == 0
@@ -637,7 +643,7 @@ export default function Events({ path, ...props }) {
                         </div>
                       </div>
                       <div class="hidden sm:flex flex-col justify-end mr-2">
-                        {event.end_time && event.has_snapshot && (event?.data?.type || "object") == "object" && (
+                        {event.end_time && event.has_snapshot && (event?.data?.type || 'object') == 'object' && (
                           <Fragment>
                             {event.plus_id ? (
                               <div className="uppercase text-xs underline">
@@ -745,7 +751,7 @@ export default function Events({ path, ...props }) {
                                     : `${apiHost}/api/events/${event.id}/thumbnail.jpg`
                                 }
                                 alt={`${event.label} at ${((event?.data?.top_score || event.top_score) * 100).toFixed(
-                                  0
+                                  0,
                                 )}% confidence`}
                               />
                             </div>

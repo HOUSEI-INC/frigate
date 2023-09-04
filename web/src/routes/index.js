@@ -48,6 +48,11 @@ export async function getConfig(_url, _cb, _props) {
   return module.default;
 }
 
+export async function getCommonConfig(_url, _cb, _props) {
+  const module = await import('./CommonConfig.jsx');
+  return module.default;
+}
+
 export async function getLogs(_url, _cb, _props) {
   const module = await import('./Logs.jsx');
   return module.default;

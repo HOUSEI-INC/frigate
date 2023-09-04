@@ -144,29 +144,31 @@ export default function Storage() {
           </Button>
         </div>
         <div data-testid="detectors" className="grid grid-cols-1 3xl:grid-cols-3 md:grid-cols-2 gap-4">
-          {Object.entries(storage).map(([name, camera]) => (
-            <div key={name} className="dark:bg-gray-800 shadow-md hover:shadow-lg rounded-lg transition-shadow">
-              <div className="capitalize text-lg flex justify-between p-4">
-                <Link href={`/cameras/${name}`}>{name.replaceAll('_', ' ')}</Link>
+          {Object.entries(storage)
+            .filter(([name, _]) => name !== 'init')
+            .map(([name, camera]) => (
+              <div key={name} className="dark:bg-gray-800 shadow-md hover:shadow-lg rounded-lg transition-shadow">
+                <div className="capitalize text-lg flex justify-between p-4">
+                  <Link href={`/cameras/${name}`}>{name.replaceAll('_', ' ')}</Link>
+                </div>
+                <div className="p-2">
+                  <Table className="w-full">
+                    <Thead>
+                      <Tr>
+                        <Th>Usage</Th>
+                        <Th>Stream Bandwidth</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      <Tr>
+                        <Td>{Math.round(camera['usage_percent'] ?? 0)}%</Td>
+                        <Td>{camera['bandwidth'] ? `${getUnitSize(camera['bandwidth'])}/hr` : 'Calculating...'}</Td>
+                      </Tr>
+                    </Tbody>
+                  </Table>
+                </div>
               </div>
-              <div className="p-2">
-                <Table className="w-full">
-                  <Thead>
-                    <Tr>
-                      <Th>Usage</Th>
-                      <Th>Stream Bandwidth</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>{Math.round(camera['usage_percent'] ?? 0)}%</Td>
-                      <Td>{camera['bandwidth'] ? `${getUnitSize(camera['bandwidth'])}/hr` : 'Calculating...'}</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </Fragment>
     </div>

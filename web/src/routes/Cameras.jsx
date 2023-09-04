@@ -35,6 +35,7 @@ function SortedCameras({ config, unsortedCameras }) {
   const sortedCameras = useMemo(
     () =>
       Object.entries(unsortedCameras)
+        .filter(([key, _]) => key !== 'init')
         .filter(([_, conf]) => conf.ui.dashboard)
         .sort(([_, aConf], [__, bConf]) => aConf.ui.order - bConf.ui.order),
     [unsortedCameras],

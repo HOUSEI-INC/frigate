@@ -35,9 +35,9 @@ services:
       - ./config:/config
       - ./debug:/media/frigate
       # - /dev/bus/usb:/dev/bus/usb
-    #  
-  mqtt:
-    container_name: mqtt
+    #
+  emqx:
+    container_name: emqx
     image: eclipse-mosquitto:1.6
     ports:
       - "1883:1883"

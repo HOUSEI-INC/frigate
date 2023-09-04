@@ -3,7 +3,7 @@ import LinkedLogo from './components/LinkedLogo';
 import { Match } from 'preact-router/match';
 import { memo } from 'preact/compat';
 import { ENV } from './env';
-import { useMemo } from 'preact/hooks'
+import { useMemo } from 'preact/hooks';
 import useSWR from 'swr';
 import NavigationDrawer, { Destination, Separator } from './components/NavigationDrawer';
 
@@ -16,6 +16,7 @@ export default function Sidebar() {
     }
 
     return Object.entries(config.cameras)
+      .filter(([key, _]) => key !== 'init')
       .filter(([_, conf]) => conf.ui.dashboard)
       .sort(([_, aConf], [__, bConf]) => aConf.ui.order - bConf.ui.order);
   }, [config]);
@@ -29,18 +30,10 @@ export default function Sidebar() {
     <NavigationDrawer header={<Header />}>
       <Destination href="/" text="Cameras" />
       <Match path="/cameras/:camera/:other?">
-        {({ matches }) =>
-          matches ? (
-            <CameraSection sortedCameras={sortedCameras} />
-          ) : null
-        }
+        {({ matches }) => (matches ? <CameraSection sortedCameras={sortedCameras} /> : null)}
       </Match>
       <Match path="/recording/:camera/:date?/:hour?/:seconds?">
-        {({ matches }) =>
-          matches ? (
-            <RecordingSection sortedCameras={sortedCameras} />
-          ) : null
-        }
+        {({ matches }) => (matches ? <RecordingSection sortedCameras={sortedCameras} /> : null)}
       </Match>
       {birdseye?.enabled ? <Destination href="/birdseye" text="Birdseye" /> : null}
       <Destination href="/events" text="Events" />
@@ -49,6 +42,7 @@ export default function Sidebar() {
       <Destination href="/storage" text="Storage" />
       <Destination href="/system" text="系统" />
       <Destination href="/config" text="Config" />
+      <Destination href="/common_config" text="共通设定" />
       {/* <Destination href="/logs" text="Logs" /> */}
       <Separator />
       <div className="flex flex-grow" />
@@ -65,7 +59,6 @@ export default function Sidebar() {
 }
 
 function CameraSection({ sortedCameras }) {
-
   return (
     <Fragment>
       <Separator />
@@ -80,7 +73,6 @@ function CameraSection({ sortedCameras }) {
 }
 
 function RecordingSection({ sortedCameras }) {
-
   return (
     <Fragment>
       <Separator />

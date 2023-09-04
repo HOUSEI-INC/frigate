@@ -39,8 +39,8 @@ cameras:
     detect:
       annotation_offset: 0
       enabled: true
-      fps: '5'
-      height: '760'
+      fps: 5
+      height: 760
       max_disappeared: null
       stationary:
         interval: null
@@ -48,7 +48,7 @@ cameras:
           default: null
           objects: {}
         threshold: null
-      width: '1280'
+      width: 1280
     enabled: true
     ffmpeg:
       global_args:
@@ -123,7 +123,7 @@ cameras:
         required_zones: []
         retain:
           default: 10
-          mode: motion
+          mode: all
           objects: {}
       expire_interval: 60
       retain:
@@ -136,8 +136,8 @@ cameras:
       bounding_box: true
       clean_copy: true
       crop: false
-      enabled: false
-      height: 0
+      enabled: true
+      height: 320
       quality: 70
       required_zones: []
       retain:
@@ -145,7 +145,7 @@ cameras:
         mode: !!python/object/apply:frigate.config.RetainModeEnum
         - motion
         objects: {}
-      timestamp: false
+      timestamp: true
     timestamp_style:
       color:
         blue: 255
@@ -542,7 +542,7 @@ snapshots:
   clean_copy: true
   crop: false
   enabled: false
-  height: null
+  height: 400
   quality: 70
   required_zones: []
   retain:
@@ -576,13 +576,13 @@ timestamp_style:
   thickness: 2
 ui:
   date_style: !!python/object/apply:frigate.config.DateTimeStyleEnum
-  - short
+  - medium
   live_mode: !!python/object/apply:frigate.config.LiveModeEnum
   - mse
   strftime_fmt: null
   time_format: !!python/object/apply:frigate.config.TimeFormatEnum
   - browser
   time_style: !!python/object/apply:frigate.config.DateTimeStyleEnum
-  - medium
+  - full
   timezone: null
   use_experimental: false

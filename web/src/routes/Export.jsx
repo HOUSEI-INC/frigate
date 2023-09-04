@@ -77,11 +77,13 @@ export default function Export() {
               onChange={(e) => setCamera(e.target.value)}
             >
               <option value="select">Select A Camera</option>
-              {Object.keys(config?.cameras || {}).map((item) => (
-                <option key={item} value={item}>
-                  {item.replaceAll('_', ' ')}
-                </option>
-              ))}
+              {Object.keys(config?.cameras || {})
+                .filter((item) => item !== 'init')
+                .map((item) => (
+                  <option key={item} value={item}>
+                    {item.replaceAll('_', ' ')}
+                  </option>
+                ))}
             </select>
             <select
               className="ms-2 cursor-pointer rounded dark:bg-slate-800"
