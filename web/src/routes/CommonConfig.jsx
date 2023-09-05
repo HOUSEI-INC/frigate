@@ -13,6 +13,8 @@ import TextField from '@mui/material/TextField';
 import { FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
 import axios from 'axios';
 import useSWR from 'swr';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 export default function CommonConfig() {
   const { data: config } = useSWR('config');
@@ -34,6 +36,9 @@ export default function CommonConfig() {
     timestamp: false,
     snapshot_retain_days: 0,
     snapshot_height: 0,
+    time_format: '',
+    date_style: '',
+    time_style: '',
   });
 
   React.useEffect(() => {
@@ -56,6 +61,9 @@ export default function CommonConfig() {
         timestamp: config.snapshots.timestamp || false,
         snapshot_retain_days: config.snapshots.retain.default || 0,
         snapshot_height: config.snapshots.height || 0,
+        time_format: config.ui.time_format || '',
+        date_style: config.ui.date_style || '',
+        time_style: config.ui.time_style || '',
       }));
     }
   }, [config]);
@@ -70,7 +78,7 @@ export default function CommonConfig() {
 
   const handleSave = () => {
     let data = {
-       detect: {
+      detect: {
         enabled: state.detect,
         width: state.detect_width,
         height: state.detect_height,
@@ -99,6 +107,10 @@ export default function CommonConfig() {
           default: state.snapshot_retain_days,
         },
         timestamp: state.timestamp,
+      },
+      ui: {
+        time_format: state.time_format,
+        date_style: state.date_style,
       },
     };
     console.log(data);
@@ -259,6 +271,41 @@ export default function CommonConfig() {
               size="small"
               value={state.snapshot_height}
             />
+          </div>
+        </ListItem>
+        <Divider />
+        <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <ListItemText primary="UI Settings" />
+          <div style={{ width: '98%', alignSelf: 'center' }}>
+            <FormControl>
+              time_format:
+              <Select value={state.time_format} onChange={handleDataChange} size="small">
+                <MenuItem value={'browser'}>browser</MenuItem>
+                <MenuItem value={'12hour'}>12hour</MenuItem>
+                <MenuItem value={'24hour'}>Thirty</MenuItem>
+              </Select>
+            </FormControl>{' '}
+            <br />
+            <FormControl>
+              date_style:
+              <Select value={state.date_style} onChange={handleDataChange} size="small">
+                <MenuItem value={'full'}>full</MenuItem>
+                <MenuItem value={'long'}>long</MenuItem>
+                <MenuItem value={'medium'}>medium</MenuItem>
+                <MenuItem value={'short'}>short</MenuItem>
+              </Select>
+            </FormControl>{' '}
+            <br />
+            <FormControl>
+              time_style:
+              <Select value={state.time_style} onChange={handleDataChange} size="small">
+                <MenuItem value={'full'}>full</MenuItem>
+                <MenuItem value={'long'}>long</MenuItem>
+                <MenuItem value={'medium'}>medium</MenuItem>
+                <MenuItem value={'short'}>short</MenuItem>
+              </Select>
+            </FormControl>{' '}
+            <br />
           </div>
         </ListItem>
         <Divider />
