@@ -27,51 +27,51 @@ export default function SettingTabs({ onReceiveData }) {
 
   const [detectData, setDetectData] = React.useState({
     enabled: false,
-    width: '',
-    height: '',
-    fps: '',
+    width: 1280,
+    height: 720,
+    fps: 5,
   });
 
   const [recordingData, setRecordingData] = React.useState({
     enabled: false,
-    record_retain_days: '',
-    record_retain_model: '',
-    event_pre_capture: '',
-    event_post_capture: '',
-    event_retain_days: '',
-    event_retain_model: '',
+    record_retain_days: 0,
+    record_retain_model: 'all',
+    event_pre_capture: 5,
+    event_post_capture: 5,
+    event_retain_days: 10,
+    event_retain_model: 'all',
   });
 
   const [snapshotData, setSnapshotData] = React.useState({
     enabled: false,
     clean_copy: true,
     timestamp: false,
-    retain_days: '',
+    retain_days: 10,
     height: 175,
   });
 
   const initialDetectData = {
     enabled: false,
-    width: '',
-    height: '',
-    fps: '',
+    width: 1280,
+    height: 720,
+    fps: 5,
   };
 
   const initialRecordingData = {
     enabled: false,
-    record_retain_days: '',
-    record_retain_model: '',
-    event_pre_capture: '',
-    event_post_capture: '',
-    event_retain_days: '',
-    event_retain_model: '',
+    record_retain_days: 0,
+    record_retain_model: 'all',
+    event_pre_capture: 5,
+    event_post_capture: 5,
+    event_retain_days: 10,
+    event_retain_model: 'all',
   };
 
   const initialSnapshotData = {
     enabled: false,
     clean_copy: true,
     timestamp: false,
-    retain_days: '',
+    retain_days: 10,
     height: 175,
   };
 

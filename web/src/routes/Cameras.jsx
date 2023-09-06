@@ -12,8 +12,10 @@ import { useMemo } from 'preact/hooks';
 import useSWR from 'swr';
 import FormDialog from '../components/FormDialog';
 import SettingsIcon from '../icons/Settings';
+import Delete from '../icons/Delete';
 import * as React from 'react';
 import ModSettingsPage from '../components/ModSettingsPage';
+import DelCamDialog from '../components/DelCamDialog';
 
 export default function Cameras() {
   const { data: config } = useSWR('config');
@@ -67,6 +69,7 @@ function Camera({ name, config }) {
   }, [name]);
 
   const [isPageOpen, setPageOpen] = React.useState(false);
+  const [isDelCamDialogOpen, setDelCamDialogOpen] = React.useState(false);
 
   const openSettingsPage = () => {
     console.log('open settings page');
@@ -77,12 +80,25 @@ function Camera({ name, config }) {
     setPageOpen(false);
   };
 
+  const closeDelCamDialog = () => {
+    setDelCamDialogOpen(false);
+  };
+
+  const openDelCamDialog = () => {
+    setDelCamDialogOpen(true);
+  };
+
   const icons = useMemo(
     () =>
       [
         {
           icon: SettingsIcon,
           onClick: openSettingsPage,
+        },
+        {
+          icon: Delete,
+          color: 'red',
+          onclick: openDelCamDialog,
         },
         // {
         //   name: `Toggle detect ${detectValue === 'ON' ? 'off' : 'on'}`,
@@ -135,6 +151,7 @@ function Camera({ name, config }) {
         icons={icons}
         media={<CameraImage camera={name} stretch />}
       />
+      <DelCamDialog open={isDelCamDialogOpen} handleClose={closeDelCamDialog} name={name} />
       <ModSettingsPage open={isPageOpen} handleClose={closeSettingsPage} name={name} config={config} />
     </div>
   );

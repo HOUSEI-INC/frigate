@@ -5,9 +5,9 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleSwitchChange = (event) => {
     const newState = { ...data, enabled: event.target.checked };
     if (!event.target.checked) {
-      newState.width = '';
-      newState.height = '';
-      newState.fps = '';
+      newState.width = 1280;
+      newState.height = 720;
+      newState.fps = 5;
     }
     setData(newState);
   };
@@ -16,9 +16,9 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
     resetDetectSwitch: () => {
       setData({
         enabled: false,
-        width: '',
-        height: '',
-        fps: '',
+        width: 1280,
+        height: 720,
+        fps: 5,
       });
     },
   }));
@@ -33,29 +33,33 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
         control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
         label="Enable"
       />
+      <br />
       {data.enabled && (
         <>
           <TextField
-            label="输入文本 1"
+            label="width"
             variant="outlined"
             value={data.width}
             onChange={handleInputChange('width')}
             type="number"
           />
+          <br />
           <TextField
-            label="输入文本 2"
+            label="height"
             variant="outlined"
             value={data.height}
             onChange={handleInputChange('height')}
             type="number"
           />
+          <br />
           <TextField
-            label="输入文本 3"
+            label="fps"
             variant="outlined"
             value={data.fps}
             onChange={handleInputChange('fps')}
             type="number"
           />
+          <br />
         </>
       )}
     </div>

@@ -7,7 +7,7 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
     if (!event.target.checked) {
       newState.clean_copy = true;
       newState.timestamp = false;
-      newState.retain_days = '';
+      newState.retain_days = 10;
       newState.height = 175;
     }
     setData(newState);
@@ -19,7 +19,7 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
         enabled: false,
         clean_copy: true,
         timestamp: false,
-        retain_days: '',
+        retain_days: 10,
         height: 175,
       });
     },
@@ -39,16 +39,19 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
         control={<Switch checked={data.enabled} onChange={handleMainSwitchChange} color="primary" />}
         label="enabled"
       />
+      <br />
       {data.enabled && (
         <>
           <FormControlLabel
             control={<Switch checked={data.clean_copy} onChange={handleSwitchChange('clean_copy')} color="primary" />}
             label="clean_copy"
           />
+          <br />
           <FormControlLabel
             control={<Switch checked={data.timestamp} onChange={handleSwitchChange('timestamp')} color="primary" />}
             label="timestamp"
           />
+          <br />
           <TextField
             label="Input Field"
             variant="outlined"
@@ -56,6 +59,7 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
             type="number"
             onChange={handleInputChange('retain_days')}
           />
+          <br />
           <TextField
             label="Input Field"
             variant="outlined"
@@ -63,6 +67,7 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
             type="number"
             onChange={handleInputChange('height')}
           />
+          <br />
         </>
       )}
     </div>

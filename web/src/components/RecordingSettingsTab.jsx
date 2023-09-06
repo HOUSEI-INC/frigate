@@ -6,12 +6,12 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
     if (!event.target.checked) {
       setData({
         enabled: false,
-        record_retain_days: '',
-        record_retain_model: '',
-        event_pre_capture: '',
-        event_post_capture: '',
-        event_retain_days: '',
-        event_retain_model: '',
+        record_retain_days: 0,
+        record_retain_model: 'all',
+        event_pre_capture: 5,
+        event_post_capture: 5,
+        event_retain_days: 10,
+        event_retain_model: 'all',
       });
     } else {
       setData((prev) => ({ ...prev, enabled: true }));
@@ -22,12 +22,12 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
     resetSwitch: () => {
       setData({
         enabled: false,
-        record_retain_days: '',
-        record_retain_model: '',
-        event_pre_capture: '',
-        event_post_capture: '',
-        event_retain_days: '',
-        event_retain_model: '',
+        record_retain_days: 0,
+        record_retain_model: 'all',
+        event_pre_capture: 5,
+        event_post_capture: 5,
+        event_retain_days: 10,
+        event_retain_model: 'all',
       });
     },
   }));
@@ -42,52 +42,59 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
         control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
         label="Enable"
       />
+      <br />
       {data.enabled && (
         <>
           <TextField
-            label="输入文本"
+            label="record_retain_days"
             variant="outlined"
             value={data.record_retain_days}
             type="number"
             onChange={handleInputChange('record_retain_days')}
           />
+          <br />
           <FormControl component="fieldset">
-            <FormLabel component="legend">选择项</FormLabel>
+            <FormLabel component="legend">record_retain_model</FormLabel>
             <RadioGroup row value={data.record_retain_model} onChange={handleInputChange('record_retain_model')}>
               <FormControlLabel value="all" control={<Radio />} label="all" />
               <FormControlLabel value="motion" control={<Radio />} label="motion" />
               <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
             </RadioGroup>
           </FormControl>
+          <br />
           <TextField
-            label="输入文本 1"
+            label="event_pre_capture"
             variant="outlined"
             value={data.event_pre_capture}
             type="number"
             onChange={handleInputChange('event_pre_capture')}
           />
+          <br />
           <TextField
-            label="输入文本 2"
+            label="event_post_capture"
             variant="outlined"
             value={data.event_post_capture}
             type="number"
             onChange={handleInputChange('event_post_capture')}
           />
+          <br />
           <TextField
-            label="输入文本 3"
+            label="event_retain_days"
             variant="outlined"
             value={data.event_retain_days}
             type="number"
             onChange={handleInputChange('event_retain_days')}
           />
+          <br />
           <FormControl component="fieldset">
-            <FormLabel component="legend">选择项2</FormLabel>
+            <FormLabel component="legend">event_retain_model</FormLabel>
             <RadioGroup row value={data.event_retain_model} onChange={handleInputChange('event_retain_model')}>
               <FormControlLabel value="all" control={<Radio />} label="all" />
               <FormControlLabel value="motion" control={<Radio />} label="motion" />
               <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
             </RadioGroup>
           </FormControl>
+          <br />
         </>
       )}
     </div>

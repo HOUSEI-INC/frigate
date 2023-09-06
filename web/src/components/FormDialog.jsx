@@ -142,7 +142,7 @@ export default function FormDialog() {
 
   const addNewCam = async (partial_config) => {
     try {
-      const response = await axios.post(`config/partial/save?save_option=restart`, partial_config, {
+      const response = await axios.post(`config/cameras/add?save_option=restart`, partial_config, {
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.status === 200) {
