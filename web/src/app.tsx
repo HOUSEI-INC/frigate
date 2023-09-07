@@ -38,7 +38,7 @@ export default function App() {
                   />
                   <AsyncRoute path="/storage" getComponent={Routes.getStorage} />
                   <AsyncRoute path="/system" getComponent={Routes.getSystem} />
-                  <AsyncRoute path="/config" getComponent={Routes.getConfig} />
+                  {/* <AsyncRoute path="/config" getComponent={Routes.getConfig} /> */}
                   <AsyncRoute path="/common_config" getComponent={Routes.getCommonConfig} />
                   <AsyncRoute path="/logs" getComponent={Routes.getLogs} />
                   <AsyncRoute path="/styleguide" getComponent={Routes.getStyleGuide} />

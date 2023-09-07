@@ -41,7 +41,7 @@ export default function Sidebar() {
       <Separator />
       <Destination href="/storage" text="Storage" />
       <Destination href="/system" text="系统" />
-      <Destination href="/config" text="Config" />
+      {/* <Destination href="/config" text="Config" /> */}
       <Destination href="/common_config" text="共通设定" />
       {/* <Destination href="/logs" text="Logs" /> */}
       <Separator />

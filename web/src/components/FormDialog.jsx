@@ -4,14 +4,12 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentT
 import SettingTabs from './SettingTabs';
 import axios from 'axios';
 
-const ipRegex = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
-  const [ipAddress, setIpAddress] = useState('');
+  const [streamUrl, setStreamUrl] = useState('');
   const [name, setName] = useState('');
 
-  const [ipError, setIpError] = useState(false);
+  const [streamError, setStreamError] = useState(false);
   const [nameError, setNameError] = useState(false);
 
   const handleClickOpen = () => {
@@ -26,23 +24,15 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
-    setIpAddress('');
+    setStreamUrl('');
     setName('');
-    setIpError(false);
+    setStreamError(false);
     setNameError(false);
   };
 
   const handleIpChange = (event) => {
     const value = event.target.value;
-    setIpAddress(value);
-
-    if (ipRegex.test(value)) {
-      // 如果输入的 IP 地址格式正确，则取消错误提示
-      setIpError(false);
-    } else {
-      // 否则，显示错误提示
-      setIpError(true);
-    }
+    setStreamUrl(value);
   };
 
   const handleNameChange = (event) => {
@@ -54,18 +44,18 @@ export default function FormDialog() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const isIpInvalid = !ipRegex.test(ipAddress);
+    const isIpInvalid = streamUrl === '';
     const isNameInvalid = name === '';
 
-    setIpError(isIpInvalid);
+    setStreamError(isIpInvalid);
     setNameError(isNameInvalid);
 
     if (!isIpInvalid && !isNameInvalid) {
-      console.log('IP Address:', ipAddress);
+      console.log('stream:', streamUrl);
       console.log('Camera Name:', name);
       //发送给后端API等。
       console.log(settingsData);
-      const camPath = 'rtsp://' + ipAddress + ':554';
+      const camPath = 'rtsp://' + streamUrl;
 
       let data = {};
       if (Object.keys(settingsData).length !== 0) {
@@ -159,7 +149,7 @@ export default function FormDialog() {
       <Button variant="outlined" onClick={handleClickOpen}>
         add new
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>add new</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
@@ -174,24 +164,23 @@ export default function FormDialog() {
               value={name}
               onChange={handleNameChange}
               error={nameError}
-              helperText={nameError ? 'Name is required' : ''}
+              helperText={nameError ? 'Name format is wrong' : ''}
             />
             <TextField
               margin="dense"
-              id="camera-ipaddress"
-              label="Camera IP Address"
+              label="Camera Stream"
               fullWidth
               variant="standard"
               required
-              value={ipAddress}
+              value={streamUrl}
               onChange={handleIpChange}
-              error={ipError}
-              helperText={ipError ? 'IP format is wrong' : ''}
+              error={streamError}
+              helperText={streamError ? 'stream format is wrong' : ''}
             />
             <SettingTabs onReceiveData={handleSettingsData} />
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              <Button variant="contained" color="primary" type="submit" disabled={ipAddress === '' || name === ''}>
+              <Button variant="contained" color="primary" type="submit" disabled={streamUrl === '' || name === ''}>
                 REGISTER
               </Button>
             </DialogActions>
