@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import * as Routes from './routes';
 import { h } from 'preact';
+// import { useState } from 'preact/hooks';
 import ActivityIndicator from './components/ActivityIndicator';
 import AsyncRoute from 'preact-async-route';
 import AppBar from './AppBar';
@@ -9,15 +11,31 @@ import Sidebar from './Sidebar';
 import { DarkModeProvider, DrawerProvider } from './context';
 import useSWR from 'swr';
 
-export default function App() {
+export default function App({ changeLanguage }: { changeLanguage: (lang: string) => void }) {
   const { data: config } = useSWR('config');
   const cameraComponent = config && config.ui?.use_experimental ? Routes.getCameraV2 : Routes.getCamera;
+
+  // const [definition, setDefinition] = useState(defaultDefinition);
+  // console.log(defaultDefinition);
+  // const changeLanguage = (lang: string) => {
+  //   console.log(lang);
+  //   import(`./lang/${lang}.json`)
+  //     .then((langDefinition) => {
+  //       console.log(langDefinition);
+  //       setDefinition(langDefinition);
+  //       console.log(definition);
+  //     })
+  //     .catch((error) => {
+  //       console.error(`Error loading language file for ${lang}:`, error);
+  //     });
+  //   console.log(definition);
+  // };
 
   return (
     <DarkModeProvider>
       <DrawerProvider>
         <div data-testid="app" className="w-full">
-          <AppBar />
+          <AppBar changeLanguage={changeLanguage} />
           {!config ? (
             <div className="flex flex-grow-1 min-h-screen justify-center items-center">
               <ActivityIndicator />

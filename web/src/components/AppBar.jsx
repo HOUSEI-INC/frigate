@@ -4,12 +4,13 @@ import MenuIcon from '../icons/Menu';
 import MoreIcon from '../icons/More';
 import { useDrawer } from '../context';
 import { useLayoutEffect, useCallback, useState } from 'preact/hooks';
+import LangSelector from './LangSelector';
 
 // We would typically preserve these in component state
 // But need to avoid too many re-renders
 let lastScrollY = window.scrollY;
 
-export default function AppBar({ title: Title, overflowRef, onOverflowClick }) {
+export default function AppBar({ title: Title, overflowRef, onOverflowClick, changeLang }) {
   const [show, setShow] = useState(true);
   const [atZero, setAtZero] = useState(window.scrollY === 0);
   const { setShowDrawer } = useDrawer();
@@ -49,6 +50,7 @@ export default function AppBar({ title: Title, overflowRef, onOverflowClick }) {
         </Button>
       </div>
       <Title />
+      <LangSelector changeLanguage={changeLang} />
       <div className="flex-grow-1 flex justify-end w-full">
         {overflowRef && onOverflowClick ? (
           <div className="w-auto" ref={overflowRef}>

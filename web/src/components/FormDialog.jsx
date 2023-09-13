@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import SettingTabs from './SettingTabs';
 import axios from 'axios';
+import { Text } from 'preact-i18n';
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
@@ -157,7 +158,7 @@ export default function FormDialog() {
             <TextField
               margin="dense"
               id="camera-name"
-              label="Camera Name"
+              label={<Text id="sidemenu.cameras" />}
               fullWidth
               variant="standard"
               required

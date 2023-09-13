@@ -2,7 +2,14 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@mui/styles": "^5.14.7",
+    "@prefresh/vite": "^2.4.1",
     "formik": "^2.4.3",
-    "react-draggable": "^4.4.5"
+    "i18next": "^23.4.9",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-http-backend": "^2.2.2",
+    "preact": "^10.17.1",
+    "preact-i18n": "^2.4.0-preactx",
+    "react-draggable": "^4.4.5",
+    "react-i18next": "^13.2.2"
   }
 }

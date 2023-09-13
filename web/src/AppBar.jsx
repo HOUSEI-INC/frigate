@@ -11,7 +11,7 @@ import { useDarkMode } from './context';
 import { useCallback, useRef, useState } from 'preact/hooks';
 import { useRestart } from './api/ws';
 
-export default function AppBar() {
+export default function AppBar({ changeLanguage }) {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showDialogWait, setShowDialogWait] = useState(false);
@@ -23,7 +23,7 @@ export default function AppBar() {
       setDarkMode(value);
       setShowMoreMenu(false);
     },
-    [setDarkMode, setShowMoreMenu]
+    [setDarkMode, setShowMoreMenu],
   );
 
   const moreRef = useRef(null);
@@ -53,7 +53,12 @@ export default function AppBar() {
 
   return (
     <Fragment>
-      <BaseAppBar title={LinkedLogo} overflowRef={moreRef} onOverflowClick={handleShowMenu} />
+      <BaseAppBar
+        title={LinkedLogo}
+        overflowRef={moreRef}
+        onOverflowClick={handleShowMenu}
+        changeLang={changeLanguage}
+      />
       {showMoreMenu ? (
         <Menu onDismiss={handleDismissMoreMenu} relativeTo={moreRef}>
           <MenuItem icon={AutoAwesomeIcon} label="Auto dark mode" value="media" onSelect={handleSelectDarkMode} />
