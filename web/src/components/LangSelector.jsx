@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function LangSelector({ changeLanguage }) {
-  const [language, setLanguage] = React.useState('en');
+  const [language, setLanguage] = React.useState('zh');
   // eslint-disable-next-line no-unused-vars
 
   const handleChange = (event) => {
