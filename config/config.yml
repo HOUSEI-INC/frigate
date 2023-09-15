@@ -351,7 +351,7 @@ cameras:
         - global_args: []
           hwaccel_args: []
           input_args: []
-          path: rtsp://172.29.243.90:554
+          path: rtsp://172.29.243.90:554/ch01/0
           roles:
             - !!python/object/apply:frigate.config.CameraRoleEnum
               - record
