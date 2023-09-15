@@ -148,7 +148,7 @@ export default function FormDialog() {
   return (
     <div style={{ width: '100%' }}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        add new
+        {<Text id="cameras.add_new_btn" />}
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>add new</DialogTitle>
@@ -158,7 +158,7 @@ export default function FormDialog() {
             <TextField
               margin="dense"
               id="camera-name"
-              label={<Text id="sidemenu.cameras" />}
+              label={<Text id="cameras.camname_textfield" />}
               fullWidth
               variant="standard"
               required
@@ -169,7 +169,7 @@ export default function FormDialog() {
             />
             <TextField
               margin="dense"
-              label="Camera Stream"
+              label={<Text id="cameras.camstream_textfield" />}
               fullWidth
               variant="standard"
               required
@@ -180,9 +180,9 @@ export default function FormDialog() {
             />
             <SettingTabs onReceiveData={handleSettingsData} />
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleClose}> {<Text id="cameras.addnew_cancel_btn" />}</Button>
               <Button variant="contained" color="primary" type="submit" disabled={streamUrl === '' || name === ''}>
-                REGISTER
+                {<Text id="cameras.addnew_save_btn" />}
               </Button>
             </DialogActions>
           </DialogContent>

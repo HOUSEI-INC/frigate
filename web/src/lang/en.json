@@ -1,5 +1,19 @@
 {
-  "sidemenu": {
-    "cameras": "hahahaha"
+  "cameras": {
+    "subtitle": "Cameras",
+    "add_new_btn": "ADD NEW",
+    "addnew_cancel_btn": "CANCEL",
+    "addnew_save_btn": "SAVE",
+    "add_new_title": "Add New",
+    "add_new_contentTxt": "Add a new camera here",
+    "camname_textfield": "Camera Name",
+    "camstream_textfield": "Camera Stream",
+    "moresettings_btn": "MORE SETTINGS",
+    "events_btn": "EVENTS",
+    "recordings_btn": "RECORDINGS",
+    "delcam_title": "Check",
+    "delcam_contentTxt": "Are you sure to delete this camera",
+    "delcam_cancel_btn": "NO",
+    "delcam_ok_btn": "OK"
   }
 }

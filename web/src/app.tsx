@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import * as Routes from './routes';
 import { h } from 'preact';
-import { useState } from 'react';
+import { useState } from 'preact/hooks';
+// import { useState, useEffect } from 'react';
 import ActivityIndicator from './components/ActivityIndicator';
 import AsyncRoute from 'preact-async-route';
 import AppBar from './AppBar';
@@ -10,7 +11,7 @@ import { Router } from 'preact-router';
 import Sidebar from './Sidebar';
 import { DarkModeProvider, DrawerProvider } from './context';
 import useSWR from 'swr';
-import defaultDefinition from './lang/zh.json';
+import defaultDefinition from './lang/ja.json';
 import { IntlProvider } from 'preact-i18n';
 
 export default function App() {
@@ -18,23 +19,20 @@ export default function App() {
   const cameraComponent = config && config.ui?.use_experimental ? Routes.getCameraV2 : Routes.getCamera;
 
   const [definition, setDefinition] = useState(defaultDefinition);
-  console.log(defaultDefinition);
+
   const changeLanguage = (lang: string) => {
-    console.log(lang);
     import(`./lang/${lang}.json`)
       .then((langDefinition) => {
-        console.log(langDefinition);
         setDefinition(langDefinition);
-        console.log(definition);
       })
       .catch((error) => {
         console.error(`Error loading language file for ${lang}:`, error);
       });
-    console.log(definition);
+    console.log({ ...definition });
   };
 
   return (
-    <IntlProvider definition={definition}>
+    <IntlProvider definition={{ ...definition }}>
       <DarkModeProvider>
         <DrawerProvider>
           <div data-testid="app" className="w-full">

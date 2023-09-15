@@ -1,0 +1,19 @@
+{
+  "cameras": {
+    "subtitle": "カメラ",
+    "add_new_btn": "新規追加",
+    "addnew_cancel_btn": "キャンセル",
+    "addnew_save_btn": "保存",
+    "add_new_title": "新規追加",
+    "add_new_contentTxt": "ここで新しいカメラを追加します",
+    "camname_textfield": "カメラ名",
+    "camstream_textfield": "カメラストリーム",
+    "moresettings_btn": "詳細設定",
+    "events_btn": "イベント",
+    "recordings_btn": "録画",
+    "delcam_title": "確認",
+    "delcam_contentTxt": "このカメラを削除してもよろしいですか",
+    "delcam_cancel_btn": "いいえ",
+    "delcam_ok_btn": "はい"
+  }
+}
