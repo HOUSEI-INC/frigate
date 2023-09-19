@@ -26,6 +26,7 @@ export default function CommonConfig() {
     detect_width: 0,
     detect_height: 0,
     detect_fps: 0,
+    max_disappeared:0,
     record: false,
     record_retain_days: 0,
     record_retain_mode: '',
@@ -44,7 +45,8 @@ export default function CommonConfig() {
     birdseye: false,
     birdseye_width: 0,
     birdseye_height: 0,
-    birdseye_quality:0,
+    birdseye_quality: 0,
+    birdseye_mode:'',
   });
 
   React.useEffect(() => {
@@ -55,6 +57,7 @@ export default function CommonConfig() {
         detect_width: config.detect.width || 0,
         detect_height: config.detect.height || 0,
         detect_fps: config.detect.fps || 0,
+        max_disappeared:config.detect.max_disappeared ||0,
         record: config.record.enabled || false,
         record_retain_days: config.record.retain.days || 0,
         record_retain_mode: config.record.retain.mode || '',
@@ -73,7 +76,8 @@ export default function CommonConfig() {
         birdseye: config.birdseye.enabled || false,
         birdseye_width: config.birdseye.width || 0,
         birdseye_height: config.birdseye.height || 0,
-        birdseye_quality:config.birdseye.quality || 0,
+        birdseye_quality: config.birdseye.quality || 0,
+        birdseye_mode:config.birdseye.mode || 0,
       }));
     }
   }, [config]);
@@ -88,11 +92,19 @@ export default function CommonConfig() {
 
   const handleSave = () => {
     let data = {
+      birdseye: {
+        enabled: state.birdseye,
+        width: state.birdseye_width,
+        height: state.birdseye_height,
+        quality: state.birdseye_quality,
+        mode:state.birdseye_mode,
+      },
       detect: {
         enabled: state.detect,
         width: state.detect_width,
         height: state.detect_height,
         fps: state.detect_fps,
+        max_disappeared:state.max_disappeared,
       },
       record: {
         enabled: state.record,
@@ -179,6 +191,8 @@ export default function CommonConfig() {
             />
             fps:
             <TextField size="small" type="number" value={state.detect_fps} onChange={handleDataChange('detect_fps')} />
+            max_disappeared:
+            <TextField size="small" type="number" value={state.max_disappeared} onChange={handleDataChange('max_disappeared')} />
           </div>
         </ListItem>
         <Divider />
@@ -350,6 +364,15 @@ export default function CommonConfig() {
               value={state.birdseye_quality}
               onChange={handleDataChange('birdseye_quality')}
             />
+            <br />
+            <FormControl component="fieldset">
+              <FormLabel component="legend">mode</FormLabel>
+              <RadioGroup row value={state.birdseye_mode} onChange={handleDataChange('birdseye_mode')}>
+                <FormControlLabel value="objects" control={<Radio />} label="objects" />
+                <FormControlLabel value="motion" control={<Radio />} label="motion" />
+                <FormControlLabel value="continuous" control={<Radio />} label="continuous" />
+              </RadioGroup>
+            </FormControl>
           </div>
         </ListItem>
         <Divider />
