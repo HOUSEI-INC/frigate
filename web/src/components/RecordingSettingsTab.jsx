@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, forwardRef } from 'react';
 import { Switch, TextField, FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
+import { Text } from 'preact-i18n';
 
 const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleSwitchChange = (event) => {
@@ -40,13 +41,13 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
     <div>
       <FormControlLabel
         control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
-        label="Enable"
+        label={<Text id="more_settings.Recording.enable" />}
       />
       <br />
       {data.enabled && (
         <>
           <TextField
-            label="record_retain_days"
+            label={<Text id="more_settings.Recording.record_retain_days" />}
             variant="outlined"
             value={data.record_retain_days}
             type="number"
@@ -54,16 +55,28 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <FormControl component="fieldset">
-            <FormLabel component="legend">record_retain_model</FormLabel>
+            <FormLabel component="legend">{<Text id="more_settings.Recording.record_retain_model.title" />}</FormLabel>
             <RadioGroup row value={data.record_retain_model} onChange={handleInputChange('record_retain_model')}>
-              <FormControlLabel value="all" control={<Radio />} label="all" />
-              <FormControlLabel value="motion" control={<Radio />} label="motion" />
-              <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
+              <FormControlLabel
+                value="all"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.record_retain_model.all" />}
+              />
+              <FormControlLabel
+                value="motion"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.record_retain_model.motion" />}
+              />
+              <FormControlLabel
+                value="active_objects"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.record_retain_model.active_objects" />}
+              />
             </RadioGroup>
           </FormControl>
           <br />
           <TextField
-            label="event_pre_capture"
+            label={<Text id="more_settings.Recording.event_pre_capture" />}
             variant="outlined"
             value={data.event_pre_capture}
             type="number"
@@ -71,7 +84,7 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label="event_post_capture"
+            label={<Text id="more_settings.Recording.event_post_capture" />}
             variant="outlined"
             value={data.event_post_capture}
             type="number"
@@ -79,7 +92,7 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label="event_retain_days"
+            label={<Text id="more_settings.Recording.event_retain_days" />}
             variant="outlined"
             value={data.event_retain_days}
             type="number"
@@ -87,11 +100,23 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <FormControl component="fieldset">
-            <FormLabel component="legend">event_retain_model</FormLabel>
+            <FormLabel component="legend">{<Text id="more_settings.Recording.event_retain_model.title" />}</FormLabel>
             <RadioGroup row value={data.event_retain_model} onChange={handleInputChange('event_retain_model')}>
-              <FormControlLabel value="all" control={<Radio />} label="all" />
-              <FormControlLabel value="motion" control={<Radio />} label="motion" />
-              <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
+              <FormControlLabel
+                value="all"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.event_retain_model.all" />}
+              />
+              <FormControlLabel
+                value="motion"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.event_retain_model.motion" />}
+              />
+              <FormControlLabel
+                value="active_objects"
+                control={<Radio />}
+                label={<Text id="more_settings.Recording.event_retain_model.active_objects" />}
+              />
             </RadioGroup>
           </FormControl>
           <br />

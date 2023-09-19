@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, forwardRef } from 'react';
 import { Switch, TextField, FormControlLabel } from '@mui/material';
+import { Text } from 'preact-i18n';
 
 const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleMainSwitchChange = (event) => {
@@ -37,23 +38,23 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
     <div>
       <FormControlLabel
         control={<Switch checked={data.enabled} onChange={handleMainSwitchChange} color="primary" />}
-        label="enabled"
+        label={<Text id="more_settings.Snapshot.enable" />}
       />
       <br />
       {data.enabled && (
         <>
           <FormControlLabel
             control={<Switch checked={data.clean_copy} onChange={handleSwitchChange('clean_copy')} color="primary" />}
-            label="clean_copy"
+            label={<Text id="more_settings.Snapshot.clean_copy" />}
           />
           <br />
           <FormControlLabel
             control={<Switch checked={data.timestamp} onChange={handleSwitchChange('timestamp')} color="primary" />}
-            label="timestamp"
+            label={<Text id="more_settings.Snapshot.timestamp" />}
           />
           <br />
           <TextField
-            label="Input Field"
+            label={<Text id="more_settings.Snapshot.retain_days" />}
             variant="outlined"
             value={data.retain_days}
             type="number"
@@ -61,7 +62,7 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label="Input Field"
+            label={<Text id="more_settings.Snapshot.height" />}
             variant="outlined"
             value={data.height}
             type="number"

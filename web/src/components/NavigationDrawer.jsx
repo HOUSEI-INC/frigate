@@ -27,7 +27,12 @@ export default function NavigationDrawer({ children, header }) {
           </div>
         ) : null}
 
-        <nav className="flex flex-col flex-grow overflow-hidden overflow-y-auto p-2 space-y-2">{children}</nav>
+        <nav
+          className="flex flex-col flex-grow overflow-hidden overflow-y-auto p-2 space-y-2"
+          style={{ paddingTop: '1.5rem' }}
+        >
+          {children}
+        </nav>
       </div>
     </Fragment>
   );
@@ -46,9 +51,8 @@ export function Destination({ className = '', href, text, ...other }) {
   }, [setShowDrawer]);
 
   const styleProps = {
-    [external
-      ? className
-      : 'class']: 'block p-2 text-sm font-semibold text-gray-900 rounded hover:bg-blue-500 dark:text-gray-200 hover:text-white dark:hover:text-white focus:outline-none ring-opacity-50 focus:ring-2 ring-blue-300',
+    [external ? className : 'class']:
+      'block p-2 text-sm font-semibold text-gray-900 rounded hover:bg-blue-500 dark:text-gray-200 hover:text-white dark:hover:text-white focus:outline-none ring-opacity-50 focus:ring-2 ring-blue-300',
   };
 
   const El = external ? 'a' : Link;

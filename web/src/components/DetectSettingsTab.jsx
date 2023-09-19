@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, forwardRef } from 'react';
 import { Switch, TextField, FormControlLabel } from '@mui/material';
+import { Text } from 'preact-i18n';
 
 const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
   const handleSwitchChange = (event) => {
@@ -31,13 +32,13 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
     <div>
       <FormControlLabel
         control={<Switch checked={data.enabled} onChange={handleSwitchChange} color="primary" />}
-        label="Enable"
+        label={<Text id="more_settings.Detect.enable" />}
       />
       <br />
       {data.enabled && (
         <>
           <TextField
-            label="width"
+            label={<Text id="more_settings.Detect.width" />}
             variant="outlined"
             value={data.width}
             onChange={handleInputChange('width')}
@@ -45,7 +46,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label="height"
+            label={<Text id="more_settings.Detect.height" />}
             variant="outlined"
             value={data.height}
             onChange={handleInputChange('height')}
@@ -53,7 +54,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label="fps"
+            label={<Text id="more_settings.Detect.fps" />}
             variant="outlined"
             value={data.fps}
             onChange={handleInputChange('fps')}

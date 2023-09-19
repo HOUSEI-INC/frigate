@@ -12,6 +12,7 @@ import TabList from '@mui/lab/TabList';
 import DetectSettingsTab from './DetectSettingsTab';
 import RecordingSettingsTab from './RecordingSettingsTab';
 import SnapshotSettingTab from './SnapshotSettingTab';
+import { Text } from 'preact-i18n';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -119,7 +120,7 @@ export default function SettingTabs({ onReceiveData }) {
   return (
     <div>
       <Button variant="text" onClick={handleClickOpen}>
-        more settings
+        {<Text id="more_settings.btn" />}
       </Button>
       <Dialog
         open={open}
@@ -134,9 +135,9 @@ export default function SettingTabs({ onReceiveData }) {
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="Detect" value="1" />
-                  <Tab label="Recording" value="2" />
-                  <Tab label="Snapshot" value="3" />
+                  <Tab label={<Text id="more_settings.Detect.title" />} value="1" />
+                  <Tab label={<Text id="more_settings.Recording.title" />} value="2" />
+                  <Tab label={<Text id="more_settings.Snapshot.title" />} value="3" />
                 </TabList>
               </Box>
               {value === '1' && <DetectSettingsTab ref={detectSettingRef} data={detectData} setData={setDetectData} />}
@@ -151,10 +152,10 @@ export default function SettingTabs({ onReceiveData }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Close
+            {<Text id="more_settings.Close" />}
           </Button>
           <Button onClick={handleSubmit} color="primary">
-            Submit
+            {<Text id="more_settings.Submit" />}
           </Button>
         </DialogActions>
       </Dialog>

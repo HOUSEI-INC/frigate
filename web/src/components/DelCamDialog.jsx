@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
+import { Text } from 'preact-i18n';
 
 const deleteCamera = (close, cam_name) => async () => {
   try {
@@ -35,7 +36,9 @@ export default function DelCamDialog({ open, handleClose, name }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{'Check'}</DialogTitle>
         <DialogContent>
-          <DialogContentText>Are you sure to delete the camera that named {name}?</DialogContentText>
+          <DialogContentText>
+            <Text id="cameras.delcam_contentTxt">{`Are you sure to delete the camera that named ${name}?`}</Text>
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

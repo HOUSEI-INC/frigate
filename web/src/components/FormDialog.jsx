@@ -148,17 +148,23 @@ export default function FormDialog() {
   return (
     <div style={{ width: '100%' }}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {<Text id="cameras.add_new_btn" />}
+        {<Text id="cameras.add_new.btn" />}
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle>add new</DialogTitle>
+        <DialogTitle>
+          {/* add new */}
+          <Text id="cameras.add_new.title" />
+        </DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
-            <DialogContentText>add a new camera</DialogContentText>
+            <DialogContentText>
+              {/* add a new camera */}
+              <Text id="cameras.add_new.contentTxt" />
+            </DialogContentText>
             <TextField
               margin="dense"
               id="camera-name"
-              label={<Text id="cameras.camname_textfield" />}
+              label={<Text id="cameras.add_new.camname_textfield" />}
               fullWidth
               variant="standard"
               required
@@ -169,7 +175,7 @@ export default function FormDialog() {
             />
             <TextField
               margin="dense"
-              label={<Text id="cameras.camstream_textfield" />}
+              label={<Text id="cameras.add_new.camstream_textfield" />}
               fullWidth
               variant="standard"
               required
@@ -180,9 +186,9 @@ export default function FormDialog() {
             />
             <SettingTabs onReceiveData={handleSettingsData} />
             <DialogActions>
-              <Button onClick={handleClose}> {<Text id="cameras.addnew_cancel_btn" />}</Button>
+              <Button onClick={handleClose}> {<Text id="cameras.add_new.cancel_btn" />}</Button>
               <Button variant="contained" color="primary" type="submit" disabled={streamUrl === '' || name === ''}>
-                {<Text id="cameras.addnew_save_btn" />}
+                {<Text id="cameras.add_new.save_btn" />}
               </Button>
             </DialogActions>
           </DialogContent>

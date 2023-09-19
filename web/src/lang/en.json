@@ -1,19 +1,70 @@
 {
   "cameras": {
     "subtitle": "Cameras",
-    "add_new_btn": "ADD NEW",
-    "addnew_cancel_btn": "CANCEL",
-    "addnew_save_btn": "SAVE",
-    "add_new_title": "Add New",
-    "add_new_contentTxt": "Add a new camera here",
-    "camname_textfield": "Camera Name",
-    "camstream_textfield": "Camera Stream",
-    "moresettings_btn": "MORE SETTINGS",
+
+    "add_new": {
+      "btn": "ADD NEW",
+      "title": "Add New",
+      "contentTxt": "Add a new camera here",
+      "camname_textfield": "Camera Name",
+      "camstream_textfield": "Camera Stream",
+
+      "cancel_btn": "CANCEL",
+      "save_btn": "SAVE"
+    },
+
     "events_btn": "EVENTS",
     "recordings_btn": "RECORDINGS",
     "delcam_title": "Check",
-    "delcam_contentTxt": "Are you sure to delete this camera",
-    "delcam_cancel_btn": "NO",
-    "delcam_ok_btn": "OK"
+    "delete_confirmation": "Are you sure to delete the camera that named {name}?",
+    "delcam_ok_btn": "OK",
+
+    "Events": "Events",
+    "Recordings": "Recordings"
+  },
+
+  "more_settings": {
+    "btn": "MORE SETTINGS",
+
+    "Detect": {
+      "title": "Detect",
+      "enable": "Enable",
+      "width": "width",
+      "height": "height",
+      "fps": "fps"
+    },
+
+    "Recording": {
+      "title": "Recording",
+      "enable": "Enable",
+      "record_retain_days": "record_retain_days",
+      "record_retain_model": {
+        "title": "record_retain_model",
+        "all": "all",
+        "motion": "motion",
+        "active_objects": "active_objects"
+      },
+      "event_pre_capture": "event_pre_capture",
+      "event_post_capture": "event_post_capture",
+      "event_retain_days": "event_retain_days",
+      "event_retain_model": {
+        "title": "event_retain_model",
+        "all": "all",
+        "motion": "motion",
+        "active_objects": "active_objects"
+      }
+    },
+
+    "Snapshot": {
+      "title": "Snapshot",
+      "enable": "Enable",
+      "clean_copy": "clean_copy",
+      "timestamp": "timestamp",
+      "retain_days": "retain_days",
+      "height": "height"
+    },
+
+    "Close": "Close",
+    "Submit": "Submit"
   }
 }

@@ -1,19 +1,71 @@
 {
   "cameras": {
     "subtitle": "カメラ",
-    "add_new_btn": "新規追加",
-    "addnew_cancel_btn": "キャンセル",
-    "addnew_save_btn": "保存",
-    "add_new_title": "新規追加",
-    "add_new_contentTxt": "ここで新しいカメラを追加します",
-    "camname_textfield": "カメラ名",
-    "camstream_textfield": "カメラストリーム",
-    "moresettings_btn": "詳細設定",
+
+    "add_new": {
+      "btn": "新規追加",
+      "title": "新規追加",
+      "contentTxt": "新しいカメラを追加",
+      "camname_textfield": "カメラ名",
+      "camstream_textfield": "カメラストリーム",
+
+      "cancel_btn": "キャンセル",
+      "save_btn": "保存"
+    },
+
     "events_btn": "イベント",
     "recordings_btn": "録画",
     "delcam_title": "確認",
-    "delcam_contentTxt": "このカメラを削除してもよろしいですか",
+    "delcam_contentTxt": "このカメラを削除してもよろしいですか？",
     "delcam_cancel_btn": "いいえ",
-    "delcam_ok_btn": "はい"
+    "delcam_ok_btn": "はい",
+
+    "Events": "イベント",
+    "Recordings": "録画"
+  },
+
+  "more_settings": {
+    "btn": "詳細設定",
+
+    "Detect": {
+      "title": "検出",
+      "enable": "有効化",
+      "width": "幅",
+      "height": "高さ",
+      "fps": "フレームレート"
+    },
+
+    "Recording": {
+      "title": "録画",
+      "enable": "有効化",
+      "record_retain_days": "録画保持日数",
+      "record_retain_model": {
+        "title": "録画保持モデル",
+        "all": "すべて",
+        "motion": "モーション",
+        "active_objects": "アクティブオブジェクト"
+      },
+      "event_pre_capture": "イベント事前キャプチャ",
+      "event_post_capture": "イベント事後キャプチャ",
+      "event_retain_days": "イベント保持日数",
+      "event_retain_model": {
+        "title": "イベント保持モデル",
+        "all": "すべて",
+        "motion": "モーション",
+        "active_objects": "アクティブオブジェクト"
+      }
+    },
+
+    "Snapshot": {
+      "title": "スナップショット",
+      "enable": "有効化",
+      "clean_copy": "クリーンコピー",
+      "timestamp": "タイムスタンプ",
+      "retain_days": "保持日数",
+      "height": "高さ"
+    },
+
+    "Close": "閉じる",
+    "Submit": "送信"
   }
 }

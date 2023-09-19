@@ -15,8 +15,8 @@ export default function LangSelector({ changeLanguage }) {
   };
 
   return (
-    <Box>
-      <FormControl>
+    <Box style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel id="demo-simple-select-label">language</InputLabel>
         <Select value={language} label="Language" onChange={handleChange}>
           <MenuItem value={'en'}>English</MenuItem>

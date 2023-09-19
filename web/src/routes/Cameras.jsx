@@ -16,6 +16,7 @@ import Delete from '../icons/Delete';
 import * as React from 'react';
 import ModSettingsPage from '../components/ModSettingsPage';
 import DelCamDialog from '../components/DelCamDialog';
+import { Text } from 'preact-i18n';
 
 export default function Cameras() {
   const { data: config } = useSWR('config');
@@ -24,7 +25,7 @@ export default function Cameras() {
   return !config ? (
     <ActivityIndicator />
   ) : (
-    <div className="grid grid-cols-1 3xl:grid-cols-3 md:grid-cols-2 gap-4 p-2 px-4">
+    <div className="grid grid-cols-1 3xl:grid-cols-3 md:grid-cols-2 gap-4 p-2 px-4" style={{ paddingTop: '1rem' }}>
       <div className="col-span-full 3xl:col-span-3 md:col-span-2">
         <FormDialog />
       </div>
@@ -60,8 +61,8 @@ function Camera({ name, config }) {
   const href = `/cameras/${name}`;
   const buttons = useMemo(() => {
     return [
-      { name: 'Events', href: `/events?cameras=${name}` },
-      { name: 'Recordings', href: `/recording/${name}` },
+      { name: <Text id="cameras.Events" />, href: `/events?cameras=${name}` },
+      { name: <Text id="cameras.Recordings" />, href: `/recording/${name}` },
     ];
   }, [name]);
   const cleanName = useMemo(() => {
