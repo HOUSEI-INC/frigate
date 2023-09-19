@@ -6,6 +6,7 @@ import axios from 'axios';
 import { baseUrl } from '../api/baseUrl';
 import { Fragment } from 'preact';
 import ActivityIndicator from '../components/ActivityIndicator';
+import { Text } from 'preact-i18n';
 
 export default function Export() {
   const { data: config } = useSWR('config');
@@ -62,7 +63,9 @@ export default function Export() {
 
   return (
     <div className="space-y-4 p-2 px-4 w-full">
-      <Heading>Export</Heading>
+      <Heading>
+        <Text id="Export.title">Export</Text>
+      </Heading>
 
       {message.text && (
         <div className={`max-h-20 ${message.error ? 'text-red-500' : 'text-green-500'}`}>{message.text}</div>
@@ -76,7 +79,9 @@ export default function Export() {
               value={camera}
               onChange={(e) => setCamera(e.target.value)}
             >
-              <option value="select">Select A Camera</option>
+              <option value="select">
+                <Text id="Export.Select_A_Camera">Select A Camera</Text>
+              </option>
               {Object.keys(config?.cameras || {})
                 .filter((item) => item !== 'init')
                 .map((item) => (
@@ -90,15 +95,21 @@ export default function Export() {
               value={playback}
               onChange={(e) => setPlayback(e.target.value)}
             >
-              <option value="select">Select A Playback Factor</option>
-              <option value="realtime">Realtime</option>
-              <option value="timelapse_25x">Timelapse</option>
+              <option value="select">
+                <Text id="Export.Select_A_Playback_Factor">Select A Playback Factor</Text>
+              </option>
+              <option value="realtime">
+                <Text id="Export.Realtime">Realtime</Text>
+              </option>
+              <option value="timelapse_25x">
+                <Text id="Export.Timelapse">Timelapse</Text>
+              </option>
             </select>
           </div>
 
           <div>
             <Heading className="py-2" size="sm">
-              From:
+              <Text id="Export.From">From</Text>:
             </Heading>
             <input
               className="dark:bg-slate-800"
@@ -115,7 +126,7 @@ export default function Export() {
               onChange={(e) => setStartTime(e.target.value)}
             />
             <Heading className="py-2" size="sm">
-              To:
+              <Text id="Export.To">To</Text>:
             </Heading>
             <input
               className="dark:bg-slate-800"
@@ -133,7 +144,7 @@ export default function Export() {
             />
           </div>
           <Button className="my-4" onClick={() => onHandleExport()}>
-            Submit
+            <Text id="Export.Submit">Submit</Text>
           </Button>
         </div>
 

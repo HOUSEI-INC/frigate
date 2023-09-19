@@ -32,6 +32,7 @@ import Timepicker from '../components/TimePicker';
 import TimelineSummary from '../components/TimelineSummary';
 import TimelineEventOverlay from '../components/TimelineEventOverlay';
 import { Score } from '../icons/Score';
+import { Text } from 'preact-i18n';
 
 const API_LIMIT = 25;
 
@@ -693,7 +694,7 @@ export default function Events({ path, ...props }) {
                             onChange={handleEventDetailTabChange}
                             className="justify"
                           >
-                            <TextTab text="Clip" disabled={!event.has_clip} />
+                            <TextTab text={<Text id="Clip" />} disabled={!event.has_clip} />
                             <TextTab text={event.has_snapshot ? 'Snapshot' : 'Thumbnail'} />
                           </Tabs>
                         </div>

@@ -2,6 +2,7 @@
   "header": {
     "langselector": "言語"
   },
+
   "cameras": {
     "subtitle": "カメラ",
 
@@ -20,9 +21,6 @@
     "recordings_btn": "録画",
     "delcam_title": "確認",
     "delcam_contentTxt": "このカメラを削除してもよろしいですか？",
-    "delcam_cancel_btn": "いいえ",
-    "delcam_ok_btn": "はい",
-
     "Events": "イベント",
     "Recordings": "録画"
   },
@@ -32,10 +30,7 @@
 
     "Detect": {
       "title": "検出",
-      "enable": "有効化",
-      "width": "幅",
-      "height": "高さ",
-      "fps": "フレームレート"
+      "enable": "有効化"
     },
 
     "Recording": {
@@ -43,19 +38,13 @@
       "enable": "有効化",
       "record_retain_days": "録画保持日数",
       "record_retain_model": {
-        "title": "録画保持モデル",
-        "all": "すべて",
-        "motion": "モーション",
-        "active_objects": "アクティブオブジェクト"
+        "title": "録画保持モデル"
       },
       "event_pre_capture": "イベント事前キャプチャ",
       "event_post_capture": "イベント事後キャプチャ",
       "event_retain_days": "イベント保持日数",
       "event_retain_model": {
-        "title": "イベント保持モデル",
-        "all": "すべて",
-        "motion": "モーション",
-        "active_objects": "アクティブオブジェクト"
+        "title": "イベント保持モデル"
       }
     },
 
@@ -70,5 +59,92 @@
 
     "Close": "閉じる",
     "Submit": "送信"
+  },
+
+  "C_Set": {
+    "title": "共通設定",
+    "Setting": "設定",
+    "cam_enabled": "カメラ有効",
+
+    "save_button": "保存",
+    "detect_Settings": "設定の検出",
+    "detect_enabled": "検出が有効",
+
+    "Record_Settings": "記録設定",
+    "record_enabled": "記録が有効",
+    "record_retain_days": "記録保持日数",
+    "record_retain_mode": "記録保持モード",
+    "event_pre_capture": "イベントプレキャプチャ",
+    "event_post_capture": "イベントポストキャプチャ",
+    "event_retain_days": "イベント保持日数",
+    "event_retain_model": "イベント保持モデル",
+
+    "Snapshot_Settings": "スナップショット設定",
+    "snapshot_enabled": "スナップショットが有効",
+    "clean_copy": "クリーンコピー",
+    "timestamp": "タイムスタンプ",
+    "retain_days": "保持日数",
+    "height": "高さ",
+
+    "UI_Settings": "UI設定",
+    "time_format": {
+      "name": "時間フォーマット",
+      "browser": "ブラウザ",
+      "12hour": "12時間制",
+      "Thirty": "30分"
+    },
+
+    "date_style": {
+      "name": "日付スタイル",
+      "full": "完全",
+      "long": "長い",
+      "medium": "中程度",
+      "short": "短い"
+    },
+
+    "time_style": {
+      "name": "時間スタイル",
+      "full": "完全",
+      "long": "長い",
+      "medium": "中程度",
+      "short": "短い"
+    }
+  },
+
+  "Export": {
+    "title": "エクスポート",
+    "Select_A_Camera": "カメラを選択",
+    "Select_A_Playback_Factor": "再生速度を選択",
+    "Realtime": "リアルタイム",
+    "Timelapse": "タイムラプス",
+    "From": "開始",
+    "To": "終了",
+    "Submit": "送信"
+  },
+
+  "show_options": {
+    "Hide": "非表示",
+    "Show": "表示",
+    "Options": "オプション",
+    "Bounding_box": "バウンディングボックス",
+    "Timestamp": "タイムスタンプ",
+    "Zones": "ゾーン",
+    "Motion_Masks": "モーションマスク",
+    "Motion_boxes": "モーションボックス",
+    "Regions": "地域",
+    "Mask_Zone_creator": "マスク＆ゾーン作成"
+  },
+
+  "Snapshot": "スナップショット",
+  "Thumbnail": "サムネイル",
+  "Clip": "クリップ",
+
+  "share": {
+    "width": "幅",
+    "height": "高さ",
+    "fps": "フレームレート",
+    "all": "すべて",
+    "motion": "モーション",
+    "active_objects": "アクティブオブジェクト"
   }
 }

@@ -17,6 +17,7 @@ import WebRtcPlayer from '../components/WebRtcPlayer';
 import '../components/MsePlayer';
 import CameraControlPanel from '../components/CameraControlPanel';
 import { baseUrl } from '../api/baseUrl';
+import { Text } from 'preact-i18n';
 
 const emptyObject = Object.freeze({});
 
@@ -35,7 +36,7 @@ export default function Camera({ camera }) {
     : 0;
   const [viewSource, setViewSource, sourceIsLoaded] = usePersistence(
     `${camera}-source`,
-    getDefaultLiveMode(config, cameraConfig, restreamEnabled)
+    getDefaultLiveMode(config, cameraConfig, restreamEnabled),
   );
   const sourceValues = restreamEnabled ? ['mse', 'webrtc', 'jsmpeg'] : ['jsmpeg'];
   const [options, setOptions] = usePersistence(`${camera}-feed`, emptyObject);
@@ -45,7 +46,7 @@ export default function Camera({ camera }) {
       const newOptions = { ...options, [id]: value };
       setOptions(newOptions);
     },
-    [options, setOptions]
+    [options, setOptions],
   );
 
   const searchParams = useMemo(
@@ -54,9 +55,9 @@ export default function Camera({ camera }) {
         Object.keys(options).reduce((memo, key) => {
           memo.push([key, options[key] === true ? '1' : '0']);
           return memo;
-        }, [])
+        }, []),
       ),
-    [options]
+    [options],
   );
 
   const handleToggleSettings = useCallback(() => {
@@ -77,39 +78,47 @@ export default function Camera({ camera }) {
         checked={options['bbox']}
         id="bbox"
         onChange={handleSetOption}
-        label="Bounding box"
+        label={<Text id="show_options.Bounding_box">Bounding box</Text>}
         labelPosition="after"
       />
       <Switch
         checked={options['timestamp']}
         id="timestamp"
         onChange={handleSetOption}
-        label="Timestamp"
+        label={<Text id="show_options.Timestamp">Timestamp</Text>}
         labelPosition="after"
       />
-      <Switch checked={options['zones']} id="zones" onChange={handleSetOption} label="Zones" labelPosition="after" />
+      <Switch
+        checked={options['zones']}
+        id="zones"
+        onChange={handleSetOption}
+        label={<Text id="show_options.Zones">Zones</Text>}
+        labelPosition="after"
+      />
       <Switch
         checked={options['mask']}
         id="mask"
         onChange={handleSetOption}
-        label="Motion Masks"
+        label={<Text id="show_options.Motion_Masks">Motion Masks</Text>}
         labelPosition="after"
       />
       <Switch
         checked={options['motion']}
         id="motion"
         onChange={handleSetOption}
-        label="Motion boxes"
+        label={<Text id="show_options.Motion_boxes">Motion boxes</Text>}
         labelPosition="after"
       />
       <Switch
         checked={options['regions']}
         id="regions"
         onChange={handleSetOption}
-        label="Regions"
+        label={<Text id="show_options.Regions">Regions</Text>}
         labelPosition="after"
       />
-      <Link href={`/cameras/${camera}/editor`}>Mask & Zone creator</Link>
+      <Link href={`/cameras/${camera}/editor`}>
+        <Text id="show_options.Mask_Zone_creator">Mask & Zone creator</Text>
+      </Link>
     </div>
   ) : null;
 
@@ -165,10 +174,15 @@ export default function Camera({ camera }) {
         <Button onClick={handleToggleSettings} type="text">
           <span className="w-5 h-5">
             <SettingsIcon />
-          </span>{' '}
-          <span>{showSettings ? 'Hide' : 'Show'} Options</span>
+          </span>
+          <span>
+            {showSettings ? <Text id="show_options.Hide">Hide</Text> : <Text id="show_options.Show">Show</Text>}
+            <Text id="show_options.Options">Options</Text>
+          </span>
         </Button>
-        {showSettings ? <Card header="Options" elevated={false} content={optionContent} /> : null}
+        {showSettings ? (
+          <Card header={<Text id="show_options.Options">Options</Text>} elevated={false} content={optionContent} />
+        ) : null}
       </Fragment>
     );
   }

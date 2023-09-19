@@ -4,6 +4,7 @@ import Switch from './Switch';
 import { useCallback, useMemo } from 'preact/hooks';
 import { usePersistence } from '../context';
 import AutoUpdatingCameraImage from './AutoUpdatingCameraImage';
+import { Text } from 'preact-i18n';
 
 const emptyObject = Object.freeze({});
 
@@ -15,7 +16,7 @@ export function DebugCamera({ camera }) {
       const newOptions = { ...options, [id]: value };
       setOptions(newOptions);
     },
-    [options, setOptions]
+    [options, setOptions],
   );
 
   const searchParams = useMemo(
@@ -24,44 +25,58 @@ export function DebugCamera({ camera }) {
         Object.keys(options).reduce((memo, key) => {
           memo.push([key, options[key] === true ? '1' : '0']);
           return memo;
-        }, [])
+        }, []),
       ),
-    [options]
+    [options],
   );
 
   const optionContent = (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <Switch
         checked={options['bbox']}
-        id='bbox'
+        id="bbox"
         onChange={handleSetOption}
-        label='Bounding box'
-        labelPosition='after'
+        label={<Text id="show_options.Bounding_box">Bounding box</Text>}
+        labelPosition="after"
       />
       <Switch
         checked={options['timestamp']}
-        id='timestamp'
+        id="timestamp"
         onChange={handleSetOption}
-        label='Timestamp'
-        labelPosition='after'
+        label={<Text id="show_options.Timestamp">Timestamp</Text>}
+        labelPosition="after"
       />
-      <Switch checked={options['zones']} id='zones' onChange={handleSetOption} label='Zones' labelPosition='after' />
-      <Switch checked={options['mask']} id='mask' onChange={handleSetOption} label='Masks' labelPosition='after' />
+      <Switch
+        checked={options['zones']}
+        id="zones"
+        onChange={handleSetOption}
+        label={<Text id="show_options.Zones">Zones</Text>}
+        labelPosition="after"
+      />
+      <Switch
+        checked={options['mask']}
+        id="mask"
+        onChange={handleSetOption}
+        label={<Text id="show_options.Motion_Masks">Motion Masks</Text>}
+        labelPosition="after"
+      />
       <Switch
         checked={options['motion']}
-        id='motion'
+        id="motion"
         onChange={handleSetOption}
-        label='Motion boxes'
-        labelPosition='after'
+        label={<Text id="show_options.Motion_boxes">Motion boxes</Text>}
+        labelPosition="after"
       />
       <Switch
         checked={options['regions']}
-        id='regions'
+        id="regions"
         onChange={handleSetOption}
-        label='Regions'
-        labelPosition='after'
+        label={<Text id="show_options.Regions">Regions</Text>}
+        labelPosition="after"
       />
-      <Link href={`/cameras/${camera}/editor`}>Mask & Zone creator</Link>
+      <Link href={`/cameras/${camera}/editor`}>
+        <Text id="show_options.Mask_Zone_creator">Mask & Zone creator</Text>
+      </Link>
     </div>
   );
 

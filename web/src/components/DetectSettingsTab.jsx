@@ -40,7 +40,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
       {data.enabled && (
         <>
           <TextField
-            label={<Text id="more_settings.Detect.width" />}
+            label={<Text id="share.width" />}
             variant="outlined"
             value={data.width}
             onChange={handleInputChange('width')}
@@ -48,7 +48,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label={<Text id="more_settings.Detect.height" />}
+            label={<Text id="share.height" />}
             variant="outlined"
             value={data.height}
             onChange={handleInputChange('height')}
@@ -56,7 +56,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
           />
           <br />
           <TextField
-            label={<Text id="more_settings.Detect.fps" />}
+            label={<Text id="share.fps" />}
             variant="outlined"
             value={data.fps}
             onChange={handleInputChange('fps')}

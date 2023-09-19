@@ -20,8 +20,6 @@
     "events_btn": "EVENTS",
     "recordings_btn": "RECORDINGS",
     "delcam_title": "Check",
-    "delete_confirmation": "Are you sure to delete the camera that named {name}?",
-    "delcam_ok_btn": "OK",
 
     "Events": "Events",
     "Recordings": "Recordings"
@@ -40,19 +38,13 @@
       "enable": "Enable",
       "record_retain_days": "record_retain_days",
       "record_retain_model": {
-        "title": "record_retain_model",
-        "all": "all",
-        "motion": "motion",
-        "active_objects": "active_objects"
+        "title": "record_retain_model"
       },
       "event_pre_capture": "event_pre_capture",
       "event_post_capture": "event_post_capture",
       "event_retain_days": "event_retain_days",
       "event_retain_model": {
-        "title": "event_retain_model",
-        "all": "all",
-        "motion": "motion",
-        "active_objects": "active_objects"
+        "title": "event_retain_model"
       }
     },
 
@@ -69,13 +61,86 @@
     "Submit": "Submit"
   },
 
-  "C_Set":{
-    "title":"Common Settings",
-    "save_button":"save",
-    "detect_Settings":"Detect Settings",
-  }
+  "C_Set": {
+    "title": "Common Settings",
+    "Setting": "Setting",
+    "cam_enabled": "cam_enabled",
 
-  "all":{
-    
+    "save_button": "save",
+    "detect_Settings": "Detect Settings",
+    "detect_enabled": "detect enabled",
+
+    "Record_Settings": "Record Settings",
+    "record_enabled": "record enabled",
+    "record_retain_days": "record retain days",
+    "record_retain_mode": "record retain mode",
+    "event_pre_capture": "event pre capture",
+    "event_post_capture": "event post capture",
+    "event_retain_days": "event retain days",
+    "event_retain_model": "event_retain_model",
+
+    "Snapshot_Settings": "Snapshot Settings",
+    "snapshot_enabled": "snapshot enabled",
+    "clean_copy": "clean copy",
+    "timestamp": "timestamp",
+    "retain_days": "retain days",
+    "height": "height",
+
+    "UI_Settings": "UI Settings",
+    "time_format": {
+      "name": "time format",
+      "browser": "browser",
+      "12hour": "12hour",
+      "Thirty": "Thirty"
+    },
+
+    "date_style": {
+      "name": "date style",
+      "full": "full",
+      "long": "long",
+      "medium": "medium",
+      "short": "short"
+    },
+
+    "time_style": {
+      "name": "time style",
+      "full": "full",
+      "long": "long",
+      "medium": "medium",
+      "short": "short"
+    }
+  },
+
+  "Export": {
+    "title": "Export",
+    "Select_A_Camera": "Select A Camera",
+    "Select_A_Playback_Factor": "Select A Playback Factor",
+    "Realtime": "Realtime",
+    "Timelapse": "Timelapse",
+    "From": "From",
+    "To": "To",
+    "Submit": "Submit"
+  },
+
+  "show_options": {
+    "Hide": "Hide",
+    "Show": "Show",
+    "Options": "Options",
+    "Bounding_box": "Bounding box",
+    "Timestamp": "Time stamp",
+    "Zones": "Zones",
+    "Motion_Masks": "Motion Masks",
+    "Motion_boxes": "Motion boxes",
+    "Regions": "Regions",
+    "Mask_Zone_creator": "Mask & Zone creator"
+  },
+
+  "share": {
+    "width": "width",
+    "height": "height",
+    "fps": "fps",
+    "all": "all",
+    "motion": "motion",
+    "active_objects": "active objects"
   }
 }

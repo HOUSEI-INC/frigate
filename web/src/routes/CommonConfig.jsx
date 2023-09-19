@@ -17,7 +17,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { Text } from 'preact-i18n';
 
-
 export default function CommonConfig() {
   const { data: config } = useSWR('config');
   console.log(config);
@@ -166,30 +165,30 @@ export default function CommonConfig() {
       </AppBar>
       <List>
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary={<Text id="detect_Settings">Detect Settings</Text>} />
+          <ListItemText primary={<Text id="C_Set.detect_Settings">Detect Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
-            detect enabled:
+            <Text id="C_Set.detect_enabled">detect enabled</Text>:
             <Switch
               checked={state.detect}
               onChange={handleChange('detect')}
               inputProps={{ 'aria-label': 'controlled' }}
             />
             <br />
-            width:
+            <Text id="share.width">width</Text>:
             <TextField
               size="small"
               value={state.detect_width}
               type="number"
               onChange={handleDataChange('detect_width')}
             />
-            height:
+            <Text id="share.height">height</Text>:
             <TextField
               size="small"
               type="number"
               value={state.detect_height}
               onChange={handleDataChange('detect_height')}
             />
-            fps:
+            <Text id="share.fps">fps</Text>:
             <TextField size="small" type="number" value={state.detect_fps} onChange={handleDataChange('detect_fps')} />
             max_disappeared:
             <TextField size="small" type="number" value={state.max_disappeared} onChange={handleDataChange('max_disappeared')} />
@@ -197,16 +196,16 @@ export default function CommonConfig() {
         </ListItem>
         <Divider />
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary="Record Settings" />
+          <ListItemText primary={<Text id="C_Set.Record_Settings">Record Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
-            record enabled:
+            <Text id="C_Set.record_enabled">record enabled</Text>:
             <Switch
               checked={state.record}
               onChange={handleChange('record')}
               inputProps={{ 'aria-label': 'controlled' }}
             />
             <br />
-            record_retain_days:
+            <Text id="C_Set.record_retain_days">record retain days</Text>:
             <TextField
               variant="outlined"
               type="number"
@@ -216,15 +215,21 @@ export default function CommonConfig() {
             />
             <br />
             <FormControl component="fieldset">
-              <FormLabel component="legend">record_retain_mode</FormLabel>
+              <FormLabel component="legend">
+                <Text id="C_Set.record_retain_mode">record retain mode</Text>
+              </FormLabel>
               <RadioGroup row value={state.record_retain_mode} onChange={handleDataChange('record_retain_mode')}>
-                <FormControlLabel value="all" control={<Radio />} label="all" />
-                <FormControlLabel value="motion" control={<Radio />} label="motion" />
-                <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
+                <FormControlLabel value="all" control={<Radio />} label={<Text id="share.all">all</Text>} />
+                <FormControlLabel value="motion" control={<Radio />} label={<Text id="share.motion">motion</Text>} />
+                <FormControlLabel
+                  value="active_objects"
+                  control={<Radio />}
+                  label={<Text id="share.active_objects">active objects</Text>}
+                />
               </RadioGroup>
             </FormControl>
             <br />
-            event_pre_capture:
+            <Text id="C_Set.event_pre_capture">event pre capture</Text>:
             <TextField
               variant="outlined"
               type="number"
@@ -232,7 +237,7 @@ export default function CommonConfig() {
               value={state.event_pre_capture}
               onChange={handleDataChange('event_pre_capture')}
             />
-            event_post_capture:
+            <Text id="C_Set.event_post_capture">event post capture</Text>:
             <TextField
               variant="outlined"
               type="number"
@@ -240,7 +245,7 @@ export default function CommonConfig() {
               value={state.event_post_capture}
               onChange={handleDataChange('event_post_capture')}
             />
-            event_retain_days:
+            <Text id="C_Set.event_retain_days">event retain days</Text>:
             <TextField
               variant="outlined"
               type="number"
@@ -250,36 +255,42 @@ export default function CommonConfig() {
             />
             <br />
             <FormControl component="fieldset">
-              <FormLabel component="legend">event_retain_model</FormLabel>
+              <FormLabel component="legend">
+                <Text id="C_Set.event_retain_model">event retain mode</Text>
+              </FormLabel>
               <RadioGroup row value={state.event_retain_mode} onChange={handleDataChange('event_retain_mode')}>
-                <FormControlLabel value="all" control={<Radio />} label="all" />
-                <FormControlLabel value="motion" control={<Radio />} label="motion" />
-                <FormControlLabel value="active_objects" control={<Radio />} label="active_objects" />
+                <FormControlLabel value="all" control={<Radio />} label={<Text id="share.all">all</Text>} />
+                <FormControlLabel value="motion" control={<Radio />} label={<Text id="share.motion">motion</Text>} />
+                <FormControlLabel
+                  value="active_objects"
+                  control={<Radio />}
+                  label={<Text id="share.active_objects">active_objects</Text>}
+                />
               </RadioGroup>
             </FormControl>
           </div>
         </ListItem>
         <Divider />
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary="Snapshot Settings" />
+          <ListItemText primary={<Text id="C_Set.Snapshot_Settings">Snapshot Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
-            snapshot enabled:
+            <Text id="C_Set.snapshot_enabled">snapshot enabled</Text>:
             <Switch
               checked={state.snapshot}
               onChange={handleChange('snapshot')}
               inputProps={{ 'aria-label': 'controlled' }}
             />
             <br />
-            clean_copy:
+            <Text id="C_Set.clean_copy">clean copy</Text>:
             <FormControlLabel
               control={<Switch checked={state.cleanCopy} onChange={handleChange('cleanCopy')} color="primary" />}
             />
-            timestamp:
+            <Text id="C_Set.timestamp">timestamp</Text>:
             <FormControlLabel
               control={<Switch checked={state.timestamp} onChange={handleChange('timestamp')} color="primary" />}
             />
             <br />
-            retain_days:
+            <Text id="C_Set.retain_days">retain days</Text>:
             <TextField
               variant="outlined"
               type="number"
@@ -287,7 +298,7 @@ export default function CommonConfig() {
               value={state.snapshot_retain_days}
               onChange={handleDataChange('snapshot_retain_days')}
             />
-            height:
+            <Text id="C_Set.height">height</Text>:
             <TextField
               onChange={handleDataChange('snapshot_height')}
               variant="outlined"
@@ -299,34 +310,56 @@ export default function CommonConfig() {
         </ListItem>
         <Divider />
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary="UI Settings" />
+          <ListItemText primary={<Text id="C_Set.UI_Settings">UI Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
             <FormControl>
-              time_format:
+              <Text id="C_Set.time_format.name">time format</Text>:
               <Select value={state.time_format} onChange={handleDataChange} size="small">
-                <MenuItem value={'browser'}>browser</MenuItem>
-                <MenuItem value={'12hour'}>12hour</MenuItem>
-                <MenuItem value={'24hour'}>Thirty</MenuItem>
+                <MenuItem value={'browser'}>
+                  <Text id="C_Set.time_format.browser">browser</Text>
+                </MenuItem>
+                <MenuItem value={'12hour'}>
+                  <Text id="C_Set.time_format.12hour">12hour</Text>
+                </MenuItem>
+                <MenuItem value={'24hour'}>
+                  <Text id="C_Set.time_format.Thirty">Thirty</Text>
+                </MenuItem>
               </Select>
             </FormControl>{' '}
             <br />
             <FormControl>
-              date_style:
+              <Text id="C_Set.date_style.name">date style</Text>:
               <Select value={state.date_style} onChange={handleDataChange} size="small">
-                <MenuItem value={'full'}>full</MenuItem>
-                <MenuItem value={'long'}>long</MenuItem>
-                <MenuItem value={'medium'}>medium</MenuItem>
-                <MenuItem value={'short'}>short</MenuItem>
+                <MenuItem value={'full'}>
+                  <Text id="C_Set.date_style.full">full</Text>
+                </MenuItem>
+                <MenuItem value={'long'}>
+                  <Text id="C_Set.date_style.long">long</Text>
+                </MenuItem>
+                <MenuItem value={'medium'}>
+                  <Text id="C_Set.date_style.medium">medium</Text>
+                </MenuItem>
+                <MenuItem value={'short'}>
+                  <Text id="C_Set.date_style.short">short</Text>
+                </MenuItem>
               </Select>
             </FormControl>{' '}
             <br />
             <FormControl>
-              time_style:
+              <Text id="C_Set.time_style.name">time style</Text>:
               <Select value={state.time_style} onChange={handleDataChange} size="small">
-                <MenuItem value={'full'}>full</MenuItem>
-                <MenuItem value={'long'}>long</MenuItem>
-                <MenuItem value={'medium'}>medium</MenuItem>
-                <MenuItem value={'short'}>short</MenuItem>
+                <MenuItem value={'full'}>
+                  <Text id="C_Set.time_style.full">full</Text>
+                </MenuItem>
+                <MenuItem value={'long'}>
+                  <Text id="C_Set.time_style.long">long</Text>
+                </MenuItem>
+                <MenuItem value={'medium'}>
+                  <Text id="C_Set.time_style.medium">medium</Text>
+                </MenuItem>
+                <MenuItem value={'short'}>
+                  <Text id="C_Set.time_style.short">short</Text>
+                </MenuItem>
               </Select>
             </FormControl>{' '}
             <br />

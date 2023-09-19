@@ -57,21 +57,9 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
           <FormControl component="fieldset">
             <FormLabel component="legend">{<Text id="more_settings.Recording.record_retain_model.title" />}</FormLabel>
             <RadioGroup row value={data.record_retain_model} onChange={handleInputChange('record_retain_model')}>
-              <FormControlLabel
-                value="all"
-                control={<Radio />}
-                label={<Text id="more_settings.Recording.record_retain_model.all" />}
-              />
-              <FormControlLabel
-                value="motion"
-                control={<Radio />}
-                label={<Text id="more_settings.Recording.record_retain_model.motion" />}
-              />
-              <FormControlLabel
-                value="active_objects"
-                control={<Radio />}
-                label={<Text id="more_settings.Recording.record_retain_model.active_objects" />}
-              />
+              <FormControlLabel value="all" control={<Radio />} label={<Text id="share.all" />} />
+              <FormControlLabel value="motion" control={<Radio />} label={<Text id="share.motion" />} />
+              <FormControlLabel value="active_objects" control={<Radio />} label={<Text id="share.active_objects" />} />
             </RadioGroup>
           </FormControl>
           <br />
@@ -105,17 +93,17 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
               <FormControlLabel
                 value="all"
                 control={<Radio />}
-                label={<Text id="more_settings.Recording.event_retain_model.all" />}
+                label={<Text id="share.all" />}
               />
               <FormControlLabel
                 value="motion"
                 control={<Radio />}
-                label={<Text id="more_settings.Recording.event_retain_model.motion" />}
+                label={<Text id="share.motion" />}
               />
               <FormControlLabel
                 value="active_objects"
                 control={<Radio />}
-                label={<Text id="more_settings.Recording.event_retain_model.active_objects" />}
+                label={<Text id="share.active_objects" />}
               />
             </RadioGroup>
           </FormControl>
