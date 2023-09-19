@@ -1,4 +1,8 @@
 {
+  "header": {
+    "langselector": "language"
+  },
+
   "cameras": {
     "subtitle": "Cameras",
 
@@ -28,10 +32,7 @@
 
     "Detect": {
       "title": "Detect",
-      "enable": "Enable",
-      "width": "width",
-      "height": "height",
-      "fps": "fps"
+      "enable": "Enable"
     },
 
     "Recording": {
@@ -66,5 +67,15 @@
 
     "Close": "Close",
     "Submit": "Submit"
+  },
+
+  "C_Set":{
+    "title":"Common Settings",
+    "save_button":"save",
+    "detect_Settings":"Detect Settings",
+  }
+
+  "all":{
+    
   }
 }

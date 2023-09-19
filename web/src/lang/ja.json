@@ -1,4 +1,7 @@
 {
+  "header": {
+    "langselector": "言語"
+  },
   "cameras": {
     "subtitle": "カメラ",
 

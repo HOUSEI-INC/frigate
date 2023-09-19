@@ -15,6 +15,8 @@ import axios from 'axios';
 import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { Text } from 'preact-i18n';
+
 
 export default function CommonConfig() {
   const { data: config } = useSWR('config');
@@ -135,16 +137,16 @@ export default function CommonConfig() {
       <AppBar sx={{ position: 'relative' }}>
         <Toolbar>
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            Common Settings
+            <Text id="C_Set.title">Common Settings</Text>
           </Typography>
           <Button color="inherit" onClick={handleSave}>
-            save
+            <Text id="C_Set.save_button">save</Text>
           </Button>
         </Toolbar>
       </AppBar>
       <List>
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary="Detect Settings" />
+          <ListItemText primary={<Text id="detect_Settings">Detect Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
             detect enabled:
             <Switch

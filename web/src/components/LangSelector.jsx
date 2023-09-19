@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Text } from 'preact-i18n';
 
 export default function LangSelector({ changeLanguage }) {
   const [language, setLanguage] = React.useState('ja');
@@ -17,8 +18,8 @@ export default function LangSelector({ changeLanguage }) {
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel id="demo-simple-select-label">language</InputLabel>
-        <Select value={language} label="Language" onChange={handleChange}>
+        <InputLabel id="demo-simple-select-label">{<Text id="header.langselector" />}</InputLabel>
+        <Select value={language} label={<Text id="header.langselector" />} onChange={handleChange}>
           <MenuItem value={'en'}>English</MenuItem>
           <MenuItem value={'ja'}>日本語</MenuItem>
         </Select>
