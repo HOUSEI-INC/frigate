@@ -3,6 +3,13 @@
     "langselector": "language"
   },
 
+  "menu": {
+    "Auto_dark_mode": "Auto dark mode",
+    "Light": "Light",
+    "Dark": "Dark",
+    "Restart_Frigate": "Restart Frigate"
+  },
+
   "cameras": {
     "subtitle": "Cameras",
 
@@ -57,18 +64,30 @@
       "height": "height"
     },
 
+    "BirdEye": {
+      "title": "BirdEye",
+      "enable": "Enable",
+      "mode": {
+        "name": "mode",
+        "objects": "objects",
+        "motion": "motion",
+        "continuous": "continuous"
+      }
+    },
+
     "Close": "Close",
     "Submit": "Submit"
   },
 
   "C_Set": {
     "title": "Common Settings",
-    "Setting": "Setting",
+    "Settings": "Settings",
     "cam_enabled": "cam_enabled",
 
     "save_button": "save",
     "detect_Settings": "Detect Settings",
     "detect_enabled": "detect enabled",
+    "max_disappeared": "max disappeared",
 
     "Record_Settings": "Record Settings",
     "record_enabled": "record enabled",
@@ -108,6 +127,15 @@
       "long": "long",
       "medium": "medium",
       "short": "short"
+    },
+
+    "BirdsEye_Settings": "BirdsEye Settings",
+    "birdseye_enabled": "birdseye enabled",
+    "mode": {
+      "name": "mode",
+      "objects": "objects",
+      "motion": "motion",
+      "continuous": "continuous"
     }
   },
 
@@ -132,13 +160,22 @@
     "Motion_Masks": "Motion Masks",
     "Motion_boxes": "Motion boxes",
     "Regions": "Regions",
-    "Mask_Zone_creator": "Mask & Zone creator"
+    "Mask_Zone_creator": "Mask & Zone creator",
+    "Control_Panel": "Control Panel",
+    "Tracked_objects": "Tracked objects"
+  },
+
+  "Event": {
+    "Snapshot": "Snapshot",
+    "Thumbnail": "Thumbnail",
+    "Clip": "Clip"
   },
 
   "share": {
     "width": "width",
     "height": "height",
     "fps": "fps",
+    "quality": "quality",
     "all": "all",
     "motion": "motion",
     "active_objects": "active objects"

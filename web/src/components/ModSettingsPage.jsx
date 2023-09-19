@@ -29,7 +29,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
     detect_width: 0,
     detect_height: 0,
     detect_fps: 0,
-    max_disappeared:0,
+    max_disappeared: 0,
     record: false,
     record_retain_days: 0,
     record_retain_mode: '',
@@ -55,7 +55,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
         detect_width: config.detect.width || 0,
         detect_height: config.detect.height || 0,
         detect_fps: config.detect.fps || 0,
-        max_disappeared:config.detect.max_disappeared || 0,
+        max_disappeared: config.detect.max_disappeared || 0,
         record: config.record.enabled || false,
         record_retain_days: config.record.retain.days || 0,
         record_retain_mode: config.record.retain.mode || '',
@@ -92,7 +92,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
             width: state.detect_width,
             height: state.detect_height,
             fps: state.detect_fps,
-            max_disappeared:state.max_disappeared,
+            max_disappeared: state.max_disappeared,
           },
           record: {
             enabled: state.record,
@@ -120,7 +120,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
           },
           birdseye: {
             enabled: state.birdseye,
-            mode:state.birdseye_mode,
+            mode: state.birdseye_mode,
           },
         },
       },
@@ -152,7 +152,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {name} <Text id="C_Set.Settings">Settings</Text>
+              {name} {<Text id="C_Set.Settings">Settings</Text>}
             </Typography>
             <Button autoFocus color="inherit" onClick={handleSave}>
               <Text id="C_Set.save_button">save</Text>
@@ -200,7 +200,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
                 value={state.detect_fps}
                 onChange={handleDataChange('detect_fps')}
               />
-               max_disappeared:
+              <Text id="C_Set.max_disappeared">max disappeared</Text>:
               <TextField
                 size="small"
                 type="number"
@@ -325,9 +325,9 @@ export default function AlertDialog({ open, handleClose, name, config }) {
           </ListItem>
           <Divider />
           <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <ListItemText primary="BirdsEye Settings" />
+            <ListItemText primary={<Text id="C_Set.BirdsEye_Settings">BirdsEye Settings</Text>} />
             <div style={{ width: '98%', alignSelf: 'center' }}>
-              birdseye enabled:
+              <Text id="C_Set.birdseye_enabled">birdseye enabled</Text>:
               <Switch
                 checked={state.birdseye}
                 onChange={handleChange('birdseye')}
@@ -335,11 +335,25 @@ export default function AlertDialog({ open, handleClose, name, config }) {
               />
               <br />
               <FormControl component="fieldset">
-                <FormLabel component="legend">mode</FormLabel>
+                <FormLabel component="legend">
+                  <Text id="C_Set.mode.name">mode</Text>
+                </FormLabel>
                 <RadioGroup row value={state.birdseye_mode} onChange={handleDataChange('birdseye_mode')}>
-                  <FormControlLabel value="objects" control={<Radio />} label="objects" />
-                  <FormControlLabel value="motion" control={<Radio />} label="motion" />
-                  <FormControlLabel value="continuous" control={<Radio />} label="continuous" />
+                  <FormControlLabel
+                    value="objects"
+                    control={<Radio />}
+                    label={<Text id="C_Set.mode.objects">objects</Text>}
+                  />
+                  <FormControlLabel
+                    value="motion"
+                    control={<Radio />}
+                    label={<Text id="C_Set.mode.motion">motion</Text>}
+                  />
+                  <FormControlLabel
+                    value="continuous"
+                    control={<Radio />}
+                    label={<Text id="C_Set.mode.continuous">continuous</Text>}
+                  />
                 </RadioGroup>
               </FormControl>
             </div>

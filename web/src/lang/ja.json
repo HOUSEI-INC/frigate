@@ -3,6 +3,13 @@
     "langselector": "言語"
   },
 
+  "menu": {
+    "Auto_dark_mode": "自動ダークモード",
+    "Light": "ライト",
+    "Dark": "ダーク",
+    "Restart_Frigate": "Frigateの再起動"
+  },
+
   "cameras": {
     "subtitle": "カメラ",
 
@@ -57,18 +64,30 @@
       "height": "高さ"
     },
 
+    "BirdEye": {
+      "title": "バードアイ",
+      "enable": "有効化",
+      "mode": {
+        "name": "モード",
+        "objects": "オブジェクト",
+        "motion": "モーション",
+        "continuous": "連続"
+      }
+    },
+
     "Close": "閉じる",
     "Submit": "送信"
   },
 
   "C_Set": {
     "title": "共通設定",
-    "Setting": "設定",
+    "Settings": "設定",
     "cam_enabled": "カメラ有効",
 
     "save_button": "保存",
     "detect_Settings": "設定の検出",
     "detect_enabled": "検出が有効",
+    "max_disappeared": "最大消失",
 
     "Record_Settings": "記録設定",
     "record_enabled": "記録が有効",
@@ -108,6 +127,15 @@
       "long": "長い",
       "medium": "中程度",
       "short": "短い"
+    },
+
+    "BirdsEye_Settings": "BirdsEyeの設定",
+    "birdseye_enabled": "BirdsEye有効",
+    "mode": {
+      "name": "モード",
+      "objects": "オブジェクト",
+      "motion": "モーション",
+      "continuous": "連続"
     }
   },
 
@@ -132,17 +160,22 @@
     "Motion_Masks": "モーションマスク",
     "Motion_boxes": "モーションボックス",
     "Regions": "地域",
-    "Mask_Zone_creator": "マスク＆ゾーン作成"
+    "Mask_Zone_creator": "マスク＆ゾーン作成",
+    "Control_Panel": "コントロールパネル",
+    "Tracked_objects": "追跡オブジェクト"
   },
 
-  "Snapshot": "スナップショット",
-  "Thumbnail": "サムネイル",
-  "Clip": "クリップ",
+  "Event": {
+    "Snapshot": "スナップショット",
+    "Thumbnail": "サムネイル",
+    "Clip": "クリップ"
+  },
 
   "share": {
     "width": "幅",
     "height": "高さ",
     "fps": "フレームレート",
+    "quality": "品質",
     "all": "すべて",
     "motion": "モーション",
     "active_objects": "アクティブオブジェクト"

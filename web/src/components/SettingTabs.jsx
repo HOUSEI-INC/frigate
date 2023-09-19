@@ -158,7 +158,7 @@ export default function SettingTabs({ onReceiveData }) {
                   <Tab label={<Text id="more_settings.Detect.title" />} value="1" />
                   <Tab label={<Text id="more_settings.Recording.title" />} value="2" />
                   <Tab label={<Text id="more_settings.Snapshot.title" />} value="3" />
-                  <Tab label='BirdEye' value="4" />
+                  <Tab label={<Text id="more_settings.BirdEye.title" />} value="4" />
                 </TabList>
               </Box>
               {value === '1' && <DetectSettingsTab ref={detectSettingRef} data={detectData} setData={setDetectData} />}

@@ -212,13 +212,17 @@ export default function Camera({ camera }) {
 
       {cameraConfig?.onvif?.host && (
         <div className="dark:bg-gray-800 shadow-md hover:shadow-lg rounded-lg transition-shadow p-4 w-full sm:w-min">
-          <Heading size="sm">Control Panel</Heading>
+          <Heading size="sm">
+            <Text id="show_options.Control_Panel">Control Panel</Text>
+          </Heading>
           <CameraControlPanel camera={camera} />
         </div>
       )}
 
       <div className="space-y-4">
-        <Heading size="sm">Tracked objects</Heading>
+        <Heading size="sm">
+          <Text id="show_options.Tracked_objects">Tracked objects</Text>
+        </Heading>
         <div className="flex flex-wrap justify-start">
           {(trackedLabels || []).map((objectType) => (
             <Card

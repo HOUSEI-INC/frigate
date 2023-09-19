@@ -10,6 +10,7 @@ import Prompt from './components/Prompt';
 import { useDarkMode } from './context';
 import { useCallback, useRef, useState } from 'preact/hooks';
 import { useRestart } from './api/ws';
+import { Text } from 'preact-i18n';
 
 export default function AppBar({ changeLanguage }) {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -61,12 +62,31 @@ export default function AppBar({ changeLanguage }) {
       />
       {showMoreMenu ? (
         <Menu onDismiss={handleDismissMoreMenu} relativeTo={moreRef}>
-          <MenuItem icon={AutoAwesomeIcon} label="Auto dark mode" value="media" onSelect={handleSelectDarkMode} />
+          <MenuItem
+            icon={AutoAwesomeIcon}
+            label={<Text id="menu.Auto_dark_mode">Auto dark mode</Text>}
+            value="media"
+            onSelect={handleSelectDarkMode}
+          />
           <MenuSeparator />
-          <MenuItem icon={LightModeIcon} label="Light" value="light" onSelect={handleSelectDarkMode} />
-          <MenuItem icon={DarkModeIcon} label="Dark" value="dark" onSelect={handleSelectDarkMode} />
+          <MenuItem
+            icon={LightModeIcon}
+            label={<Text id="menu.Light">Light</Text>}
+            value="light"
+            onSelect={handleSelectDarkMode}
+          />
+          <MenuItem
+            icon={DarkModeIcon}
+            label={<Text id="menu.Dark">Dark</Text>}
+            value="dark"
+            onSelect={handleSelectDarkMode}
+          />
           <MenuSeparator />
-          <MenuItem icon={FrigateRestartIcon} label="Restart Frigate" onSelect={handleRestart} />
+          <MenuItem
+            icon={FrigateRestartIcon}
+            label={<Text id="menu.Restart_Frigate">Restart Frigate</Text>}
+            onSelect={handleRestart}
+          />
         </Menu>
       ) : null}
       {showDialog ? (

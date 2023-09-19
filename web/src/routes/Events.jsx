@@ -694,8 +694,16 @@ export default function Events({ path, ...props }) {
                             onChange={handleEventDetailTabChange}
                             className="justify"
                           >
-                            <TextTab text={<Text id="Clip" />} disabled={!event.has_clip} />
-                            <TextTab text={event.has_snapshot ? 'Snapshot' : 'Thumbnail'} />
+                            <TextTab text={<Text id="Event.Clip">Clip</Text>} disabled={!event.has_clip} />
+                            <TextTab
+                              text={
+                                event.has_snapshot ? (
+                                  <Text id="Event.Snapshot">Snapshot</Text>
+                                ) : (
+                                  <Text id="Event.Thumbnail">Thumbnail</Text>
+                                )
+                              }
+                            />
                           </Tabs>
                         </div>
 

@@ -25,7 +25,7 @@ export default function CommonConfig() {
     detect_width: 0,
     detect_height: 0,
     detect_fps: 0,
-    max_disappeared:0,
+    max_disappeared: 0,
     record: false,
     record_retain_days: 0,
     record_retain_mode: '',
@@ -45,7 +45,7 @@ export default function CommonConfig() {
     birdseye_width: 0,
     birdseye_height: 0,
     birdseye_quality: 0,
-    birdseye_mode:'',
+    birdseye_mode: '',
   });
 
   React.useEffect(() => {
@@ -56,7 +56,7 @@ export default function CommonConfig() {
         detect_width: config.detect.width || 0,
         detect_height: config.detect.height || 0,
         detect_fps: config.detect.fps || 0,
-        max_disappeared:config.detect.max_disappeared ||0,
+        max_disappeared: config.detect.max_disappeared || 0,
         record: config.record.enabled || false,
         record_retain_days: config.record.retain.days || 0,
         record_retain_mode: config.record.retain.mode || '',
@@ -76,7 +76,7 @@ export default function CommonConfig() {
         birdseye_width: config.birdseye.width || 0,
         birdseye_height: config.birdseye.height || 0,
         birdseye_quality: config.birdseye.quality || 0,
-        birdseye_mode:config.birdseye.mode || 0,
+        birdseye_mode: config.birdseye.mode || 0,
       }));
     }
   }, [config]);
@@ -96,14 +96,14 @@ export default function CommonConfig() {
         width: state.birdseye_width,
         height: state.birdseye_height,
         quality: state.birdseye_quality,
-        mode:state.birdseye_mode,
+        mode: state.birdseye_mode,
       },
       detect: {
         enabled: state.detect,
         width: state.detect_width,
         height: state.detect_height,
         fps: state.detect_fps,
-        max_disappeared:state.max_disappeared,
+        max_disappeared: state.max_disappeared,
       },
       record: {
         enabled: state.record,
@@ -190,8 +190,13 @@ export default function CommonConfig() {
             />
             <Text id="share.fps">fps</Text>:
             <TextField size="small" type="number" value={state.detect_fps} onChange={handleDataChange('detect_fps')} />
-            max_disappeared:
-            <TextField size="small" type="number" value={state.max_disappeared} onChange={handleDataChange('max_disappeared')} />
+            <Text id="C_Set.max_disappeared">max_disappeared</Text>:
+            <TextField
+              size="small"
+              type="number"
+              value={state.max_disappeared}
+              onChange={handleDataChange('max_disappeared')}
+            />
           </div>
         </ListItem>
         <Divider />
@@ -367,30 +372,30 @@ export default function CommonConfig() {
         </ListItem>
         <Divider />
         <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <ListItemText primary="BirdsEye Settings" />
+          <ListItemText primary={<Text id="C_Set.BirdsEye_Settings">BirdsEye Settings</Text>} />
           <div style={{ width: '98%', alignSelf: 'center' }}>
-            birdseye enabled:
+            <Text id="C_Set.birdseye_enabled">birdseye enabled</Text>:
             <Switch
               checked={state.birdseye}
               onChange={handleChange('birdseye')}
               inputProps={{ 'aria-label': 'controlled' }}
             />
             <br />
-            width:
+            <Text id="share.width">width</Text>:
             <TextField
               size="small"
               value={state.birdseye_width}
               type="number"
               onChange={handleDataChange('birdseye_width')}
             />
-            height:
+            <Text id="share.height">height</Text>:
             <TextField
               size="small"
               type="number"
               value={state.birdseye_height}
               onChange={handleDataChange('birdseye_height')}
             />
-            quality:
+            <Text id="share.quality">quality</Text>:
             <TextField
               size="small"
               type="number"
@@ -399,11 +404,25 @@ export default function CommonConfig() {
             />
             <br />
             <FormControl component="fieldset">
-              <FormLabel component="legend">mode</FormLabel>
+              <FormLabel component="legend">
+                <Text id="C_Set.mode.name">mode</Text>
+              </FormLabel>
               <RadioGroup row value={state.birdseye_mode} onChange={handleDataChange('birdseye_mode')}>
-                <FormControlLabel value="objects" control={<Radio />} label="objects" />
-                <FormControlLabel value="motion" control={<Radio />} label="motion" />
-                <FormControlLabel value="continuous" control={<Radio />} label="continuous" />
+                <FormControlLabel
+                  value="objects"
+                  control={<Radio />}
+                  label={<Text id="C_Set.mode.objects">objects</Text>}
+                />
+                <FormControlLabel
+                  value="motion"
+                  control={<Radio />}
+                  label={<Text id="C_Set.mode.motion">motion</Text>}
+                />
+                <FormControlLabel
+                  value="continuous"
+                  control={<Radio />}
+                  label={<Text id="C_Set.mode.continuous">continuous</Text>}
+                />
               </RadioGroup>
             </FormControl>
           </div>
