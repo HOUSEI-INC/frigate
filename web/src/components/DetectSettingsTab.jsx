@@ -9,6 +9,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
       newState.width = 1280;
       newState.height = 720;
       newState.fps = 5;
+      newState.max_disappeared = 25;
     }
     setData(newState);
   };
@@ -20,6 +21,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
         width: 1280,
         height: 720,
         fps: 5,
+        max_disappeared:25,
       });
     },
   }));
@@ -61,6 +63,13 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
             type="number"
           />
           <br />
+          <TextField
+            label='max_disappeared'
+            variant="outlined"
+            value={data.max_disappeared}
+            onChange={handleInputChange('max_disappeared')}
+            type="number"
+          />
         </>
       )}
     </div>

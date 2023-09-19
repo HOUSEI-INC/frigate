@@ -12,6 +12,8 @@ import TabList from '@mui/lab/TabList';
 import DetectSettingsTab from './DetectSettingsTab';
 import RecordingSettingsTab from './RecordingSettingsTab';
 import SnapshotSettingTab from './SnapshotSettingTab';
+import BirdEyeSettingsTab from './BirdEyeSettingsTab';
+
 import { Text } from 'preact-i18n';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -25,12 +27,14 @@ export default function SettingTabs({ onReceiveData }) {
   const detectSettingRef = React.useRef();
   const recordingSettingsRef = React.useRef();
   const snapshotSettingsRef = React.useRef();
+  const birdEyeSettingsRef = React.useRef();
 
   const [detectData, setDetectData] = React.useState({
     enabled: false,
     width: 1280,
     height: 720,
     fps: 5,
+    max_disappeared:25,
   });
 
   const [recordingData, setRecordingData] = React.useState({
@@ -51,11 +55,17 @@ export default function SettingTabs({ onReceiveData }) {
     height: 175,
   });
 
+  const [birdEyeData, setBirdEyeData] = React.useState({
+    enabled: false,
+    mode:'objects',
+  });
+
   const initialDetectData = {
     enabled: false,
     width: 1280,
     height: 720,
     fps: 5,
+    max_disappeared:25,
   };
 
   const initialRecordingData = {
@@ -74,6 +84,11 @@ export default function SettingTabs({ onReceiveData }) {
     timestamp: false,
     retain_days: 10,
     height: 175,
+  };
+
+  const initialBirdEyeData = {
+    enabled: false,
+    mode:'objects',
   };
 
   const handleChange = (event, newValue) => {
@@ -98,10 +113,14 @@ export default function SettingTabs({ onReceiveData }) {
     if (snapshotSettingsRef.current) {
       snapshotSettingsRef.current.resetSnapshotSwitch();
     }
+    if (birdEyeSettingsRef.current) {
+      birdEyeSettingsRef.current.resetBirdEyeSwitch
+    }
 
     setDetectData(initialDetectData);
     setRecordingData(initialRecordingData);
     setSnapshotData(initialSnapshotData);
+    setBirdEyeData(initialBirdEyeData);
     setValue('1');
     setOpen(false);
   };
@@ -111,6 +130,7 @@ export default function SettingTabs({ onReceiveData }) {
       detectData,
       recordingData,
       snapshotData,
+      birdEyeData,
     };
 
     onReceiveData(allData);
@@ -134,10 +154,11 @@ export default function SettingTabs({ onReceiveData }) {
           <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList onChange={handleChange} aria-label="lab API tabs example">
+                <TabList onChange={handleChange}>
                   <Tab label={<Text id="more_settings.Detect.title" />} value="1" />
                   <Tab label={<Text id="more_settings.Recording.title" />} value="2" />
                   <Tab label={<Text id="more_settings.Snapshot.title" />} value="3" />
+                  <Tab label='BirdEye' value="4" />
                 </TabList>
               </Box>
               {value === '1' && <DetectSettingsTab ref={detectSettingRef} data={detectData} setData={setDetectData} />}
@@ -146,6 +167,9 @@ export default function SettingTabs({ onReceiveData }) {
               )}
               {value === '3' && (
                 <SnapshotSettingTab ref={snapshotSettingsRef} data={snapshotData} setData={setSnapshotData} />
+              )}
+              {value === '4' && (
+                <BirdEyeSettingsTab ref={birdEyeSettingsRef} data={birdEyeData} setData={setBirdEyeData} />
               )}
             </TabContext>
           </Box>

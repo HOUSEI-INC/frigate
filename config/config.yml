@@ -43,7 +43,7 @@ cameras:
       height: 500
     ffmpeg:
       inputs:
-        - path: rtsp://172.29.243.90:554/ch01/0
+        - path: rtsp://172.29.243.5:554/ch01/0
           roles:
             - detect
             - rtmp
@@ -58,7 +58,7 @@ cameras:
       height: 500
     ffmpeg:
       inputs:
-        - path: rtsp://172.29.243.91:554/rtsp/streaming?channel=01&subtype=A
+        - path: rtsp://172.29.243.9:554/rtsp/streaming?channel=01&subtype=A
           roles:
             - detect
             - rtmp

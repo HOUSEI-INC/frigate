@@ -41,6 +41,10 @@ export default function CommonConfig() {
     time_format: '',
     date_style: '',
     time_style: '',
+    birdseye: false,
+    birdseye_width: 0,
+    birdseye_height: 0,
+    birdseye_quality:0,
   });
 
   React.useEffect(() => {
@@ -66,6 +70,10 @@ export default function CommonConfig() {
         time_format: config.ui.time_format || '',
         date_style: config.ui.date_style || '',
         time_style: config.ui.time_style || '',
+        birdseye: config.birdseye.enabled || false,
+        birdseye_width: config.birdseye.width || 0,
+        birdseye_height: config.birdseye.height || 0,
+        birdseye_quality:config.birdseye.quality || 0,
       }));
     }
   }, [config]);
@@ -308,6 +316,40 @@ export default function CommonConfig() {
               </Select>
             </FormControl>{' '}
             <br />
+          </div>
+        </ListItem>
+        <Divider />
+        <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <ListItemText primary="BirdsEye Settings" />
+          <div style={{ width: '98%', alignSelf: 'center' }}>
+            birdseye enabled:
+            <Switch
+              checked={state.birdseye}
+              onChange={handleChange('birdseye')}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            <br />
+            width:
+            <TextField
+              size="small"
+              value={state.birdseye_width}
+              type="number"
+              onChange={handleDataChange('birdseye_width')}
+            />
+            height:
+            <TextField
+              size="small"
+              type="number"
+              value={state.birdseye_height}
+              onChange={handleDataChange('birdseye_height')}
+            />
+            quality:
+            <TextField
+              size="small"
+              type="number"
+              value={state.birdseye_quality}
+              onChange={handleDataChange('birdseye_quality')}
+            />
           </div>
         </ListItem>
         <Divider />

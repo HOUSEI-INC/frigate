@@ -70,11 +70,16 @@ export default function FormDialog() {
                   },
                 ],
               },
+              birdseye: {
+                enabled: settingsData.birdEyeData.enabled,
+                mode: settingsData.birdEyeData.mode,
+              },
               detect: {
                 enabled: settingsData.detectData.enabled,
                 width: settingsData.detectData.width,
                 height: settingsData.detectData.height,
                 fps: settingsData.detectData.fps,
+                max_disappeared:settingsData.detectData.max_disappeared,
               },
               record: {
                 enabled: settingsData.recordingData.enabled,
