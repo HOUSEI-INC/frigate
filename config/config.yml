@@ -1,6 +1,9 @@
 mqtt:
   host: emqx
   port: 1883
+detectors:
+  detector1:
+    type: cpu
 birdseye:
   enabled: True
   mode: objects

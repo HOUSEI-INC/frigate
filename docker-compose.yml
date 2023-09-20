@@ -1,9 +1,8 @@
 version: "3"
 services:
-  devcontainer:
+  frigate:
     ports:
       - 5001:5000
-      - 5173:5173
     restart: unless-stopped
     privileged: true
     container_name: frigate
@@ -18,7 +17,7 @@ services:
       context: .
       dockerfile: docker/main/Dockerfile
       # Use target devcontainer-trt for TensorRT dev
-      target: devcontainer
+      target: frigate
     # deploy:
     #       resources:
     #           reservations:

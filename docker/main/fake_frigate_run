@@ -53,4 +53,3 @@ cd /opt/frigate || echo "[ERROR] Failed to change working directory to /opt/frig
 # Replace the bash process with the Frigate process, redirecting stderr to stdout
 exec 2>&1
 exec python3 -u -m frigate
-cd web && exec npm run dev
