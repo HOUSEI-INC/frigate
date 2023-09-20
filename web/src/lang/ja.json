@@ -179,5 +179,14 @@
     "all": "すべて",
     "motion": "モーション",
     "active_objects": "アクティブオブジェクト"
+  },
+  "events": {
+    "title": "イベント"
+  },
+  "storage": {
+    "title": "ストレージ"
+  },
+  "system": {
+    "title": "システム"
   }
 }

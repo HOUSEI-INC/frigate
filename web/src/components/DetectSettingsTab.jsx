@@ -21,7 +21,7 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
         width: 1280,
         height: 720,
         fps: 5,
-        max_disappeared:25,
+        max_disappeared: 25,
       });
     },
   }));
@@ -39,13 +39,16 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
       <br />
       {data.enabled && (
         <>
+          <br />
           <TextField
             label={<Text id="share.width" />}
             variant="outlined"
             value={data.width}
             onChange={handleInputChange('width')}
             type="number"
+            size="small"
           />
+          <br />
           <br />
           <TextField
             label={<Text id="share.height" />}
@@ -53,7 +56,9 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
             value={data.height}
             onChange={handleInputChange('height')}
             type="number"
+            size="small"
           />
+          <br />
           <br />
           <TextField
             label={<Text id="share.fps" />}
@@ -61,15 +66,20 @@ const DetectSettingsTab = forwardRef(({ data, setData }, ref) => {
             value={data.fps}
             onChange={handleInputChange('fps')}
             type="number"
+            size="small"
           />
           <br />
+          <br />
           <TextField
-            label='max_disappeared'
+            label="max_disappeared"
             variant="outlined"
             value={data.max_disappeared}
             onChange={handleInputChange('max_disappeared')}
             type="number"
+            size="small"
           />
+          <br />
+          <br />
         </>
       )}
     </div>

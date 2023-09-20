@@ -140,7 +140,7 @@
   },
 
   "Export": {
-    "title": "Export",
+    "title": "Exports",
     "Select_A_Camera": "Select A Camera",
     "Select_A_Playback_Factor": "Select A Playback Factor",
     "Realtime": "Realtime",
@@ -179,5 +179,14 @@
     "all": "all",
     "motion": "motion",
     "active_objects": "active objects"
+  },
+  "events": {
+    "title": "EVENTS"
+  },
+  "storage": {
+    "title": "STORGE"
+  },
+  "system": {
+    "title": "SYSTEM"
   }
 }

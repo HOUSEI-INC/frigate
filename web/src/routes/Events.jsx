@@ -391,7 +391,7 @@ export default function Events({ path, ...props }) {
               download
             />
           )}
-          {(event?.data?.type || 'object') == 'object' &&
+          {/* {(event?.data?.type || 'object') == 'object' &&
             downloadEvent.end_time &&
             downloadEvent.has_snapshot &&
             !downloadEvent.plus_id && (
@@ -401,7 +401,7 @@ export default function Events({ path, ...props }) {
                 value="plus"
                 onSelect={() => showSubmitToPlus(downloadEvent.id, downloadEvent.label, downloadEvent.box)}
               />
-            )}
+            )} */}
           {downloadEvent.plus_id && (
             <MenuItem
               icon={UploadPlus}
@@ -643,7 +643,7 @@ export default function Events({ path, ...props }) {
                             : `, ${event.sub_label}: ${(event?.data?.sub_label_score * 100).toFixed(0)}%`}
                         </div>
                       </div>
-                      <div class="hidden sm:flex flex-col justify-end mr-2">
+                      {/* <div class="hidden sm:flex flex-col justify-end mr-2">
                         {event.end_time && event.has_snapshot && (event?.data?.type || 'object') == 'object' && (
                           <Fragment>
                             {event.plus_id ? (
@@ -669,7 +669,7 @@ export default function Events({ path, ...props }) {
                             )}
                           </Fragment>
                         )}
-                      </div>
+                      </div> */}
                       <div class="flex flex-col">
                         <Delete
                           className="h-6 w-6 cursor-pointer"

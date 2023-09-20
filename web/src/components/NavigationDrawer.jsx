@@ -29,7 +29,7 @@ export default function NavigationDrawer({ children, header }) {
 
         <nav
           className="flex flex-col flex-grow overflow-hidden overflow-y-auto p-2 space-y-2"
-          style={{ paddingTop: '1.5rem' }}
+          style={{ paddingTop: '2.0rem' }}
         >
           {children}
         </nav>

@@ -53,13 +53,16 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
             label={<Text id="more_settings.Snapshot.timestamp" />}
           />
           <br />
+          <br />
           <TextField
             label={<Text id="more_settings.Snapshot.retain_days" />}
             variant="outlined"
             value={data.retain_days}
             type="number"
             onChange={handleInputChange('retain_days')}
+            size="small"
           />
+          <br />
           <br />
           <TextField
             label={<Text id="more_settings.Snapshot.height" />}
@@ -67,7 +70,9 @@ const SnapshotSettingsTab = forwardRef(({ data, setData }, ref) => {
             value={data.height}
             type="number"
             onChange={handleInputChange('height')}
+            size="small"
           />
+          <br />
           <br />
         </>
       )}

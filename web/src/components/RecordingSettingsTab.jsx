@@ -46,15 +46,18 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
       <br />
       {data.enabled && (
         <>
+          <br />
           <TextField
             label={<Text id="more_settings.Recording.record_retain_days" />}
             variant="outlined"
             value={data.record_retain_days}
             type="number"
             onChange={handleInputChange('record_retain_days')}
+            size="small"
           />
           <br />
-          <FormControl component="fieldset">
+          <br />
+          <FormControl component="fieldset" size="small">
             <FormLabel component="legend">{<Text id="more_settings.Recording.record_retain_model.title" />}</FormLabel>
             <RadioGroup row value={data.record_retain_model} onChange={handleInputChange('record_retain_model')}>
               <FormControlLabel value="all" control={<Radio />} label={<Text id="share.all" />} />
@@ -63,13 +66,16 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
             </RadioGroup>
           </FormControl>
           <br />
+          <br />
           <TextField
             label={<Text id="more_settings.Recording.event_pre_capture" />}
             variant="outlined"
             value={data.event_pre_capture}
             type="number"
             onChange={handleInputChange('event_pre_capture')}
+            size="small"
           />
+          <br />
           <br />
           <TextField
             label={<Text id="more_settings.Recording.event_post_capture" />}
@@ -77,7 +83,9 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
             value={data.event_post_capture}
             type="number"
             onChange={handleInputChange('event_post_capture')}
+            size="small"
           />
+          <br />
           <br />
           <TextField
             label={<Text id="more_settings.Recording.event_retain_days" />}
@@ -85,28 +93,19 @@ const RecordingSettingsTab = forwardRef(({ data, setData }, ref) => {
             value={data.event_retain_days}
             type="number"
             onChange={handleInputChange('event_retain_days')}
+            size="small"
           />
+          <br />
           <br />
           <FormControl component="fieldset">
             <FormLabel component="legend">{<Text id="more_settings.Recording.event_retain_model.title" />}</FormLabel>
             <RadioGroup row value={data.event_retain_model} onChange={handleInputChange('event_retain_model')}>
-              <FormControlLabel
-                value="all"
-                control={<Radio />}
-                label={<Text id="share.all" />}
-              />
-              <FormControlLabel
-                value="motion"
-                control={<Radio />}
-                label={<Text id="share.motion" />}
-              />
-              <FormControlLabel
-                value="active_objects"
-                control={<Radio />}
-                label={<Text id="share.active_objects" />}
-              />
+              <FormControlLabel value="all" control={<Radio />} label={<Text id="share.all" />} />
+              <FormControlLabel value="motion" control={<Radio />} label={<Text id="share.motion" />} />
+              <FormControlLabel value="active_objects" control={<Radio />} label={<Text id="share.active_objects" />} />
             </RadioGroup>
           </FormControl>
+          <br />
           <br />
         </>
       )}

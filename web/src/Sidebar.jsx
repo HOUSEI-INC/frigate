@@ -6,6 +6,7 @@ import { ENV } from './env';
 import { useMemo } from 'preact/hooks';
 import useSWR from 'swr';
 import NavigationDrawer, { Destination, Separator } from './components/NavigationDrawer';
+import { Text } from 'preact-i18n';
 
 export default function Sidebar() {
   const { data: config } = useSWR('config');
@@ -28,30 +29,30 @@ export default function Sidebar() {
 
   return (
     <NavigationDrawer header={<Header />}>
-      <Destination href="/" text="Cameras" />
+      <Destination href="/" text={<Text id="cameras.subtitle" />} />
       <Match path="/cameras/:camera/:other?">
         {({ matches }) => (matches ? <CameraSection sortedCameras={sortedCameras} /> : null)}
       </Match>
       <Match path="/recording/:camera/:date?/:hour?/:seconds?">
         {({ matches }) => (matches ? <RecordingSection sortedCameras={sortedCameras} /> : null)}
       </Match>
-      {birdseye?.enabled ? <Destination href="/birdseye" text="Birdseye" /> : null}
-      <Destination href="/events" text="Events" />
-      <Destination href="/exports" text="Exports" />
+      {birdseye?.enabled ? <Destination href="/birdseye" text={<Text id="BirdEye.title" />} /> : null}
+      <Destination href="/events" text={<Text id="events.title" />} />
+      <Destination href="/exports" text={<Text id="Export.title" />} />
       <Separator />
-      <Destination href="/storage" text="Storage" />
-      <Destination href="/system" text="系统" />
+      <Destination href="/storage" text={<Text id="storage.title" />} />
+      <Destination href="/system" text={<Text id="system.title" />} />
       {/* <Destination href="/config" text="Config" /> */}
-      <Destination href="/common_config" text="共通设定" />
+      <Destination href="/common_config" text={<Text id="C_Set.title" />} />
       {/* <Destination href="/logs" text="Logs" /> */}
       <Separator />
       <div className="flex flex-grow" />
-      {ENV !== 'production' ? (
+      {/* {ENV !== 'production' ? (
         <Fragment>
           <Destination href="/styleguide" text="Style Guide" />
           <Separator />
         </Fragment>
-      ) : null}
+      ) : null} */}
       {/* <Destination className="self-end" href="https://docs.frigate.video" text="Documentation" />
       <Destination className="self-end" href="https://github.com/blakeblackshear/frigate" text="GitHub" /> */}
     </NavigationDrawer>
