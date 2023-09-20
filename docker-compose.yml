@@ -1,9 +1,12 @@
 version: "3"
 services:
   devcontainer:
+    ports:
+      - 5001:5000
+      - 5173:5173
     restart: unless-stopped
     privileged: true
-    container_name: frigate-devcontainer
+    container_name: frigate
     # add groups from host for render, plugdev, video
     group_add:
       - "109" # render
@@ -40,4 +43,20 @@ services:
     container_name: emqx
     image: eclipse-mosquitto:1.6
     ports:
-      - "1883:1883"
+      - 1883:1883
+  double-take:
+      container_name: double-take
+      image: jakowenko/double-take
+      restart: unless-stopped
+      ports:
+        - 3000:3000
+  deepstack:
+    container_name: deepstack
+    image: deepquestai/deepstack
+    restart: unless-stopped
+    environment:
+      - VISION_FACE=True
+      - VISION_DETECTION=True
+      - MODE=High
+    ports:
+      - 5050:5000
