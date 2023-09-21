@@ -36,7 +36,7 @@ export default function Sidebar() {
       <Match path="/recording/:camera/:date?/:hour?/:seconds?">
         {({ matches }) => (matches ? <RecordingSection sortedCameras={sortedCameras} /> : null)}
       </Match>
-      {birdseye?.enabled ? <Destination href="/birdseye" text={<Text id="BirdEye.title" />} /> : null}
+      {birdseye?.enabled ? <Destination href="/birdseye" text={<Text id="birdseye.title" />} /> : null}
       <Destination href="/events" text={<Text id="events.title" />} />
       <Destination href="/exports" text={<Text id="Export.title" />} />
       <Separator />

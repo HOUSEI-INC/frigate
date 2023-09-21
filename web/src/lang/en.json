@@ -188,5 +188,8 @@
   },
   "system": {
     "title": "SYSTEM"
+  },
+  "birdseye": {
+    "title": "Birdseye"
   }
 }
