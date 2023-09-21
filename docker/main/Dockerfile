@@ -249,6 +249,7 @@ FROM scratch AS rootfs
 WORKDIR /opt/frigate/
 COPY frigate frigate/
 COPY migrations migrations/
+COPY docker/main/build_web.sh /etc/services.d/web-builder/run
 COPY --from=web-build /work/dist/ web/
 
 # Frigate final container
@@ -256,3 +257,6 @@ FROM deps AS frigate
 
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
+
+# s6-overlay will start the frigate service
+ENTRYPOINT ["/init"]
