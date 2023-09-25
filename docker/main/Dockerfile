@@ -227,7 +227,9 @@ RUN apt-get update \
 RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
     pip3 install -r requirements-dev.txt
 
-CMD ["sleep", "infinity"]
+COPY docker/main/build_web.sh /opt/frigate/build_web.sh
+RUN chmod +x /opt/frigate/build_web.sh
+ENTRYPOINT ["/opt/frigate/build_web.sh"]
 
 
 # Frigate web build
@@ -256,8 +258,3 @@ FROM deps AS frigate
 
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
-COPY docker/main/build_web.sh /etc/services.d/web-builder/run
-RUN chmod +x /etc/services.d/web-builder/run
-
-# s6-overlay will start the frigate service
-ENTRYPOINT ["/init"]
