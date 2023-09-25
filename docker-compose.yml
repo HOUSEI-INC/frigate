@@ -1,6 +1,8 @@
 version: "3"
 services:
   frigate:
+    ports:
+      - 5555:5000
     restart: unless-stopped
     privileged: true
     container_name: frigate
