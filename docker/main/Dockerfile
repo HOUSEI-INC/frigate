@@ -257,7 +257,7 @@ FROM deps AS frigate
 
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
-RUN chmod +x /etc/services.d/web-builder/run
+# RUN chmod +x /etc/services.d/web-builder/run
 
 # # s6-overlay will start the frigate service
 # ENTRYPOINT ["/init"]
