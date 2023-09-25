@@ -1,14 +1,18 @@
+#!/bin/bash
 ###
  # @Author: Ray
- # @Date: 2023-09-21 11:22:29
- # @LastEditTime: 2023-09-21 13:54:48
+ # @Date: 2023-09-25 15:42:45
+ # @LastEditTime: 2023-09-25 16:43:48
  # @LastEditors: Ray
  # @Description: 
  # @FilePath: /frigate/docker/main/build_web.sh
 ### 
-
-#!/bin/bash
 set -e
+
+env > /tmp/env.log
+
+# Running web-builder script to build web interface
+echo "Running web-builder script started."
 
 # Update repositories
 /usr/bin/apt update
@@ -41,3 +45,5 @@ cd /workspace/frigate/web
 
 mv /workspace/frigate/web/dist/BASE_PATH/monacoeditorwork/* dist/assets/
 
+# Running web-builder script to build successfully
+echo "Running web-builder script successful."
