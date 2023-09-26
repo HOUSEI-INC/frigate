@@ -1,9 +1,6 @@
 mqtt:
   host: emqx
   port: 1883
-detectors:
-  detector1:
-    type: cpu
 birdseye:
   enabled: True
   mode: objects
@@ -36,22 +33,22 @@ cameras:
             - detect
             - rtmp
             - record
-  # test1:
-  # mqtt:
-  #   enabled: True
-  #   timestamp: False
-  #   bounding_box: False
-  #   crop: True
-  #   quality: 100
-  #   height: 500
-  # ffmpeg:
-  #   inputs:
-  #     - path: rtsp://172.29.243.5:554/ch01/0
-  #       roles:
-  #         - detect
-  #         - rtmp
-  #         - record
-  testcam:
+  test1:
+    mqtt:
+      enabled: True
+      timestamp: False
+      bounding_box: False
+      crop: True
+      quality: 100
+      height: 500
+    ffmpeg:
+      inputs:
+        - path: rtsp://172.29.243.5:554/ch01/0
+          roles:
+            - detect
+            - rtmp
+            - record
+  test2:
     mqtt:
       enabled: True
       timestamp: False
@@ -66,21 +63,21 @@ cameras:
             - detect
             - rtmp
             - record
-  # test3:
-  #   mqtt:
-  #     enabled: True
-  #     timestamp: False
-  #     bounding_box: False
-  #     crop: True
-  #     quality: 100
-  #     height: 500
-  #   ffmpeg:
-  #     inputs:
-  #       - path: rtsp://172.29.243.99:554/main
-  #         roles:
-  #         - detect
-  #         - rtmp
-  #         - record
+  test3:
+    mqtt:
+      enabled: True
+      timestamp: False
+      bounding_box: False
+      crop: True
+      quality: 100
+      height: 500
+    ffmpeg:
+      inputs:
+        - path: rtsp://172.29.243.99:554/main
+          roles:
+          - detect
+          - rtmp
+          - record
 detect:
   height: 720
   width: 1280
