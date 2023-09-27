@@ -4,6 +4,7 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentT
 import SettingTabs from './SettingTabs';
 import axios from 'axios';
 import { Text } from 'preact-i18n';
+import SaveSuccessSnackbar from './SaveSuccessSnackBar';
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,9 @@ export default function FormDialog() {
 
   const [streamError, setStreamError] = useState(false);
   const [nameError, setNameError] = useState(false);
+
+
+  const [snackbarOpen, setsnackbarOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -143,6 +147,7 @@ export default function FormDialog() {
       });
       if (response.status === 200) {
         setSuccess(response.data);
+        setsnackbarOpen(true)
         console.log(success);
       }
     } catch (error) {
@@ -152,6 +157,7 @@ export default function FormDialog() {
 
   return (
     <div style={{ width: '100%' }}>
+      <SaveSuccessSnackbar open={snackbarOpen} setOpen={setsnackbarOpen}/>
       <Button variant="outlined" onClick={handleClickOpen}>
         {<Text id="cameras.add_new.btn" />}
       </Button>

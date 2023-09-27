@@ -16,6 +16,8 @@ import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { Text } from 'preact-i18n';
+import SaveSuccessSnackbar from '../components/SaveSuccessSnackBar';
+
 
 export default function CommonConfig() {
   const { data: config } = useSWR('config');
@@ -89,6 +91,9 @@ export default function CommonConfig() {
     setState({ ...state, [key]: event.target.value });
   };
 
+  const [snackbarOpen, setsnackbarOpen] = React.useState(false);
+
+
   const handleSave = () => {
     let data = {
       birdseye: {
@@ -153,6 +158,7 @@ export default function CommonConfig() {
 
   return (
     <div>
+      <SaveSuccessSnackbar open={snackbarOpen} setOpen={setsnackbarOpen}/>
       <AppBar sx={{ position: 'relative' }}>
         <Toolbar>
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">

@@ -191,5 +191,6 @@
   },
   "birdseye": {
     "title": "Birdseye"
-  }
+  },
+  "save_success_msg":"Successfully!Please reload the page after a moment"
 }

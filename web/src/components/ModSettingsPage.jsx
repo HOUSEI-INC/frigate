@@ -17,6 +17,8 @@ import TextField from '@mui/material/TextField';
 import { FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
 import axios from 'axios';
 import { Text } from 'preact-i18n';
+import SaveSuccessSnackbar from './SaveSuccessSnackBar';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -73,6 +75,9 @@ export default function AlertDialog({ open, handleClose, name, config }) {
       }));
     }
   }, [config]);
+
+
+  const [snackbarOpen, setsnackbarOpen] = React.useState(false);
 
   const handleChange = (key) => (event) => {
     setState({ ...state, [key]: event.target.checked });
@@ -137,6 +142,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
       });
       if (response.status === 200) {
         console.log('save success');
+        setsnackbarOpen(true)
       }
     } catch (error) {
       console.log('save filed');
@@ -145,6 +151,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
 
   return (
     <div>
+      <SaveSuccessSnackbar open={snackbarOpen} setOpen={setsnackbarOpen}/>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>

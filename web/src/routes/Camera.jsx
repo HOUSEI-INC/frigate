@@ -188,7 +188,7 @@ export default function Camera({ camera }) {
   }
 
   return (
-    <div className="space-y-4 p-2 px-4">
+    <div className="space-y-4 p-2 px-4" style={{ paddingTop: '1.5rem' }}>
       <div className="flex justify-between">
         <Heading className="p-2" size="2xl">
           {camera.replaceAll('_', ' ')}

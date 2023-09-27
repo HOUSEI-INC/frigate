@@ -12,7 +12,7 @@
 
   "cameras": {
     "subtitle": "カメラ",
-
+    
     "add_new": {
       "btn": "新規追加",
       "title": "新規追加",
@@ -191,5 +191,6 @@
   },
   "birdseye": {
     "title": "バードアイ"
-  }
+  },
+  "save_success_msg":"保存成功！少し時間経って画面を再読込してください"
 }

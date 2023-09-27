@@ -41,7 +41,7 @@ export default function Sidebar() {
       <Destination href="/exports" text={<Text id="Export.title" />} />
       <Separator />
       <Destination href="/storage" text={<Text id="storage.title" />} />
-      <Destination href="/system" text={<Text id="system.title" />} />
+      {/* <Destination href="/system" text={<Text id="system.title" />} /> */}
       {/* <Destination href="/config" text="Config" /> */}
       <Destination href="/common_config" text={<Text id="C_Set.title" />} />
       {/* <Destination href="/logs" text="Logs" /> */}
