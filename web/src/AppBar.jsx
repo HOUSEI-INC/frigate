@@ -62,7 +62,7 @@ export default function AppBar({ changeLanguage }) {
       />
       {showMoreMenu ? (
         <Menu onDismiss={handleDismissMoreMenu} relativeTo={moreRef}>
-          <MenuItem
+          {/* <MenuItem
             icon={AutoAwesomeIcon}
             label={<Text id="menu.Auto_dark_mode">Auto dark mode</Text>}
             value="media"
@@ -81,7 +81,7 @@ export default function AppBar({ changeLanguage }) {
             value="dark"
             onSelect={handleSelectDarkMode}
           />
-          <MenuSeparator />
+          <MenuSeparator /> */}
           <MenuItem
             icon={FrigateRestartIcon}
             label={<Text id="menu.Restart_Frigate">Restart Frigate</Text>}
