@@ -1,93 +1,732 @@
-mqtt:
-  host: emqx
-  port: 1883
+audio:
+  enabled: false
+  enabled_in_config: null
+  filters: null
+  listen:
+  - bark
+  - speech
+  - yell
+  - scream
+  max_not_heard: 30
+  min_volume: 500
 birdseye:
-  enabled: True
-  mode: objects
-  width: 1280
+  enabled: true
   height: 720
-objects:
-  track:
-    - person
-#    - car
-#    - motorcyle
-#    - cat
-#    - dog
-# Optional: list of objects to track from labelmap.txt (default: shown below)
-ffmpeg:
-  output_args:
-    record: -f segment -segment_time 10  -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
+  mode: !!python/object/apply:frigate.config.BirdseyeModeEnum
+  - objects
+  quality: 8
+  restream: false
+  width: 1280
 cameras:
   init:
-    mqtt:
-      enabled: True
-      timestamp: False
-      bounding_box: False
-      crop: True
-      quality: 100
-      height: 500
+    audio:
+      enabled: false
+      enabled_in_config: null
+      filters: null
+      listen:
+      - bark
+      - speech
+      - yell
+      - scream
+      max_not_heard: 30
+      min_volume: 500
+    best_image_timeout: 60
+    birdseye:
+      enabled: true
+      mode: !!python/object/apply:frigate.config.BirdseyeModeEnum
+      - objects
+      order: 0
+    detect:
+      annotation_offset: 0
+      enabled: true
+      fps: 5
+      height: null
+      max_disappeared: null
+      stationary:
+        interval: null
+        max_frames:
+          default: null
+          objects: {}
+        threshold: null
+      width: null
+    enabled: true
     ffmpeg:
+      global_args:
+      - -hide_banner
+      - -loglevel
+      - warning
+      - -threads
+      - '2'
+      hwaccel_args: []
+      input_args: preset-rtsp-generic
       inputs:
-        - path: test
-          roles:
-            - detect
-            - rtmp
-            - record
-  test1:
-    mqtt:
-      enabled: True
-      timestamp: False
-      bounding_box: False
-      crop: True
-      quality: 100
-      height: 500
-    ffmpeg:
-      inputs:
-        - path: rtsp://172.29.243.5:554/ch01/0
-          roles:
-            - detect
-            - rtmp
-            - record
-  test2:
-    mqtt:
-      enabled: True
-      timestamp: False
-      bounding_box: False
-      crop: True
-      quality: 100
-      height: 500
-    ffmpeg:
-      inputs:
-        - path: rtsp://172.29.243.91:554/rtsp/streaming?channel=01&subtype=A
-          roles:
-            - detect
-            - rtmp
-            - record
-  test3:
-    mqtt:
-      enabled: True
-      timestamp: False
-      bounding_box: False
-      crop: True
-      quality: 100
-      height: 500
-    ffmpeg:
-      inputs:
-        - path: rtsp://172.29.243.99:554/main
-          roles:
-          - detect
-          - rtmp
+      - global_args: []
+        hwaccel_args: []
+        input_args: []
+        path: test
+        roles:
+        - !!python/object/apply:frigate.config.CameraRoleEnum
           - record
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - detect
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - rtmp
+      output_args:
+        detect:
+        - -threads
+        - '2'
+        - -f
+        - rawvideo
+        - -pix_fmt
+        - yuv420p
+        record: preset-record-generic
+        rtmp: preset-rtmp-generic
+      retry_interval: 10.0
+    live:
+      height: 720
+      quality: 8
+      stream_name: ''
+    motion: null
+    mqtt:
+      bounding_box: false
+      crop: true
+      enabled: true
+      height: 500
+      quality: 100
+      required_zones: []
+      timestamp: false
+    name: init
+    objects:
+      filters: null
+      mask: ''
+      track:
+      - person
+    onvif:
+      autotracking:
+        enabled: false
+        required_zones: []
+        return_preset: home
+        timeout: 10
+        track:
+        - person
+      host: ''
+      password: null
+      port: 8000
+      user: null
+    record:
+      enabled: false
+      enabled_in_config: null
+      events:
+        objects: null
+        post_capture: 5
+        pre_capture: 5
+        required_zones: []
+        retain:
+          default: 10.0
+          mode: !!python/object/apply:frigate.config.RetainModeEnum
+          - motion
+          objects: {}
+      expire_interval: 60
+      retain:
+        days: 0.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - all
+      sync_on_startup: false
+    rtmp:
+      enabled: false
+    snapshots:
+      bounding_box: true
+      clean_copy: true
+      crop: false
+      enabled: false
+      height: null
+      quality: 70
+      required_zones: []
+      retain:
+        default: 10.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - motion
+        objects: {}
+      timestamp: false
+    timestamp_style:
+      color:
+        blue: 255
+        green: 255
+        red: 255
+      effect: null
+      format: '%m/%d/%Y %H:%M:%S'
+      position: !!python/object/apply:frigate.config.TimestampPositionEnum
+      - tl
+      thickness: 2
+    ui:
+      dashboard: true
+      order: 0
+    zones: {}
+  test1:
+    audio:
+      enabled: false
+      enabled_in_config: null
+      filters: null
+      listen:
+      - bark
+      - speech
+      - yell
+      - scream
+      max_not_heard: 30
+      min_volume: 500
+    best_image_timeout: 60
+    birdseye:
+      enabled: false
+      mode: !!python/object/apply:frigate.config.BirdseyeModeEnum
+      - objects
+      order: 0
+    detect:
+      annotation_offset: 0
+      enabled: true
+      fps: 5
+      height: 3000
+      max_disappeared: 25
+      stationary:
+        interval: null
+        max_frames:
+          default: null
+          objects: {}
+        threshold: null
+      width: 3840
+    enabled: true
+    ffmpeg:
+      global_args:
+      - -hide_banner
+      - -loglevel
+      - warning
+      - -threads
+      - '2'
+      hwaccel_args: []
+      input_args: preset-rtsp-generic
+      inputs:
+      - global_args: []
+        hwaccel_args: []
+        input_args: []
+        path: rtsp://172.29.243.90:554/ch01/0
+        roles:
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - record
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - detect
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - rtmp
+      output_args:
+        detect:
+        - -threads
+        - '2'
+        - -f
+        - rawvideo
+        - -pix_fmt
+        - yuv420p
+        record: preset-record-generic
+        rtmp: preset-rtmp-generic
+      retry_interval: 10.0
+    live:
+      height: 720
+      quality: 8
+      stream_name: ''
+    motion: null
+    mqtt:
+      bounding_box: false
+      crop: true
+      enabled: true
+      height: 500
+      quality: 100
+      required_zones: []
+      timestamp: false
+    name: test1
+    objects:
+      filters: null
+      mask: ''
+      track:
+      - person
+    onvif:
+      autotracking:
+        enabled: false
+        required_zones: []
+        return_preset: home
+        timeout: 10
+        track:
+        - person
+      host: ''
+      password: null
+      port: 8000
+      user: null
+    record:
+      enabled: false
+      enabled_in_config: null
+      events:
+        objects: null
+        post_capture: 5
+        pre_capture: 5
+        required_zones: []
+        retain:
+          default: 10.0
+          mode: !!python/object/apply:frigate.config.RetainModeEnum
+          - motion
+          objects: {}
+      expire_interval: 60
+      retain:
+        days: 0.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - all
+      sync_on_startup: false
+    rtmp:
+      enabled: false
+    snapshots:
+      bounding_box: true
+      clean_copy: true
+      crop: false
+      enabled: false
+      height: 0
+      quality: 70
+      required_zones: []
+      retain:
+        default: 10.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - motion
+        objects: {}
+      timestamp: false
+    timestamp_style:
+      color:
+        blue: 255
+        green: 255
+        red: 255
+      effect: null
+      format: '%m/%d/%Y %H:%M:%S'
+      position: !!python/object/apply:frigate.config.TimestampPositionEnum
+      - tl
+      thickness: 2
+    ui:
+      dashboard: true
+      order: 0
+    zones: {}
+  test2:
+    audio:
+      enabled: false
+      enabled_in_config: null
+      filters: null
+      listen:
+      - bark
+      - speech
+      - yell
+      - scream
+      max_not_heard: 30
+      min_volume: 500
+    best_image_timeout: 60
+    birdseye:
+      enabled: true
+      mode: objects
+      order: 0
+    detect:
+      annotation_offset: 0
+      enabled: false
+      fps: 5
+      height: 1056
+      max_disappeared: 25
+      stationary:
+        interval: null
+        max_frames:
+          default: null
+          objects: {}
+        threshold: null
+      width: 1920
+    enabled: true
+    ffmpeg:
+      global_args:
+      - -hide_banner
+      - -loglevel
+      - warning
+      - -threads
+      - '2'
+      hwaccel_args: []
+      input_args: preset-rtsp-generic
+      inputs:
+      - global_args: []
+        hwaccel_args: []
+        input_args: []
+        path: rtsp://172.29.243.91:554/rtsp/streaming?channel=01&subtype=A
+        roles:
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - record
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - detect
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - rtmp
+      output_args:
+        detect:
+        - -threads
+        - '2'
+        - -f
+        - rawvideo
+        - -pix_fmt
+        - yuv420p
+        record: preset-record-generic
+        rtmp: preset-rtmp-generic
+      retry_interval: 10.0
+    live:
+      height: 720
+      quality: 8
+      stream_name: ''
+    motion: null
+    mqtt:
+      bounding_box: false
+      crop: true
+      enabled: true
+      height: 500
+      quality: 100
+      required_zones: []
+      timestamp: false
+    name: test2
+    objects:
+      filters: null
+      mask: ''
+      track:
+      - person
+    onvif:
+      autotracking:
+        enabled: false
+        required_zones: []
+        return_preset: home
+        timeout: 10
+        track:
+        - person
+      host: ''
+      password: null
+      port: 8000
+      user: null
+    record:
+      enabled: true
+      enabled_in_config: null
+      events:
+        objects: null
+        post_capture: 5
+        pre_capture: 5
+        required_zones: []
+        retain:
+          default: 10
+          mode: all
+          objects: {}
+      expire_interval: 60
+      retain:
+        days: '10'
+        mode: all
+      sync_on_startup: false
+    rtmp:
+      enabled: false
+    snapshots:
+      bounding_box: true
+      clean_copy: true
+      crop: false
+      enabled: false
+      height: 0
+      quality: 70
+      required_zones: []
+      retain:
+        default: 10
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - motion
+        objects: {}
+      timestamp: false
+    timestamp_style:
+      color:
+        blue: 255
+        green: 255
+        red: 255
+      effect: null
+      format: '%m/%d/%Y %H:%M:%S'
+      position: !!python/object/apply:frigate.config.TimestampPositionEnum
+      - tl
+      thickness: 2
+    ui:
+      dashboard: true
+      order: 0
+    zones: {}
+  test3:
+    audio:
+      enabled: false
+      enabled_in_config: null
+      filters: null
+      listen:
+      - bark
+      - speech
+      - yell
+      - scream
+      max_not_heard: 30
+      min_volume: 500
+    best_image_timeout: 60
+    birdseye:
+      enabled: true
+      mode: !!python/object/apply:frigate.config.BirdseyeModeEnum
+      - objects
+      order: 0
+    detect:
+      annotation_offset: 0
+      enabled: false
+      fps: 5
+      height: 1440
+      max_disappeared: 25
+      stationary:
+        interval: null
+        max_frames:
+          default: null
+          objects: {}
+        threshold: null
+      width: 2560
+    enabled: true
+    ffmpeg:
+      global_args:
+      - -hide_banner
+      - -loglevel
+      - warning
+      - -threads
+      - '2'
+      hwaccel_args: []
+      input_args: preset-rtsp-generic
+      inputs:
+      - global_args: []
+        hwaccel_args: []
+        input_args: []
+        path: rtsp://172.29.243.99:554/main
+        roles:
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - record
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - detect
+        - !!python/object/apply:frigate.config.CameraRoleEnum
+          - rtmp
+      output_args:
+        detect:
+        - -threads
+        - '2'
+        - -f
+        - rawvideo
+        - -pix_fmt
+        - yuv420p
+        record: preset-record-generic
+        rtmp: preset-rtmp-generic
+      retry_interval: 10.0
+    live:
+      height: 720
+      quality: 8
+      stream_name: ''
+    motion: null
+    mqtt:
+      bounding_box: false
+      crop: true
+      enabled: true
+      height: 500
+      quality: 100
+      required_zones: []
+      timestamp: false
+    name: test3
+    objects:
+      filters: null
+      mask: ''
+      track:
+      - person
+    onvif:
+      autotracking:
+        enabled: false
+        required_zones: []
+        return_preset: home
+        timeout: 10
+        track:
+        - person
+      host: ''
+      password: null
+      port: 8000
+      user: null
+    record:
+      enabled: false
+      enabled_in_config: null
+      events:
+        objects: null
+        post_capture: 5
+        pre_capture: 5
+        required_zones: []
+        retain:
+          default: 10.0
+          mode: !!python/object/apply:frigate.config.RetainModeEnum
+          - motion
+          objects: {}
+      expire_interval: 60
+      retain:
+        days: 0.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - all
+      sync_on_startup: false
+    rtmp:
+      enabled: false
+    snapshots:
+      bounding_box: true
+      clean_copy: true
+      crop: false
+      enabled: false
+      height: 0
+      quality: 70
+      required_zones: []
+      retain:
+        default: 10.0
+        mode: !!python/object/apply:frigate.config.RetainModeEnum
+        - motion
+        objects: {}
+      timestamp: false
+    timestamp_style:
+      color:
+        blue: 255
+        green: 255
+        red: 255
+      effect: null
+      format: '%m/%d/%Y %H:%M:%S'
+      position: !!python/object/apply:frigate.config.TimestampPositionEnum
+      - tl
+      thickness: 2
+    ui:
+      dashboard: true
+      order: 0
+    zones: {}
+database:
+  path: /config/frigate.db
 detect:
-  height: 720
-  width: 1280
+  annotation_offset: 0
+  enabled: false
   fps: 5
+  height: 720
+  max_disappeared: 0
+  stationary:
+    interval: null
+    max_frames:
+      default: null
+      objects: {}
+    threshold: null
+  width: 1280
+detectors:
+  cpu:
+    model: null
+    type: cpu
+environment_vars: {}
+ffmpeg:
+  global_args:
+  - -hide_banner
+  - -loglevel
+  - warning
+  - -threads
+  - '2'
+  hwaccel_args: []
+  input_args: preset-rtsp-generic
+  output_args:
+    detect:
+    - -threads
+    - '2'
+    - -f
+    - rawvideo
+    - -pix_fmt
+    - yuv420p
+    record: -f segment -segment_time 10  -segment_format mp4 -reset_timestamps 1 -strftime
+      1 -c:v copy -c:a aac
+    rtmp: preset-rtmp-generic
+  retry_interval: 10.0
+go2rtc: {}
+live:
+  height: 720
+  quality: 8
+  stream_name: ''
+logger:
+  default: !!python/object/apply:frigate.config.LogLevelEnum
+  - info
+  logs: {}
+motion: null
+mqtt:
+  client_id: frigate
+  enabled: true
+  host: emqx
+  password: null
+  port: 1883
+  stats_interval: 60
+  tls_ca_certs: null
+  tls_client_cert: null
+  tls_client_key: null
+  tls_insecure: null
+  topic_prefix: frigate
+  user: null
+objects:
+  filters: null
+  mask: ''
+  track:
+  - person
 record:
-  enabled:
-    True
-    # Optional: timeout for highest scoring image before allowing it
-    # to be replaced by a newer image. (default: shown below)
+  enabled: true
+  enabled_in_config: null
+  events:
+    objects: null
+    post_capture: 5
+    pre_capture: 5
+    required_zones: []
+    retain:
+      default: 10.0
+      mode: !!python/object/apply:frigate.config.RetainModeEnum
+      - all
+      objects: {}
+  expire_interval: 60
   retain:
-    days: 30
+    days: 30.0
+    mode: !!python/object/apply:frigate.config.RetainModeEnum
+    - all
+  sync_on_startup: false
+rtmp:
+  enabled: false
 snapshots:
-  enabled: True
+  bounding_box: true
+  clean_copy: true
+  crop: false
+  enabled: true
+  height: 0
+  quality: 70
+  required_zones: []
+  retain:
+    default: 10.0
+    mode: !!python/object/apply:frigate.config.RetainModeEnum
+    - motion
+    objects: {}
+  timestamp: true
+telemetry:
+  network_interfaces:
+  - eth
+  - enp
+  - eno
+  - ens
+  - wl
+  - lo
+  stats:
+    amd_gpu_stats: true
+    intel_gpu_stats: true
+    network_bandwidth: false
+  version_check: true
+timestamp_style:
+  color:
+    blue: 255
+    green: 255
+    red: 255
+  effect: null
+  format: '%m/%d/%Y %H:%M:%S'
+  position: !!python/object/apply:frigate.config.TimestampPositionEnum
+  - tl
+  thickness: 2
+ui:
+  date_style: !!python/object/apply:frigate.config.DateTimeStyleEnum
+  - short
+  live_mode: !!python/object/apply:frigate.config.LiveModeEnum
+  - mse
+  strftime_fmt: null
+  time_format: !!python/object/apply:frigate.config.TimeFormatEnum
+  - browser
+  time_style: !!python/object/apply:frigate.config.DateTimeStyleEnum
+  - medium
+  timezone: null
+  use_experimental: false
