@@ -16,16 +16,16 @@ export default function AppBar({ changeLanguage }) {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showDialogWait, setShowDialogWait] = useState(false);
-  const { setDarkMode } = useDarkMode();
+  // const { setDarkMode } = useDarkMode();
   const { send: sendRestart } = useRestart();
 
-  const handleSelectDarkMode = useCallback(
-    (value) => {
-      setDarkMode(value);
-      setShowMoreMenu(false);
-    },
-    [setDarkMode, setShowMoreMenu],
-  );
+  // const handleSelectDarkMode = useCallback(
+  //   (value) => {
+  //     setDarkMode(value);
+  //     setShowMoreMenu(false);
+  //   },
+  //   [setDarkMode, setShowMoreMenu],
+  // );
 
   const moreRef = useRef(null);
 

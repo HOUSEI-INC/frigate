@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <IntlProvider definition={{ ...definition }}>
-      <DarkModeProvider>
+      {/* <DarkModeProvider> */}
         <DrawerProvider>
           <div data-testid="app" className="w-full">
             <AppBar changeLanguage={changeLanguage} />
@@ -68,7 +68,7 @@ export default function App() {
             )}
           </div>
         </DrawerProvider>
-      </DarkModeProvider>
+      {/* </DarkModeProvider> */}
     </IntlProvider>
   );
 }
