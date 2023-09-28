@@ -51,7 +51,7 @@ export default function AppBar({ title: Title, overflowRef, onOverflowClick, cha
       </div>
       <Title />
       <LangSelector changeLanguage={changeLang} />
-      <div className="flex-grow-1 flex justify-end">
+      {/* <div className="flex-grow-1 flex justify-end">
         {overflowRef && onOverflowClick ? (
           <div className="w-auto" ref={overflowRef}>
             <Button
@@ -65,7 +65,7 @@ export default function AppBar({ title: Title, overflowRef, onOverflowClick, cha
             </Button>
           </div>
         ) : null}
-      </div>
+      </div> */}
     </div>
   );
 }

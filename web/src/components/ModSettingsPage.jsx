@@ -17,8 +17,8 @@ import TextField from '@mui/material/TextField';
 import { FormControlLabel, Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
 import axios from 'axios';
 import { Text } from 'preact-i18n';
+import '../style/style.css';
 import SaveSuccessSnackbar from './SaveSuccessSnackBar';
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -75,7 +75,6 @@ export default function AlertDialog({ open, handleClose, name, config }) {
       }));
     }
   }, [config]);
-
 
   const [snackbarOpen, setsnackbarOpen] = React.useState(false);
 
@@ -142,7 +141,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
       });
       if (response.status === 200) {
         console.log('save success');
-        setsnackbarOpen(true)
+        setsnackbarOpen(true);
       }
     } catch (error) {
       console.log('save filed');
@@ -151,7 +150,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
 
   return (
     <div>
-      <SaveSuccessSnackbar open={snackbarOpen} setOpen={setsnackbarOpen}/>
+      <SaveSuccessSnackbar open={snackbarOpen} setOpen={setsnackbarOpen} />
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
@@ -168,7 +167,7 @@ export default function AlertDialog({ open, handleClose, name, config }) {
         </AppBar>
         <List>
           <ListItem>
-            <Text id="C_Set.cam_enabled">camera enabled</Text>:
+            <Text id="C_Set.cam_enabled" />:
             <Switch
               checked={state.camChecked}
               onChange={handleChange('camChecked')}
@@ -176,46 +175,65 @@ export default function AlertDialog({ open, handleClose, name, config }) {
             />
           </ListItem>
           <Divider />
-          <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <ListItemText primary={<Text id="C_Set.detect_Settings">Detect Settings</Text>} />
-            <div style={{ width: '98%', alignSelf: 'center' }}>
-              <Text id="C_Set.detect_enabled">detect enabled</Text>:
-              <Switch
-                checked={state.detect}
-                onChange={handleChange('detect')}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-              <br />
-              <Text id="share.width">width</Text>:
-              <TextField
-                size="small"
-                value={state.detect_width}
-                type="number"
-                onChange={handleDataChange('detect_width')}
-              />
-              <Text id="share.height">height</Text>:
-              <TextField
-                size="small"
-                type="number"
-                value={state.detect_height}
-                onChange={handleDataChange('detect_height')}
-              />
-              <Text id="share.fps">fps</Text>:
-              <TextField
-                size="small"
-                type="number"
-                value={state.detect_fps}
-                onChange={handleDataChange('detect_fps')}
-              />
-              <Text id="C_Set.max_disappeared">max disappeared</Text>:
-              <TextField
-                size="small"
-                type="number"
-                value={state.max_disappeared}
-                onChange={handleDataChange('max_disappeared')}
-              />
+          <div class="setting-item">
+            <div class="text-title">
+              <Text id="C_Set.detect_Settings" />
             </div>
-          </ListItem>
+            <div style={{ width: '98%', alignSelf: 'center' }}>
+              <div style={{ width: '50%' }}>
+                <div class="setting-row">
+                  <Text id="C_Set.detect_enabled" />:
+                  <Switch
+                    checked={state.detect}
+                    onChange={handleChange('detect')}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+                </div>
+                <div class="setting-row">
+                  <span class="text-common">
+                    <Text id="share.width" />:
+                  </span>
+                  <TextField
+                    size="small"
+                    value={state.detect_width}
+                    type="number"
+                    onChange={handleDataChange('detect_width')}
+                    style={{ flexGrow: 1 }}
+                  />
+                </div>
+                <div class="setting-row">
+                  <Text id="share.height" />:
+                  <TextField
+                    size="small"
+                    type="number"
+                    value={state.detect_height}
+                    onChange={handleDataChange('detect_height')}
+                    style={{ flexGrow: 1 }}
+                  />
+                </div>
+                <div class="setting-row">
+                  <Text id="share.fps" />:
+                  <TextField
+                    size="small"
+                    type="number"
+                    value={state.detect_fps}
+                    onChange={handleDataChange('detect_fps')}
+                    style={{ flexGrow: 1 }}
+                  />
+                </div>
+                <div class="setting-row">
+                  <Text id="C_Set.max_disappeared" />:
+                  <TextField
+                    size="small"
+                    type="number"
+                    value={state.max_disappeared}
+                    onChange={handleDataChange('max_disappeared')}
+                    style={{ flexGrow: 1 }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <Divider />
           <ListItem style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <ListItemText primary={<Text id="C_Set.Record_Settings">Record Settings</Text>} />

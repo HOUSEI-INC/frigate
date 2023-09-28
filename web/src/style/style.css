@@ -1,0 +1,23 @@
+.text-common {
+  font-size: 16px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+.text-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem 2rem;
+  margin-bottom: 16px;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
