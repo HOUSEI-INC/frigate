@@ -15,7 +15,6 @@ from urllib.parse import unquote
 import cv2
 import numpy as np
 import pytz
-import yaml
 from flask import (
     Blueprint,
     Flask,
@@ -30,6 +29,7 @@ from playhouse.shortcuts import model_to_dict
 from playhouse.sqliteq import SqliteQueueDatabase
 from tzlocal import get_localzone_name
 
+import frigate.myyaml as myyaml
 from frigate.config import FrigateConfig
 from frigate.const import (
     CACHE_DIR,
@@ -1752,7 +1752,7 @@ def config_partial_save():
         config_file = config_file_yaml
 
     # load yaml setting
-    user_config = FrigateConfig.parse_file(config_file)
+    FrigateConfig.parse_file(config_file)
 
     # get json data
     json_data = request.get_json()
@@ -1760,43 +1760,9 @@ def config_partial_save():
     if not json_data:
         return "Config with body param is required", 400
 
-    user_config.from_json(json_data)
-
-    # del model struct
-    del user_config.model
-    # set cam name
-    for key, cam in user_config.cameras.items():
-        cam.name = key
-
-    yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
-
-    # Validate the config schema
-    try:
-        FrigateConfig.parse_raw(yaml_str)
-    except Exception:
-        return make_response(
-            jsonify(
-                {
-                    "success": False,
-                    "message": f"\nConfig Error:\n\n{str(traceback.format_exc())}",
-                }
-            ),
-            400,
-        )
-
     # Save the config to file
     try:
-        config_file = os.environ.get("CONFIG_FILE", "/config/config.yml")
-
-        # Check if we can use .yaml instead of .yml
-        config_file_yaml = config_file.replace(".yml", ".yaml")
-
-        if os.path.isfile(config_file_yaml):
-            config_file = config_file_yaml
-
-        with open(config_file, "w") as f:
-            yaml.dump(user_config.dict(), f)
-            f.close()
+        myyaml.update_yaml_with_json(config_file, json_data)
     except Exception:
         return make_response(
             jsonify(
@@ -1843,54 +1809,20 @@ def config_cameras_add():
     if json_data is None:
         return "Config with body param is required", 400
 
-    if json_data and "cameras" in json_data and isinstance(json_data["cameras"], dict):
-        cam_list = json_data["cameras"]
-
-        for key in cam_list:
-            if key in user_config.cameras:
-                return "The camera name already exists", 400
-            else:
-                user_config.cameras["init"].enabled = True
-                new_camera = user_config.cameras["init"].from_json(cam_list[key])
-                user_config.cameras[key] = new_camera.copy()
-
-    # del model struct
-    del user_config.model
-    # set cam name
-    for key in user_config.cameras:
-        user_config.cameras[key].name = key
-    # init cam disable
-    user_config.cameras["init"].enabled = False
-
-    yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
-
-    # Validate the config schema
-    try:
-        FrigateConfig.parse_raw(yaml_str)
-    except Exception:
-        return make_response(
-            jsonify(
-                {
-                    "success": False,
-                    "message": f"\nConfig Error:\n\n{str(traceback.format_exc())}",
-                }
-            ),
-            400,
-        )
-
     # Save the config to file
     try:
-        config_file = os.environ.get("CONFIG_FILE", "/config/config.yml")
+        if (
+            json_data
+            and "cameras" in json_data
+            and isinstance(json_data["cameras"], dict)
+        ):
+            cam_list = json_data["cameras"]
 
-        # Check if we can use .yaml instead of .yml
-        config_file_yaml = config_file.replace(".yml", ".yaml")
-
-        if os.path.isfile(config_file_yaml):
-            config_file = config_file_yaml
-
-        with open(config_file, "w") as f:
-            yaml.dump(user_config.dict(), f)
-            f.close()
+            for key in cam_list:
+                if key in user_config.cameras:
+                    return "The camera name already exists", 400
+                else:
+                    myyaml.add_camera_to_yaml(config_file, json_data)
     except Exception:
         return make_response(
             jsonify(
@@ -1937,45 +1869,17 @@ def config_cameras_delete():
     if json_data is None:
         return "Config with body param is required", 400
 
-    if json_data and "cameras" in json_data and isinstance(json_data["cameras"], list):
-        cam_list = json_data["cameras"]
-
-        for value in cam_list:
-            if value in user_config.cameras:
-                del user_config.cameras[value]
-
-    # del model struct
-    del user_config.model
-
-    yaml_str = yaml.dump(user_config.dict(), default_flow_style=False)
-
-    # Validate the config schema
-    try:
-        FrigateConfig.parse_raw(yaml_str)
-    except Exception:
-        return make_response(
-            jsonify(
-                {
-                    "success": False,
-                    "message": f"\nConfig Error:\n\n{str(traceback.format_exc())}",
-                }
-            ),
-            400,
-        )
-
     # Save the config to file
     try:
-        config_file = os.environ.get("CONFIG_FILE", "/config/config.yml")
-
-        # Check if we can use .yaml instead of .yml
-        config_file_yaml = config_file.replace(".yml", ".yaml")
-
-        if os.path.isfile(config_file_yaml):
-            config_file = config_file_yaml
-
-        with open(config_file, "w") as f:
-            yaml.dump(user_config.dict(), f)
-            f.close()
+        if (
+            json_data
+            and "cameras" in json_data
+            and isinstance(json_data["cameras"], list)
+        ):
+            cam_list = json_data["cameras"]
+            for value in cam_list:
+                if value in user_config.cameras:
+                    myyaml.delete_camera_from_yaml(config_file, value)
     except Exception:
         return make_response(
             jsonify(
