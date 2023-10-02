@@ -33,7 +33,7 @@ RUN --mount=type=tmpfs,target=/tmp --mount=type=tmpfs,target=/var/cache/apt \
 FROM scratch AS go2rtc
 ARG TARGETARCH
 WORKDIR /rootfs/usr/local/go2rtc/bin
-ADD --link --chmod=755 "https://github.com/AlexxIT/go2rtc/releases/download/v1.6.2/go2rtc_linux_${TARGETARCH}" go2rtc
+ADD --link --chmod=755 "https://github.com/AlexxIT/go2rtc/releases/download/v1.7.1/go2rtc_linux_${TARGETARCH}" go2rtc
 
 
 ####
@@ -71,22 +71,22 @@ ENV CCACHE_MAXSIZE 2G
 
 # Build libUSB without udev.  Needed for Openvino NCS2 support
 WORKDIR /opt
-RUN apt-get update && apt-get install -y unzip build-essential automake libtool ccache
-RUN --mount=type=cache,target=/root/.ccache wget -q https://github.com/libusb/libusb/archive/v1.0.25.zip -O v1.0.25.zip && \
-    unzip v1.0.25.zip && cd libusb-1.0.25 && \
+RUN apt-get update && apt-get install -y unzip build-essential automake libtool ccache pkg-config
+RUN --mount=type=cache,target=/root/.ccache wget -q https://github.com/libusb/libusb/archive/v1.0.26.zip -O v1.0.26.zip && \
+    unzip v1.0.26.zip && cd libusb-1.0.26 && \
     ./bootstrap.sh && \
     ./configure CC='ccache gcc' CCX='ccache g++' --disable-udev --enable-shared && \
     make -j $(nproc --all)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libusb-1.0-0-dev && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/libusb-1.0.25/libusb
+WORKDIR /opt/libusb-1.0.26/libusb
 RUN /bin/mkdir -p '/usr/local/lib' && \
     /bin/bash ../libtool  --mode=install /usr/bin/install -c libusb-1.0.la '/usr/local/lib' && \
     /bin/mkdir -p '/usr/local/include/libusb-1.0' && \
     /usr/bin/install -c -m 644 libusb.h '/usr/local/include/libusb-1.0' && \
     /bin/mkdir -p '/usr/local/lib/pkgconfig' && \
-    cd  /opt/libusb-1.0.25/ && \
+    cd  /opt/libusb-1.0.26/ && \
     /usr/bin/install -c -m 644 libusb-1.0.pc '/usr/local/lib/pkgconfig' && \
     ldconfig
 
@@ -236,7 +236,7 @@ FROM --platform=$BUILDPLATFORM node:16 AS web-build
 
 WORKDIR /work
 COPY web/package.json web/package-lock.json ./
-RUN npm install --no-cache
+RUN npm install
 
 COPY web/ ./
 RUN npm run build \
@@ -249,7 +249,6 @@ FROM scratch AS rootfs
 WORKDIR /opt/frigate/
 COPY frigate frigate/
 COPY migrations migrations/
-COPY docker/main/build_web.sh /etc/services.d/web-builder/run
 COPY --from=web-build /work/dist/ web/
 
 # Frigate final container
@@ -257,7 +256,3 @@ FROM deps AS frigate
 
 WORKDIR /opt/frigate/
 COPY --from=rootfs / /
-RUN chmod +x /etc/services.d/web-builder/run
-
-# s6-overlay will start the frigate service
-ENTRYPOINT ["/init"]
